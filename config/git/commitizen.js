@@ -26,12 +26,7 @@ module.exports = {
   ],
 
   // область. Она характеризует фрагмент кода, которую затронули изменения
-  scopes: [
-    { name: "components" },
-    { name: "tutorial" },
-    { name: "catalog" },
-    { name: "product" },
-  ],
+  scopes: [{ name: "components" }, { name: "routing" }, { name: "api" }],
 
   // дефолтные вопросы
   messages: {
@@ -41,8 +36,7 @@ module.exports = {
     subject: "Напишите КОРОТКОЕ описание в ПОВЕЛИТЕЛЬНОМ наклонении:\n",
     body: 'Напишите ПОДРОБНОЕ описание (опционально). Используйте "|" для новой строки:\n',
     breaking: "Список BREAKING CHANGES (опционально):\n",
-    footer:
-      "Место для мета данных (тикетов, ссылок и остального). Например: SECRETMRKT-700, SECRETMRKT-800:\n",
+    footer: "Опишите BREAKING CHANGE, если они есть:\n",
     confirmCommit: "Вас устраивает получившийся коммит?",
   },
 
@@ -53,7 +47,7 @@ module.exports = {
   allowBreakingChanges: false,
 
   // Префикс для нижнего колонтитула
-  footerPrefix: "МЕТА ДАННЫЕ:",
+  footerPrefix: "BREAKING CHANGE:",
 
   // limit subject length
   subjectLimit: 72,
