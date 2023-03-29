@@ -2,6 +2,21 @@
   @apply sticky top-0 z-10 w-full;
 
   .logo {
-    @apply text-white float-left;
+    @apply text-white float-left mr-5 text-lg;
+  }
+  .linkWrapper {
+    @apply p-0;
+
+    &.lastInLeftCol {
+      @apply mr-auto;
+    }
+
+    .link {
+      @apply block h-full px-4;
+
+      &.active {
+        @apply bg-blue-500 text-white;
+      }
+    }
   }
 }

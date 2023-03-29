@@ -1,33 +1,102 @@
 import { Layout, Menu } from "antd";
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./header.module.scss";
 
 const { Header: AntHeader } = Layout;
 
-const Header = () => {
-  console.log(styles);
+// const paths = [
+//   "/",
+//   "//(groups|courses)/*/",
+//   "/",
+//   "/",
+//   "/registration",
+//   "/login",
+// ];
+
+const Header: FC = () => {
   return (
     <AntHeader className={styles.navbar}>
       <NavLink to="/" className={styles.logo}>
         Кампусные курсы
       </NavLink>
-      <Menu theme="dark" mode="horizontal">
-        <Menu.Item>
-          <NavLink to="/groups">Группы курсов</NavLink>
-        </Menu.Item>
-        <Menu.Item>
-          <NavLink to="/">Мои курсы</NavLink>
-        </Menu.Item>
-        <Menu.Item style={{ marginRight: "auto" }}>
-          <NavLink to="/">Преподаваемые курсы</NavLink>
-        </Menu.Item>
-        <Menu.Item>
-          <NavLink to="/registration">Регистрация</NavLink>
-        </Menu.Item>
-        <Menu.Item>
-          <NavLink to="/login">Логин</NavLink>
-        </Menu.Item>
-      </Menu>
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        selectable={false}
+        items={[
+          {
+            label: (
+              <NavLink
+                to="/groups"
+                className={({ isActive }) => {
+                  return `${styles.link} ${isActive ? styles.active : ""}`;
+                }}
+              >
+                Группы курсов
+              </NavLink>
+            ),
+            key: "1",
+            className: styles.linkWrapper,
+          },
+          {
+            label: (
+              <NavLink
+                to="/courses"
+                className={({ isActive }) => {
+                  return `${styles.link} ${isActive ? styles.active : ""}`;
+                }}
+              >
+                Мои курсы
+              </NavLink>
+            ),
+            key: "2",
+            className: styles.linkWrapper,
+          },
+          {
+            label: (
+              <NavLink
+                to="/profile"
+                className={({ isActive }) => {
+                  return `${styles.link} ${isActive ? styles.active : ""}`;
+                }}
+              >
+                Преподаваемые курсы
+              </NavLink>
+            ),
+            key: "3",
+            className: `${styles.linkWrapper} ${styles.lastInLeftCol}`,
+          },
+          {
+            label: (
+              <NavLink
+                to="/registration"
+                className={({ isActive }) => {
+                  return `${styles.link} ${isActive ? styles.active : ""}`;
+                }}
+              >
+                Регистрация
+              </NavLink>
+            ),
+            key: "4",
+            className: styles.linkWrapper,
+          },
+          {
+            label: (
+              <NavLink
+                to="/login"
+                className={({ isActive }) => {
+                  return `${styles.link} ${isActive ? styles.active : ""}`;
+                }}
+              >
+                Логин
+              </NavLink>
+            ),
+            key: "5",
+            className: styles.linkWrapper,
+          },
+        ]}
+      />
     </AntHeader>
   );
 };
