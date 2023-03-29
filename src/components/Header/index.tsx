@@ -5,15 +5,6 @@ import styles from "./header.module.scss";
 
 const { Header: AntHeader } = Layout;
 
-// const paths = [
-//   "/",
-//   "//(groups|courses)/*/",
-//   "/",
-//   "/",
-//   "/registration",
-//   "/login",
-// ];
-
 const Header: FC = () => {
   return (
     <AntHeader className={styles.navbar}>

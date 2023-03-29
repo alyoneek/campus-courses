@@ -8,3 +8,9 @@
   box-sizing: border-box;
   font-family: "Jura", sans-serif;
 }
+
+html,
+body,
+#root {
+  height: 100%;
+}
