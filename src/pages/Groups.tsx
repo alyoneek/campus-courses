@@ -1,5 +1,5 @@
 const Groups = () => {
-  return <div className="bg-red-900">Groups</div>;
+  return <div className="bg-red-700">Groups</div>;
 };
 
 export default Groups;
