@@ -1,6 +1,7 @@
+import "@/index.css";
+import Routes from "@/router/Routes";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import Routes from "./router/Routes";
 
 const container = document.getElementById("root");
 
