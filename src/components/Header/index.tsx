@@ -1,26 +1,25 @@
 import { Layout, Menu } from "antd";
 import { NavLink } from "react-router-dom";
+import styles from "./header.module.scss";
 
 const { Header: AntHeader } = Layout;
 
 const Header = () => {
+  console.log(styles);
   return (
-    <AntHeader style={{ position: "sticky", top: 0, zIndex: 1, width: "100%" }}>
-      <NavLink
-        to="/"
-        style={{
-          float: "left",
-          width: 120,
-          height: 31,
-          color: "white",
-        }}
-        className="text-[#50d71e]"
-      >
+    <AntHeader className={styles.navbar}>
+      <NavLink to="/" className={styles.logo}>
         Кампусные курсы
       </NavLink>
       <Menu theme="dark" mode="horizontal">
-        <Menu.Item style={{ marginRight: "auto" }}>
+        <Menu.Item>
           <NavLink to="/groups">Группы курсов</NavLink>
+        </Menu.Item>
+        <Menu.Item>
+          <NavLink to="/">Мои курсы</NavLink>
+        </Menu.Item>
+        <Menu.Item style={{ marginRight: "auto" }}>
+          <NavLink to="/">Преподаваемые курсы</NavLink>
         </Menu.Item>
         <Menu.Item>
           <NavLink to="/registration">Регистрация</NavLink>

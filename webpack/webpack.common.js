@@ -5,14 +5,6 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 const projectPath = path.resolve(__dirname, "..");
 
-const cssLoader = {
-  loader: "css-loader",
-  options: {
-    modules: true,
-    sourceMap: true,
-  },
-};
-
 module.exports = {
   entry: path.resolve(projectPath, "./src/index.tsx"),
   output: {
@@ -34,12 +26,21 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        test: /\.module\.(sa|sc|c)ss$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { modules: true },
+          },
+          "sass-loader",
+          "postcss-loader",
+        ],
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: ["style-loader", cssLoader, "sass-loader"],
+        test: /\.(sa|sc|c)ss$/,
+        exclude: /\.module\.(sa|sc|c)ss$/,
+        use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"],
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
