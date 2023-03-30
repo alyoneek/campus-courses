@@ -1,5 +1,12 @@
+import ProfileForm from "@/components/forms/ProfileForm";
+import DataContent from "@/layouts/content/DataContent";
+
 const Profile = () => {
-  return <div>Profile</div>;
+  return (
+    <DataContent title="Профиль">
+      <ProfileForm />
+    </DataContent>
+  );
 };
 
 export default Profile;
