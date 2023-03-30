@@ -1,5 +1,11 @@
+import DataContent from "@/layouts/content/DataContent";
+
 const Group = () => {
-  return <div>Group</div>;
+  return (
+    <DataContent title="Группа - Компьютерные науки">
+      Группа - Компьютерные науки
+    </DataContent>
+  );
 };
 
 export default Group;

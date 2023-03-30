@@ -13,7 +13,14 @@ module.exports = {
       "5xl": "3.052rem",
     },
 
-    extend: {},
+    extend: {
+      width: {
+        112: "28rem",
+      },
+    },
+  },
+  corePlugins: {
+    preflight: false,
   },
   plugins: [],
 };
