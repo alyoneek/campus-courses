@@ -1,8 +1,8 @@
 import { profileFormValidation } from "@/helpers/validation";
 import { Button, DatePicker, Form, Input, message } from "antd";
-import { useState } from "react";
+import { FC, useState } from "react";
 
-const ProfileForm = () => {
+const ProfileForm: FC = () => {
   const [isEdit, setEdit] = useState(false);
   const [form] = Form.useForm();
 
