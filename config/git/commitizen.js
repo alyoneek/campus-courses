@@ -26,7 +26,12 @@ module.exports = {
   ],
 
   // область. Она характеризует фрагмент кода, которую затронули изменения
-  scopes: [{ name: "components" }, { name: "routing" }, { name: "api" }],
+  scopes: [
+    { name: "components" },
+    { name: "routing" },
+    { name: "api" },
+    { name: "store" },
+  ],
 
   // дефолтные вопросы
   messages: {
