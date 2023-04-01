@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const RegisterForm: FC = () => {
   const status = useAppSelector((state) => state.account.status);
-  const error = useAppSelector((state) => state.account.error);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ const RegisterForm: FC = () => {
       });
   };
 
-  const onFinishFailed = (value: string | null) => {
+  const onFinishFailed = (value: string) => {
     if (value) message.error(value);
   };
 

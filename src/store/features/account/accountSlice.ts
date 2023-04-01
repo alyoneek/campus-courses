@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signup } from "./accountActions";
+import { login, signup } from "./accountActions";
 
 export interface IError {
   message: string;
@@ -34,6 +34,21 @@ const accountSlice = createSlice({
     });
 
     builder.addCase(signup.rejected, (state, { payload }) => {
+      state.status = "error";
+      if (payload) state.error = payload.message;
+    });
+
+    builder.addCase(login.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(login.fulfilled, (state, { payload }) => {
+      state.status = "success";
+      state.userToken = payload.token;
+    });
+
+    builder.addCase(login.rejected, (state, { payload }) => {
       state.status = "error";
       if (payload) state.error = payload.message;
     });
