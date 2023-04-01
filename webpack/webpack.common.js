@@ -1,4 +1,5 @@
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
@@ -6,8 +7,12 @@ const projectPath = path.resolve(__dirname, "..");
 
 module.exports = {
   entry: path.resolve(projectPath, "./src/index.tsx"),
+  output: {
+    path: path.resolve(projectPath, "./build"),
+    filename: "bundle.js",
+  },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", "jsx", "json"],
   },
   module: {
     rules: [
@@ -21,8 +26,21 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.module\.(sa|sc|c)ss$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: { modules: true },
+          },
+          "sass-loader",
+          "postcss-loader",
+        ],
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        exclude: /\.module\.(sa|sc|c)ss$/,
+        use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"],
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
@@ -53,13 +71,12 @@ module.exports = {
       ".scss",
     ],
   },
-  output: {
-    path: path.resolve(projectPath, "./build"),
-    filename: "bundle.js",
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(projectPath, "./public/index.html"),
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].[contenthash].css",
     }),
   ],
 };
