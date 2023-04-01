@@ -1,3 +1,4 @@
+import { editGroupFormValidation } from "@/helpers/validation";
 import { Form, FormInstance, Input } from "antd";
 import { FC } from "react";
 
@@ -23,7 +24,6 @@ const EditGroupForm: FC<EditGroupFormProps> = ({
     <Form
       form={form}
       layout="vertical"
-      name="userForm"
       onFinish={onFinish}
       autoComplete="off"
       initialValues={{ name: idGroup }}
@@ -31,7 +31,7 @@ const EditGroupForm: FC<EditGroupFormProps> = ({
       <Form.Item
         name="name"
         label="Название группы"
-        rules={[{ required: true }]}
+        rules={editGroupFormValidation.name}
       >
         <Input size="large" />
       </Form.Item>

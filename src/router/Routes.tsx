@@ -2,6 +2,7 @@ import MainLayout from "@/layouts/MainLayout";
 import Course from "@/pages/Course";
 import Group from "@/pages/Group";
 import Groups from "@/pages/Groups";
+import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Profile from "@/pages/Profile";
 import Registration from "@/pages/Registration";
@@ -11,6 +12,7 @@ const Routes = () => {
   return (
     <ReactRoutes>
       <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
         <Route path="registration" element={<Registration />} />
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<Profile />} />

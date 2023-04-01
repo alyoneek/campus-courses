@@ -1,3 +1,4 @@
+import { createGroupFormValidation } from "@/helpers/validation";
 import { Form, FormInstance, Input } from "antd";
 import { FC } from "react";
 
@@ -15,17 +16,11 @@ const CreateGroupForm: FC<CreateGroupFormProps> = ({ form, afterFinish }) => {
   };
 
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      name="userForm"
-      onFinish={onFinish}
-      autoComplete="off"
-    >
+    <Form form={form} layout="vertical" onFinish={onFinish} autoComplete="off">
       <Form.Item
         name="name"
         label="Название группы"
-        rules={[{ required: true }]}
+        rules={createGroupFormValidation.name}
       >
         <Input size="large" />
       </Form.Item>

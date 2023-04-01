@@ -130,3 +130,59 @@ export const profileFormValidation = {
     },
   ],
 };
+
+export const createGroupFormValidation = {
+  name: [
+    {
+      required: true,
+      message: "Введите название группы",
+    },
+  ],
+};
+
+export const editGroupFormValidation = createGroupFormValidation;
+
+export const createCourseFormValidation = {
+  name: [
+    {
+      required: true,
+      message: "Введите название курса",
+    },
+  ],
+  startYear: [
+    {
+      required: true,
+      message: "Введите год начала курса",
+    },
+  ],
+  maximumStudentsCount: [
+    {
+      required: true,
+      message: "Введите количество мест",
+    },
+  ],
+  semester: [
+    {
+      required: true,
+      message: "Выберите семестр",
+    },
+  ],
+  mainTeacherId: [
+    {
+      required: true,
+      message: "Выберите основного преподавателя",
+    },
+  ],
+  requirements: [
+    {
+      required: true,
+      message: "Введите требования",
+    },
+  ],
+  annotations: [
+    {
+      required: true,
+      message: "Введите аннотации",
+    },
+  ],
+};

@@ -80,7 +80,7 @@ const Header: FC = () => {
                   return `${styles.link} ${isActive ? styles.active : ""}`;
                 }}
               >
-                Логин
+                Вход
               </NavLink>
             ),
             key: "5",

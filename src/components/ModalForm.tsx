@@ -54,6 +54,7 @@ const ModalForm = ({
           Сохранить
         </Button>,
       ]}
+      className="my-3"
     >
       {renderChildren()}
     </Modal>
