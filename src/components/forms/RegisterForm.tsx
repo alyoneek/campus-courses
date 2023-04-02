@@ -1,15 +1,13 @@
+import { history } from "@/router/history";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { signup } from "@/store/features/account/accountActions";
 import { registerFormValidation } from "@helpers/validation";
 import { Button, DatePicker, Form, Input, message } from "antd";
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
 
 const RegisterForm: FC = () => {
   const status = useAppSelector((state) => state.account.status);
   const dispatch = useAppDispatch();
-
-  const navigate = useNavigate();
 
   const [form] = Form.useForm();
 
@@ -20,7 +18,7 @@ const RegisterForm: FC = () => {
     };
     dispatch(signup(newValues))
       .unwrap()
-      .then(() => navigate("/groups"))
+      .then(() => history.navigate && history.navigate("/groups"))
       .catch((e) => {
         onFinishFailed(e.message);
       });

@@ -3,7 +3,7 @@ import { getRoles, login, logout, signup } from "./accountActions";
 import { convertRolesResponeToArray, getToken, resetToken } from "./helpers";
 
 export enum Roles {
-  isStident = "Student",
+  isStudent = "Student",
   isTeacher = "Teacher",
   isAdmin = "Admin",
 }

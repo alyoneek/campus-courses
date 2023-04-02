@@ -1,5 +1,4 @@
 import Endpoints from "@/api/endpoints";
-import { history } from "@/router/history";
 import { store } from "@/store";
 import { accountActions } from "@/store/features/account/accountSlice";
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
@@ -41,7 +40,7 @@ axiosInstance.interceptors.response.use(
         store.dispatch(accountActions.clearState());
       }
 
-      if (history.navigate) history.navigate("/login");
+      //   if (history.navigate) history.navigate("/login");
     }
 
     throw error;
