@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Header from "@/components/Header";
+import useAuth from "@/hooks/useAuth";
 import { history } from "@/router/history";
-import { useAppDispatch, useAppSelector } from "@/store";
+import { useAppDispatch } from "@/store";
 import { getRoles } from "@/store/features/account/accountActions";
 import { Layout } from "antd";
 import { FC, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const MainLayout: FC = () => {
-  const roles = useAppSelector((state) => state.account.userRoles);
-  const token = useAppSelector((state) => state.account.userToken);
+  const { token, roles } = useAuth();
   const dispatch = useAppDispatch();
 
   history.navigate = useNavigate();

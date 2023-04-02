@@ -9,7 +9,7 @@ import Profile from "@/pages/Profile";
 import Registration from "@/pages/Registration";
 import { Roles } from "@/store/features/account/accountSlice";
 import { Route, Routes as ReactRoutes } from "react-router-dom";
-import RequireAuth from "./RequireAuth";
+import RequireAuthRoute from "./RequireAuthRoute";
 
 const Routes = () => {
   return (
@@ -20,17 +20,20 @@ const Routes = () => {
         <Route path="registration" element={<Registration />} />
         <Route path="login" element={<Login />} />
 
-        <Route element={<RequireAuth />}>
+        {/* protected routes */}
+        <Route element={<RequireAuthRoute />}>
           <Route path="profile" element={<Profile />} />
-        </Route>
-
-        <Route element={<RequireAuth allowedRoles={[Roles.isAdmin]} />}>
           <Route path="groups">
             <Route index element={<Groups />} />
             <Route path=":id" element={<Group />} />
           </Route>
+        </Route>
+
+        <Route element={<RequireAuthRoute allowedRoles={[Roles.isAdmin]} />}>
           <Route path="courses">
             <Route path=":id" element={<Course />} />
+            <Route path="my" element={<Course />} />
+            <Route path="teaching" element={<Course />} />
           </Route>
         </Route>
       </Route>

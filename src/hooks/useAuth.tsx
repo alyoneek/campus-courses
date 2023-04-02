@@ -7,6 +7,7 @@ const useAuth = () => {
   return {
     isLoggedIn: !!token,
     roles,
+    token,
   };
 };
 
