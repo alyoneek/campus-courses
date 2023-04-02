@@ -13,6 +13,10 @@ export const login = (
 ): AxiosPromise<accountTypes.ILoginResponse> =>
   axiosInstance.post(Endpoints.ACCOUNT.LOGIN, params);
 
-// export const logout = (): AxiosPromise => axiosInstance.get(Endpoints.AUTH.LOGOUT)
+export const logout = (): AxiosPromise =>
+  axiosInstance.post(Endpoints.ACCOUNT.LOGOUT);
+
+export const getRoles = (): AxiosPromise<accountTypes.IRolesResponse> =>
+  axiosInstance.get(Endpoints.ACCOUNT.ROLES);
 
 // export const getProfile = (): AxiosPromise<string> => axiosInstance.get(Endpoints.AUTH.PROFILE)

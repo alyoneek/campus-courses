@@ -22,3 +22,11 @@ export interface ILoginRequest {
 export interface ILoginResponse {
   token: string;
 }
+
+// roles
+
+export interface IRolesResponse {
+  isTeacher: boolean;
+  isStudent: boolean;
+  isAdmin: boolean;
+}

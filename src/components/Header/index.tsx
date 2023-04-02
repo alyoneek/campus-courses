@@ -1,3 +1,5 @@
+import { useAppDispatch } from "@/store";
+import { logout } from "@/store/features/account/accountActions";
 import { Layout, Menu } from "antd";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
@@ -6,6 +8,8 @@ import styles from "./header.module.scss";
 const { Header: AntHeader } = Layout;
 
 const Header: FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <AntHeader className={styles.navbar}>
       <NavLink to="/" className={styles.logo}>
@@ -84,6 +88,15 @@ const Header: FC = () => {
               </NavLink>
             ),
             key: "5",
+            className: styles.linkWrapper,
+          },
+          {
+            label: (
+              <div aria-hidden="true" onClick={() => dispatch(logout())}>
+                Выход
+              </div>
+            ),
+            key: "6",
             className: styles.linkWrapper,
           },
         ]}
