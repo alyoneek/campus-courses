@@ -1,6 +1,5 @@
-import useAuth from "@/hooks/useAuth";
 import RequireAuthComponent from "@/router/RequireAuthComponent";
-import { useAppDispatch } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/store";
 import { logout } from "@/store/features/account/accountActions";
 import { Roles } from "@/store/features/account/accountSlice";
 import { Layout, Menu } from "antd";
@@ -11,8 +10,8 @@ import styles from "./header.module.scss";
 const { Header: AntHeader } = Layout;
 
 const Header: FC = () => {
+  const email = useAppSelector((state) => state.account.userEmail);
   const dispatch = useAppDispatch();
-  const { isLoggedIn } = useAuth();
 
   return (
     <AntHeader className={styles.navbar}>
@@ -118,7 +117,7 @@ const Header: FC = () => {
                     return `${styles.link} ${isActive ? styles.active : ""}`;
                   }}
                 >
-                  {"имя"}
+                  {email && email}
                 </NavLink>
               </RequireAuthComponent>
             ),

@@ -1,6 +1,13 @@
+import { IProfileResponse } from "@/api/account/types";
 import { createSlice } from "@reduxjs/toolkit";
-import { getRoles, login, logout, signup } from "./accountActions";
-import { convertRolesResponeToArray, getToken, resetToken } from "./helpers";
+import { getProfile, getRoles, login, logout, signup } from "./accountActions";
+import {
+  convertRolesResponeToArray,
+  getEmail,
+  getToken,
+  resetEmail,
+  resetToken,
+} from "./helpers";
 
 export enum Roles {
   isStudent = "Student",
@@ -14,15 +21,18 @@ export interface IError {
 
 interface IAccountState {
   userToken: string | null;
+  userEmail: string | null;
   userRoles: Roles[] | null;
+  userProfile: IProfileResponse;
   status: "init" | "loading" | "error" | "success";
   error: string | null;
 }
 
 const initialState: IAccountState = {
-  // userInfo: {}
   userToken: getToken(),
+  userEmail: getEmail(),
   userRoles: null,
+  userProfile: {} as IProfileResponse,
   status: "init",
   error: null,
 };
@@ -33,9 +43,11 @@ const accountSlice = createSlice({
   reducers: {
     clearState: () => {
       resetToken();
+      resetEmail();
       return {
         ...initialState,
         userToken: getToken(),
+        userEmail: getEmail(),
       };
     },
   },
@@ -46,14 +58,15 @@ const accountSlice = createSlice({
       state.error = null;
     });
 
-    builder.addCase(signup.fulfilled, (state, { payload }) => {
+    builder.addCase(signup.fulfilled, (state) => {
       state.status = "success";
-      state.userToken = payload.token;
+      state.userToken = getToken();
+      state.userEmail = getEmail();
     });
 
     builder.addCase(signup.rejected, (state, { payload }) => {
       state.status = "error";
-      if (payload) state.error = payload.message;
+      state.error = payload?.message;
     });
 
     // login
@@ -62,14 +75,15 @@ const accountSlice = createSlice({
       state.error = null;
     });
 
-    builder.addCase(login.fulfilled, (state, { payload }) => {
+    builder.addCase(login.fulfilled, (state) => {
       state.status = "success";
-      state.userToken = payload.token;
+      state.userToken = getToken();
+      state.userEmail = getEmail();
     });
 
     builder.addCase(login.rejected, (state, { payload }) => {
       state.status = "error";
-      if (payload) state.error = payload.message;
+      state.error = payload?.message;
     });
 
     // logout
@@ -80,9 +94,11 @@ const accountSlice = createSlice({
 
     builder.addCase(logout.fulfilled, () => {
       resetToken();
+      resetEmail();
       return {
         ...initialState,
         userToken: getToken(),
+        userEmail: getEmail(),
       };
     });
 
@@ -103,6 +119,22 @@ const accountSlice = createSlice({
 
     builder.addCase(getRoles.rejected, (state) => {
       state.status = "error";
+    });
+
+    // getProfile
+    builder.addCase(getProfile.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(getProfile.fulfilled, (state, { payload }) => {
+      state.status = "success";
+      state.userProfile = payload;
+    });
+
+    builder.addCase(getProfile.rejected, (state, { payload }) => {
+      state.status = "error";
+      state.error = payload?.message;
     });
   },
 });

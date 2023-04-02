@@ -30,3 +30,11 @@ export interface IRolesResponse {
   isStudent: boolean;
   isAdmin: boolean;
 }
+
+// profile
+
+export interface IProfileResponse {
+  fullName: string;
+  email: string;
+  birthDate: string;
+}

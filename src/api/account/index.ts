@@ -19,4 +19,5 @@ export const logout = (): AxiosPromise =>
 export const getRoles = (): AxiosPromise<accountTypes.IRolesResponse> =>
   axiosInstance.get(Endpoints.ACCOUNT.ROLES);
 
-// export const getProfile = (): AxiosPromise<string> => axiosInstance.get(Endpoints.AUTH.PROFILE)
+export const getProfile = (): AxiosPromise<accountTypes.IProfileResponse> =>
+  axiosInstance.get(Endpoints.ACCOUNT.PROFILE);

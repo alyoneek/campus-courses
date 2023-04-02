@@ -1,7 +1,7 @@
 import api from "@/api";
 import { ILoginRequest, ISignupRequest } from "@/api/account/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setToken } from "./helpers";
+import { setEmail, setToken } from "./helpers";
 
 export const signup = createAsyncThunk(
   "account/signup",
@@ -9,7 +9,7 @@ export const signup = createAsyncThunk(
     try {
       const response = await api.account.signup(data);
       setToken(response.data.token);
-      return response.data;
+      setEmail(data.email);
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });
@@ -26,7 +26,7 @@ export const login = createAsyncThunk(
     try {
       const response = await api.account.login(data);
       setToken(response.data.token);
-      return response.data;
+      setEmail(data.email);
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });
@@ -45,3 +45,19 @@ export const getRoles = createAsyncThunk("account/getRoles", async () => {
   const response = await api.account.getRoles();
   return response.data;
 });
+
+export const getProfile = createAsyncThunk(
+  "account/getProfile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.account.getProfile();
+      return response.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);
