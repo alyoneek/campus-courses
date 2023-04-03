@@ -1,6 +1,13 @@
 import { IProfileResponse } from "@/api/account/types";
 import { createSlice } from "@reduxjs/toolkit";
-import { getProfile, getRoles, login, logout, signup } from "./accountActions";
+import {
+  editProfile,
+  getProfile,
+  getRoles,
+  login,
+  logout,
+  signup,
+} from "./accountActions";
 import {
   convertRolesResponeToArray,
   getEmail,
@@ -132,7 +139,25 @@ const accountSlice = createSlice({
       state.userProfile = payload;
     });
 
-    builder.addCase(getProfile.rejected, (state, { payload }) => {
+    builder.addCase(getProfile.rejected, (state) => {
+      state.status = "error";
+    });
+
+    // editProfile
+    builder.addCase(editProfile.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(editProfile.fulfilled, (state, { payload }) => {
+      state.status = "success";
+      state.userProfile = {
+        ...state.userProfile,
+        ...payload,
+      };
+    });
+
+    builder.addCase(editProfile.rejected, (state, { payload }) => {
       state.status = "error";
       state.error = payload?.message;
     });

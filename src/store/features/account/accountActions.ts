@@ -1,5 +1,9 @@
 import api from "@/api";
-import { ILoginRequest, ISignupRequest } from "@/api/account/types";
+import {
+  ILoginRequest,
+  IProfileEditRequest,
+  ISignupRequest,
+} from "@/api/account/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setEmail, setToken } from "./helpers";
 
@@ -46,12 +50,17 @@ export const getRoles = createAsyncThunk("account/getRoles", async () => {
   return response.data;
 });
 
-export const getProfile = createAsyncThunk(
-  "account/getProfile",
-  async (_, { rejectWithValue }) => {
+export const getProfile = createAsyncThunk("account/getProfile", async () => {
+  const response = await api.account.getProfile();
+  return response.data;
+});
+
+export const editProfile = createAsyncThunk(
+  "account/editProfile",
+  async (data: IProfileEditRequest, { rejectWithValue }) => {
     try {
-      const response = await api.account.getProfile();
-      return response.data;
+      await api.account.editProfile(data);
+      return data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });

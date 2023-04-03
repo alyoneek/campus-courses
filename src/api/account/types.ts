@@ -19,9 +19,7 @@ export interface ILoginRequest {
   password: string;
 }
 
-export interface ILoginResponse {
-  token: string;
-}
+export type ILoginResponse = ISignupResponse;
 
 // roles
 
@@ -38,3 +36,5 @@ export interface IProfileResponse {
   email: string;
   birthDate: string;
 }
+
+export type IProfileEditRequest = Omit<IProfileResponse, "email">;

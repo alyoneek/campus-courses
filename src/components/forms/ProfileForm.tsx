@@ -1,5 +1,7 @@
 import { IProfileResponse } from "@/api/account/types";
 import { profileFormValidation } from "@/helpers/validation";
+import { useAppDispatch } from "@/store";
+import { editProfile } from "@/store/features/account/accountActions";
 import { Button, DatePicker, Form, Input, message } from "antd";
 import dayjs from "dayjs";
 import { FC, useEffect, useState } from "react";
@@ -11,16 +13,26 @@ interface ProfileFormProps {
 const ProfileForm: FC<ProfileFormProps> = ({ profileInfo }) => {
   const [isEdit, setEdit] = useState(false);
   const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
 
   useEffect(() => form.resetFields(), [profileInfo]);
 
-  const onFinish = (values: any) => {
-    console.log(values);
-    setEdit(false);
+  const onFinishFailed = (value: string) => {
+    message.error(value);
   };
 
-  const onFinishFailed = () => {
-    message.error("Submit failed!");
+  const onFinish = (values: any) => {
+    const newValues = {
+      ...values,
+      birthDate: values["birthDate"].format("YYYY-MM-DD"),
+    };
+
+    dispatch(editProfile(newValues))
+      .unwrap()
+      .then(() => setEdit(false))
+      .catch((e) => {
+        onFinishFailed(e.message);
+      });
   };
 
   const onEditClick = () => {

@@ -21,3 +21,7 @@ export const getRoles = (): AxiosPromise<accountTypes.IRolesResponse> =>
 
 export const getProfile = (): AxiosPromise<accountTypes.IProfileResponse> =>
   axiosInstance.get(Endpoints.ACCOUNT.PROFILE);
+
+export const editProfile = (
+  params: accountTypes.IProfileEditRequest
+): AxiosPromise => axiosInstance.put(Endpoints.ACCOUNT.PROFILE, params);
