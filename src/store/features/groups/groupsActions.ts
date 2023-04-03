@@ -23,3 +23,24 @@ export const createGroup = createAsyncThunk(
     }
   }
 );
+
+interface IPayloadForUpdate {
+  id: string;
+  data: IGropRequest;
+}
+
+export const updateGroup = createAsyncThunk(
+  "groups/updateGroup",
+  async (payload: IPayloadForUpdate, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await api.groups.updateGroup(payload.id, payload.data);
+      dispatch(groupsActions.updateGroup(response.data));
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);

@@ -1,6 +1,6 @@
 import { IGropResponse } from "@/api/groups/types";
 import { createSlice } from "@reduxjs/toolkit";
-import { createGroup, getGroups } from "./groupsActions";
+import { createGroup, getGroups, updateGroup } from "./groupsActions";
 
 interface IGroupsState {
   allGroups: IGropResponse[];
@@ -20,6 +20,18 @@ const groupsSlice = createSlice({
   reducers: {
     addGroup: (state, { payload }) => {
       state.allGroups.push(payload);
+    },
+    updateGroup: (state, { payload }) => {
+      let updatedGroup = state.allGroups.find(
+        (group) => group.id === payload.id
+      );
+      updatedGroup = {
+        ...updatedGroup,
+        ...payload,
+      };
+      state.allGroups = state.allGroups.map((group) =>
+        group.id === payload.id ? updatedGroup : group
+      ) as IGropResponse[];
     },
   },
   extraReducers: (builder) => {
@@ -45,6 +57,17 @@ const groupsSlice = createSlice({
     });
 
     builder.addCase(createGroup.rejected, (state, { payload }) => {
+      state.status = "error";
+      state.error = payload?.message;
+    });
+
+    // updateGroup
+    builder.addCase(updateGroup.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(updateGroup.rejected, (state, { payload }) => {
       state.status = "error";
       state.error = payload?.message;
     });

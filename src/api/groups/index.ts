@@ -9,3 +9,9 @@ export const getGroups = (): AxiosPromise<IGropResponse[]> =>
 
 export const createGroup = (params: accountTypes.IGropRequest): AxiosPromise =>
   axiosInstance.post(Endpoints.GROUPS.ALL_GROUPS, params);
+
+export const updateGroup = (
+  groupId: string,
+  params: accountTypes.IGropRequest
+): AxiosPromise =>
+  axiosInstance.put(Endpoints.GROUPS.GROUP_BY_ID(groupId), params);

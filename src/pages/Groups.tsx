@@ -1,3 +1,4 @@
+import { IGropResponse } from "@/api/groups/types";
 import CreateGroupForm from "@/components/forms/CreateGroupForm";
 import EditGroupForm from "@/components/forms/EditGroupForm";
 import GroupsList from "@/components/GroupsList";
@@ -66,7 +67,11 @@ const Groups: FC = () => {
         form={editGroupForm}
       >
         <EditGroupForm
-          idGroup={choosenGroupId}
+          groupInfo={
+            groupsInfo.find(
+              (group) => group.id === choosenGroupId
+            ) as IGropResponse
+          }
           afterFinish={handleEditModalCancel}
         />
       </ModalForm>

@@ -1,3 +1,4 @@
+import { IGropRequest } from "@/api/groups/types";
 import { createGroupFormValidation } from "@/helpers/validation";
 import { useAppDispatch } from "@/store";
 import { createGroup } from "@/store/features/groups/groupsActions";
@@ -12,7 +13,7 @@ interface CreateGroupFormProps {
 const CreateGroupForm: FC<CreateGroupFormProps> = ({ form, afterFinish }) => {
   const dispatch = useAppDispatch();
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: IGropRequest) => {
     dispatch(createGroup(values))
       .unwrap()
       .then(() => onFinishSuccess())

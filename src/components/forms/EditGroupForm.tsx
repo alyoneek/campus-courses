@@ -1,23 +1,39 @@
+import { IGropRequest, IGropResponse } from "@/api/groups/types";
 import { editGroupFormValidation } from "@/helpers/validation";
-import { Form, FormInstance, Input } from "antd";
-import { FC } from "react";
+import { useAppDispatch } from "@/store";
+import { updateGroup } from "@/store/features/groups/groupsActions";
+import { Form, FormInstance, Input, message } from "antd";
+import { FC, useEffect } from "react";
 
 interface EditGroupFormProps {
-  idGroup: string;
+  groupInfo: IGropResponse;
   form?: FormInstance;
   afterFinish?: () => void;
 }
 
 const EditGroupForm: FC<EditGroupFormProps> = ({
-  idGroup,
+  groupInfo,
   form,
   afterFinish,
 }) => {
-  const onFinish = (values: any) => {
-    setTimeout(() => {
-      console.log(values);
-      afterFinish && afterFinish();
-    }, 1000);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => form?.resetFields(), [groupInfo]);
+
+  const onFinish = (values: IGropRequest) => {
+    dispatch(updateGroup({ id: groupInfo.id, data: values }))
+      .unwrap()
+      .then(() => onFinishSuccess())
+      .catch((e) => onFinishFailed(e.message));
+  };
+
+  const onFinishFailed = (value: string) => {
+    message.error(value);
+  };
+
+  const onFinishSuccess = () => {
+    message.success("Группа успешно отредактирована");
+    afterFinish && afterFinish();
   };
 
   return (
@@ -26,7 +42,7 @@ const EditGroupForm: FC<EditGroupFormProps> = ({
       layout="vertical"
       onFinish={onFinish}
       autoComplete="off"
-      initialValues={{ name: idGroup }}
+      initialValues={{ name: groupInfo.name }}
     >
       <Form.Item
         name="name"

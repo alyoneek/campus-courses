@@ -5,11 +5,7 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 const BASE_URL = "https://camp-courses.api.kreosoft.space";
 
-const urlsSkipAuth = [
-  Endpoints.ACCOUNT.LOGIN,
-  Endpoints.ACCOUNT.SIGNUP,
-  Endpoints.GROUPS.ALL_GROUPS,
-];
+const urlsSkipAuth = [Endpoints.ACCOUNT.LOGIN, Endpoints.ACCOUNT.SIGNUP];
 
 export const axiosInstance = axios.create({ baseURL: BASE_URL });
 
@@ -43,11 +39,10 @@ axiosInstance.interceptors.response.use(
       if (isLoggedIn) {
         store.dispatch(accountActions.clearState());
       }
-
+      error.message = "Необходима повторная авторизация";
       //   if (history.navigate) history.navigate("/login");
     }
 
-    error.message = "Необходима повторная авторизация";
     throw error;
   }
 );
