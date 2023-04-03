@@ -44,3 +44,19 @@ export const updateGroup = createAsyncThunk(
     }
   }
 );
+
+export const deleteGroup = createAsyncThunk(
+  "groups/deleteGroup",
+  async (id: string, { rejectWithValue, dispatch }) => {
+    try {
+      await api.groups.deleteGroup(id);
+      dispatch(groupsActions.deleteGroup(id));
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);

@@ -1,4 +1,5 @@
 import { useResetFormOnCloseModal } from "@/hooks/useResetFormOnCloseModal";
+import { useAppSelector } from "@/store";
 import { Button, FormInstance, Modal } from "antd";
 import { cloneElement, ReactElement } from "react";
 
@@ -18,6 +19,7 @@ const ModalForm = ({
   children,
 }: ModalFormProps) => {
   useResetFormOnCloseModal(form, open);
+  const status = useAppSelector((state) => state.groups.status);
 
   const onOk = () => {
     form.submit();
@@ -48,7 +50,7 @@ const ModalForm = ({
           key="submit"
           type="primary"
           htmlType="submit"
-          // loading
+          loading={status === "loading"}
           onClick={onOk}
         >
           Сохранить

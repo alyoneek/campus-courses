@@ -1,6 +1,11 @@
 import { IGropResponse } from "@/api/groups/types";
 import { createSlice } from "@reduxjs/toolkit";
-import { createGroup, getGroups, updateGroup } from "./groupsActions";
+import {
+  createGroup,
+  deleteGroup,
+  getGroups,
+  updateGroup,
+} from "./groupsActions";
 
 interface IGroupsState {
   allGroups: IGropResponse[];
@@ -21,6 +26,7 @@ const groupsSlice = createSlice({
     addGroup: (state, { payload }) => {
       state.allGroups.push(payload);
     },
+
     updateGroup: (state, { payload }) => {
       let updatedGroup = state.allGroups.find(
         (group) => group.id === payload.id
@@ -32,6 +38,10 @@ const groupsSlice = createSlice({
       state.allGroups = state.allGroups.map((group) =>
         group.id === payload.id ? updatedGroup : group
       ) as IGropResponse[];
+    },
+
+    deleteGroup: (state, { payload }) => {
+      state.allGroups = state.allGroups.filter((group) => group.id !== payload);
     },
   },
   extraReducers: (builder) => {
@@ -56,6 +66,10 @@ const groupsSlice = createSlice({
       state.error = null;
     });
 
+    builder.addCase(createGroup.fulfilled, (state) => {
+      state.status = "success";
+    });
+
     builder.addCase(createGroup.rejected, (state, { payload }) => {
       state.status = "error";
       state.error = payload?.message;
@@ -67,7 +81,26 @@ const groupsSlice = createSlice({
       state.error = null;
     });
 
+    builder.addCase(updateGroup.fulfilled, (state) => {
+      state.status = "success";
+    });
+
     builder.addCase(updateGroup.rejected, (state, { payload }) => {
+      state.status = "error";
+      state.error = payload?.message;
+    });
+
+    // deleteGroup
+    builder.addCase(deleteGroup.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(deleteGroup.fulfilled, (state) => {
+      state.status = "success";
+    });
+
+    builder.addCase(deleteGroup.rejected, (state, { payload }) => {
       state.status = "error";
       state.error = payload?.message;
     });

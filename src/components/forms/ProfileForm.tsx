@@ -1,6 +1,6 @@
 import { IProfileResponse } from "@/api/account/types";
 import { profileFormValidation } from "@/helpers/validation";
-import { useAppDispatch } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/store";
 import { editProfile } from "@/store/features/account/accountActions";
 import { Button, DatePicker, Form, Input, message } from "antd";
 import dayjs from "dayjs";
@@ -13,13 +13,11 @@ interface ProfileFormProps {
 const ProfileForm: FC<ProfileFormProps> = ({ profileInfo }) => {
   const [isEdit, setEdit] = useState(false);
   const [form] = Form.useForm();
+
   const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.account.status);
 
   useEffect(() => form.resetFields(), [profileInfo]);
-
-  const onFinishFailed = (value: string) => {
-    message.error(value);
-  };
 
   const onFinish = (values: any) => {
     const newValues = {
@@ -29,10 +27,19 @@ const ProfileForm: FC<ProfileFormProps> = ({ profileInfo }) => {
 
     dispatch(editProfile(newValues))
       .unwrap()
-      .then(() => setEdit(false))
+      .then(() => onFinishSuccess())
       .catch((e) => {
         onFinishFailed(e.message);
       });
+  };
+
+  const onFinishFailed = (value: string) => {
+    message.error(value);
+  };
+
+  const onFinishSuccess = () => {
+    message.success("Профиль успешно отредактирован");
+    setEdit(false);
   };
 
   const onEditClick = () => {
@@ -95,6 +102,7 @@ const ProfileForm: FC<ProfileFormProps> = ({ profileInfo }) => {
           size="large"
           onClick={onEditClick}
           className={isEdit ? "block" : "hidden"}
+          loading={status === "loading"}
         >
           Сохранить
         </Button>

@@ -15,3 +15,6 @@ export const updateGroup = (
   params: accountTypes.IGropRequest
 ): AxiosPromise =>
   axiosInstance.put(Endpoints.GROUPS.GROUP_BY_ID(groupId), params);
+
+export const deleteGroup = (groupId: string): AxiosPromise =>
+  axiosInstance.delete(Endpoints.GROUPS.GROUP_BY_ID(groupId));

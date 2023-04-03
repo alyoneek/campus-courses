@@ -7,7 +7,7 @@ interface GroupsListProps {
   onEditGroup: (idGroup: string) => void;
 }
 
-const GroupsList: FC<GroupsListProps> = ({ onEditGroup, groupsInfo }) => {
+const GroupsList: FC<GroupsListProps> = ({ groupsInfo, onEditGroup }) => {
   return (
     <>
       {groupsInfo.map((group) => (
