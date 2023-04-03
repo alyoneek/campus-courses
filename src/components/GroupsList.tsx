@@ -1,21 +1,17 @@
+import { IGropResponse } from "@/api/groups/types";
 import GroupCard from "@/components/GroupCard";
 import { FC } from "react";
 
-const groups = [
-  "Гуманитарные науки",
-  "Иностранные науки",
-  "Компьютерные науки",
-];
-
 interface GroupsListProps {
+  groupsInfo: IGropResponse[];
   onEditGroup: (idGroup: string) => void;
 }
 
-const GroupsList: FC<GroupsListProps> = ({ onEditGroup }) => {
+const GroupsList: FC<GroupsListProps> = ({ onEditGroup, groupsInfo }) => {
   return (
     <>
-      {groups.map((group, i) => (
-        <GroupCard key={i} title={group} onEdit={onEditGroup} />
+      {groupsInfo.map((group) => (
+        <GroupCard key={group.id} groupInfo={group} onEdit={onEditGroup} />
       ))}
     </>
   );

@@ -1,5 +1,7 @@
 import { createGroupFormValidation } from "@/helpers/validation";
-import { Form, FormInstance, Input } from "antd";
+import { useAppDispatch } from "@/store";
+import { createGroup } from "@/store/features/groups/groupsActions";
+import { Form, FormInstance, Input, message } from "antd";
 import { FC } from "react";
 
 interface CreateGroupFormProps {
@@ -8,11 +10,22 @@ interface CreateGroupFormProps {
 }
 
 const CreateGroupForm: FC<CreateGroupFormProps> = ({ form, afterFinish }) => {
+  const dispatch = useAppDispatch();
+
   const onFinish = (values: any) => {
-    setTimeout(() => {
-      console.log(values);
-      afterFinish && afterFinish();
-    }, 1000);
+    dispatch(createGroup(values))
+      .unwrap()
+      .then(() => onFinishSuccess())
+      .catch((e) => onFinishFailed(e.message));
+  };
+
+  const onFinishFailed = (value: string) => {
+    message.error(value);
+  };
+
+  const onFinishSuccess = () => {
+    message.success("Группа успешно добавлена");
+    afterFinish && afterFinish();
   };
 
   return (

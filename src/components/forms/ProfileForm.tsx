@@ -47,7 +47,6 @@ const ProfileForm: FC<ProfileFormProps> = ({ profileInfo }) => {
       layout="horizontal"
       form={form}
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       autoComplete="off"
       initialValues={{
         fullName: profileInfo.fullName,
