@@ -25,13 +25,13 @@ const Routes = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="groups">
             <Route index element={<Groups />} />
-            <Route path=":id" element={<Group />} />
+            <Route path=":idGroup" element={<Group />} />
           </Route>
         </Route>
 
         <Route element={<RequireAuthRoute allowedRoles={[Roles.isAdmin]} />}>
           <Route path="courses">
-            <Route path=":id" element={<Course />} />
+            <Route path=":idCourse" element={<Course />} />
             <Route path="my" element={<Course />} />
             <Route path="teaching" element={<Course />} />
           </Route>

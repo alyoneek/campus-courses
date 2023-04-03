@@ -1,17 +1,16 @@
+import { ICourseInGroupResponse } from "@/api/groups/types";
 import CourseCard from "@components/CourseCard";
 import { FC } from "react";
 
-const courses = [
-  "Искусственный интеллект",
-  "Основы сетевого анализа",
-  "Основы машинного обучения",
-];
+interface CoursesListProps {
+  courses: ICourseInGroupResponse[];
+}
 
-const CoursesList: FC = () => {
+const CoursesList: FC<CoursesListProps> = ({ courses }) => {
   return (
     <>
       {courses.map((course, i) => (
-        <CourseCard key={i} title={course} />
+        <CourseCard key={i} courseInfo={course} />
       ))}
     </>
   );

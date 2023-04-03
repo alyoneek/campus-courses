@@ -18,7 +18,7 @@ const Groups: FC = () => {
   const [editGroupForm] = useForm();
 
   const dispatch = useAppDispatch();
-  const groupsInfo = useAppSelector((state) => state.groups.allGroups);
+  const groups = useAppSelector((state) => state.groups.allGroups);
 
   useEffect(() => {
     dispatch(getGroups());
@@ -51,7 +51,7 @@ const Groups: FC = () => {
       >
         Создать
       </Button>
-      <GroupsList onEditGroup={showEditModal} groupsInfo={groupsInfo} />
+      <GroupsList onEditGroup={showEditModal} groups={groups} />
       <ModalForm
         title="Создание группы"
         open={isCreateModalOpen}
@@ -68,9 +68,7 @@ const Groups: FC = () => {
       >
         <EditGroupForm
           groupInfo={
-            groupsInfo.find(
-              (group) => group.id === choosenGroupId
-            ) as IGropResponse
+            groups.find((group) => group.id === choosenGroupId) as IGropResponse
           }
           afterFinish={handleEditModalCancel}
         />

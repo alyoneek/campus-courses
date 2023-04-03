@@ -60,3 +60,19 @@ export const deleteGroup = createAsyncThunk(
     }
   }
 );
+
+export const getCourses = createAsyncThunk(
+  "groups/getCourses",
+  async (idGroup: string, { rejectWithValue }) => {
+    try {
+      const response = await api.groups.getCoursesInGroup(idGroup);
+      return response.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);

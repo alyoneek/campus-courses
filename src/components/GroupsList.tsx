@@ -3,14 +3,14 @@ import GroupCard from "@/components/GroupCard";
 import { FC } from "react";
 
 interface GroupsListProps {
-  groupsInfo: IGropResponse[];
+  groups: IGropResponse[];
   onEditGroup: (idGroup: string) => void;
 }
 
-const GroupsList: FC<GroupsListProps> = ({ groupsInfo, onEditGroup }) => {
+const GroupsList: FC<GroupsListProps> = ({ groups, onEditGroup }) => {
   return (
     <>
-      {groupsInfo.map((group) => (
+      {groups.map((group) => (
         <GroupCard key={group.id} groupInfo={group} onEdit={onEditGroup} />
       ))}
     </>
