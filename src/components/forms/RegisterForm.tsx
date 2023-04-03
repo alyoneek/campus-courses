@@ -1,8 +1,14 @@
+import { history } from "@/router/history";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { signup } from "@/store/features/account/accountActions";
 import { registerFormValidation } from "@helpers/validation";
 import { Button, DatePicker, Form, Input, message } from "antd";
 import { FC } from "react";
 
 const RegisterForm: FC = () => {
+  const status = useAppSelector((state) => state.account.status);
+  const dispatch = useAppDispatch();
+
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
@@ -10,21 +16,20 @@ const RegisterForm: FC = () => {
       ...values,
       birthDate: values["birthDate"].format("YYYY-MM-DD"),
     };
-    console.log(newValues);
+    dispatch(signup(newValues))
+      .unwrap()
+      .then(() => history.navigate && history.navigate("/groups"))
+      .catch((e) => {
+        onFinishFailed(e.message);
+      });
   };
 
-  const onFinishFailed = () => {
-    message.error("Submit failed!");
+  const onFinishFailed = (value: string) => {
+    if (value) message.error(value);
   };
 
   return (
-    <Form
-      layout="vertical"
-      form={form}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-    >
+    <Form layout="vertical" form={form} onFinish={onFinish} autoComplete="off">
       <Form.Item
         label="ФИО"
         name="fullName"
@@ -62,7 +67,12 @@ const RegisterForm: FC = () => {
         <Input.Password size="large" />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit" size="large">
+        <Button
+          type="primary"
+          htmlType="submit"
+          size="large"
+          loading={status === "loading"}
+        >
           Зарегистрироваться
         </Button>
       </Form.Item>

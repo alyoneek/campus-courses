@@ -1,18 +1,38 @@
+import { IProfileResponse } from "@/api/account/types";
 import { profileFormValidation } from "@/helpers/validation";
+import { useAppDispatch } from "@/store";
+import { editProfile } from "@/store/features/account/accountActions";
 import { Button, DatePicker, Form, Input, message } from "antd";
-import { FC, useState } from "react";
+import dayjs from "dayjs";
+import { FC, useEffect, useState } from "react";
 
-const ProfileForm: FC = () => {
+interface ProfileFormProps {
+  profileInfo: IProfileResponse;
+}
+
+const ProfileForm: FC<ProfileFormProps> = ({ profileInfo }) => {
   const [isEdit, setEdit] = useState(false);
   const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
 
-  const onFinish = (values: any) => {
-    console.log(values);
-    setEdit(false);
+  useEffect(() => form.resetFields(), [profileInfo]);
+
+  const onFinishFailed = (value: string) => {
+    message.error(value);
   };
 
-  const onFinishFailed = () => {
-    message.error("Submit failed!");
+  const onFinish = (values: any) => {
+    const newValues = {
+      ...values,
+      birthDate: values["birthDate"].format("YYYY-MM-DD"),
+    };
+
+    dispatch(editProfile(newValues))
+      .unwrap()
+      .then(() => setEdit(false))
+      .catch((e) => {
+        onFinishFailed(e.message);
+      });
   };
 
   const onEditClick = () => {
@@ -29,6 +49,10 @@ const ProfileForm: FC = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
+      initialValues={{
+        fullName: profileInfo.fullName,
+        birthDate: dayjs(profileInfo.birthDate),
+      }}
     >
       <Form.Item
         label="ФИО"
@@ -40,7 +64,7 @@ const ProfileForm: FC = () => {
       </Form.Item>
 
       <Form.Item label="Email" labelAlign="left">
-        <div>alyonta03@mail.ru</div>
+        <div>{profileInfo.email}</div>
       </Form.Item>
 
       <Form.Item
@@ -50,7 +74,7 @@ const ProfileForm: FC = () => {
         rules={profileFormValidation.birthDate}
       >
         <DatePicker
-          format="MM.DD.YYYY"
+          format="DD.MM.YYYY"
           size="large"
           className="w-full"
           disabled={!isEdit}

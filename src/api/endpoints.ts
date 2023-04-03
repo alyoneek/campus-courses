@@ -1,8 +1,9 @@
 const Endpoints = {
   ACCOUNT: {
+    SIGNUP: "/registration",
     LOGIN: "/login",
     LOGOUT: "/logout",
-    SIGNUP: "/registration",
+    ROLES: "/roles",
     PROFILE: "/profile",
   },
 };
