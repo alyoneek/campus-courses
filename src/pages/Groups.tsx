@@ -22,7 +22,7 @@ const Groups: FC = () => {
 
   useEffect(() => {
     dispatch(getGroups());
-  }, []);
+  }, [dispatch]);
 
   const showCreateModal = () => {
     setCreateModalOpen(true);

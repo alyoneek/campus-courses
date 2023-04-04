@@ -21,7 +21,7 @@ enum Statuses {
 }
 
 const ribbonColors = {
-  Created: "default",
+  Created: "grey",
   OpenForAssigning: "green",
   Started: "blue",
   Finished: "red",

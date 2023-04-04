@@ -1,5 +1,5 @@
 import api from "@/api";
-import { IGropRequest } from "@/api/groups/types";
+import { ICourseInGroupRequest, IGropRequest } from "@/api/groups/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { groupsActions } from "./groupsSlice";
 
@@ -24,14 +24,14 @@ export const createGroup = createAsyncThunk(
   }
 );
 
-interface IPayloadForUpdate {
+interface IPayloadForUpdateGroup {
   id: string;
   data: IGropRequest;
 }
 
 export const updateGroup = createAsyncThunk(
   "groups/updateGroup",
-  async (payload: IPayloadForUpdate, { rejectWithValue, dispatch }) => {
+  async (payload: IPayloadForUpdateGroup, { rejectWithValue, dispatch }) => {
     try {
       const response = await api.groups.updateGroup(payload.id, payload.data);
       dispatch(groupsActions.updateGroup(response.data));
@@ -66,6 +66,30 @@ export const getCourses = createAsyncThunk(
   async (idGroup: string, { rejectWithValue }) => {
     try {
       const response = await api.groups.getCoursesInGroup(idGroup);
+      return response.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);
+
+interface IPayloadForCreateCourse {
+  idGroup: string;
+  data: ICourseInGroupRequest;
+}
+
+export const createCourse = createAsyncThunk(
+  "groups/createCourse",
+  async (payload: IPayloadForCreateCourse, { rejectWithValue }) => {
+    try {
+      const response = await api.groups.createCourseInGroup(
+        payload.idGroup,
+        payload.data
+      );
       return response.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {

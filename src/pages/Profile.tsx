@@ -10,7 +10,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getProfile());
-  }, []);
+  }, [dispatch]);
 
   return (
     <DataContent title="Профиль">

@@ -1,23 +1,39 @@
 import { createCourseFormValidation } from "@/helpers/validation";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { createCourse } from "@/store/features/groups/groupsActions";
+import { getUsers } from "@/store/features/users/usersActions";
 import {
   DatePicker,
   Form,
   FormInstance,
   Input,
   InputNumber,
+  message,
   Radio,
   Select,
 } from "antd";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import TextEditor from "../TextEditor";
 
 interface CreateCourseFormProps {
+  idGroup: string;
   form?: FormInstance;
   afterFinish?: () => void;
 }
 
-const CreateCourseForm: FC<CreateCourseFormProps> = ({ form, afterFinish }) => {
+const CreateCourseForm: FC<CreateCourseFormProps> = ({
+  idGroup,
+  form,
+  afterFinish,
+}) => {
+  const dispatch = useAppDispatch();
+  const users = useAppSelector((state) => state.users.allUsers);
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
   const changeRequirementsField = (value: string) => {
     form?.setFieldValue("requirements", value);
   };
@@ -27,14 +43,24 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({ form, afterFinish }) => {
   };
 
   const onFinish = (values: any) => {
-    setTimeout(() => {
-      const newValues = {
-        ...values,
-        startYear: values["startYear"].format("YYYY"),
-      };
-      console.log(newValues);
-      afterFinish && afterFinish();
-    }, 1000);
+    const newValues = {
+      ...values,
+      startYear: Number(values["startYear"].format("YYYY")),
+    };
+
+    dispatch(createCourse({ idGroup, data: newValues }))
+      .unwrap()
+      .then(() => onFinishSuccess())
+      .catch((e) => onFinishFailed(e.message));
+  };
+
+  const onFinishFailed = (value: string) => {
+    message.error(value);
+  };
+
+  const onFinishSuccess = () => {
+    message.success("Курс успешно добавлен");
+    afterFinish && afterFinish();
   };
 
   return (
@@ -44,7 +70,7 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({ form, afterFinish }) => {
         layout="vertical"
         onFinish={onFinish}
         autoComplete="off"
-        initialValues={{ semester: "autmn" }}
+        initialValues={{ semester: "Autmn" }}
       >
         <Form.Item
           name="name"
@@ -76,8 +102,8 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({ form, afterFinish }) => {
           rules={createCourseFormValidation.semester}
         >
           <Radio.Group>
-            <Radio value="autmn">Осенний</Radio>
-            <Radio value="spring">Весенний</Radio>
+            <Radio value="Autmn">Осенний</Radio>
+            <Radio value="Spring">Весенний</Radio>
           </Radio.Group>
         </Form.Item>
 
@@ -87,9 +113,11 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({ form, afterFinish }) => {
           rules={createCourseFormValidation.mainTeacherId}
         >
           <Select size="large">
-            <Select.Option value="demo1">Demo1</Select.Option>
-            <Select.Option value="demo2">Demo2</Select.Option>
-            <Select.Option value="demo3">Demo3</Select.Option>
+            {users.map((user) => (
+              <Select.Option key={user.id} value={user.id}>
+                {user.fullName}
+              </Select.Option>
+            ))}
           </Select>
         </Form.Item>
 

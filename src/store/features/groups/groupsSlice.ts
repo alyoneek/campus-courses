@@ -1,6 +1,7 @@
 import { ICourseInGroupResponse, IGropResponse } from "@/api/groups/types";
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  createCourse,
   createGroup,
   deleteGroup,
   getCourses,
@@ -120,6 +121,22 @@ const groupsSlice = createSlice({
     });
 
     builder.addCase(getCourses.rejected, (state, { payload }) => {
+      state.status = "error";
+      state.error = payload?.message;
+    });
+
+    // createCourse
+    builder.addCase(createCourse.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(createCourse.fulfilled, (state, { payload }) => {
+      state.status = "success";
+      state.currentGroupCourses = payload;
+    });
+
+    builder.addCase(createCourse.rejected, (state, { payload }) => {
       state.status = "error";
       state.error = payload?.message;
     });

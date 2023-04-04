@@ -21,7 +21,7 @@ const Group = () => {
 
   useEffect(() => {
     if (idGroup) dispatch(getCourses(idGroup));
-  }, [idGroup]);
+  }, [idGroup, dispatch]);
 
   const showCreateModal = () => {
     setCreateModalOpen(true);
@@ -50,7 +50,10 @@ const Group = () => {
         onCancel={handleCreateModalCancel}
         form={createCourseForm}
       >
-        <CreateCourseForm afterFinish={handleCreateModalCancel} />
+        <CreateCourseForm
+          idGroup={idGroup as string}
+          afterFinish={handleCreateModalCancel}
+        />
       </ModalForm>
     </DataContent>
   );
