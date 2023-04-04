@@ -16,5 +16,5 @@ export interface ICourseInGroupResponse {
   semester: Semester;
 }
 
-type CourseStatus = "Created" | "OpenForAssigning" | "Started" | "Finished ";
-type Semester = "Autumn" | "Spring ";
+type CourseStatus = "Created" | "OpenForAssigning" | "Started" | "Finished";
+type Semester = "Autumn" | "Spring";
