@@ -4,9 +4,10 @@ import Group from "@/pages/Group";
 import Groups from "@/pages/Groups";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
+import OwnCourses from "@/pages/OwnCourses";
 import Profile from "@/pages/Profile";
 import Registration from "@/pages/Registration";
-import { Route, Routes as ReactRoutes } from "react-router-dom";
+import { Routes as ReactRoutes, Route } from "react-router-dom";
 
 const Routes = () => {
   return (
@@ -21,6 +22,7 @@ const Routes = () => {
           <Route path=":id" element={<Group />} />
         </Route>
         <Route path="courses">
+          <Route path="my" element={<OwnCourses />} />
           <Route path=":id" element={<Course />} />
         </Route>
       </Route>

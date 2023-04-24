@@ -1,5 +1,6 @@
 import { Badge, Collapse } from "antd";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 const { Panel } = Collapse;
 
@@ -21,6 +22,7 @@ const CourseCard: FC<CourseCardProps> = ({ title }) => {
           <p className="mb-1">Семестр - Осенний</p>
           <p className="mb-1">Мест всего - 100</p>
           <p className="mb-1">Мест свободно - 95</p>
+          <Link to="/courses/1">Подробнее</Link>
         </Panel>
       </Collapse>
     </Badge.Ribbon>

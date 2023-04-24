@@ -33,7 +33,7 @@ const Header: FC = () => {
           {
             label: (
               <NavLink
-                to="/courses"
+                to="/courses/my"
                 className={({ isActive }) => {
                   return `${styles.link} ${isActive ? styles.active : ""}`;
                 }}
