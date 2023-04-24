@@ -1,9 +1,11 @@
 import { IGropResponse } from "@/api/groups/types";
 import usePopconfirm from "@/hooks/usePopconfirm";
+import RequireAuthComponent from "@/router/RequireAuthComponent";
 import { useAppDispatch, useAppSelector } from "@/store";
+import { Roles } from "@/store/features/account/accountSlice";
 import { deleteGroup } from "@/store/features/groups/groupsActions";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Card, message, Popconfirm } from "antd";
+import { Card, Popconfirm, message } from "antd";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import styles from "./groupCard.module.scss";
@@ -47,22 +49,26 @@ const GroupCard: FC<GroupCardProps> = ({ groupInfo, onEdit }) => {
           {groupInfo.name}
         </Link>
         <div className={styles.iconsContainer}>
-          <EditOutlined
-            className={styles.editIcon}
-            onClick={() => onEdit(groupInfo.id)}
-          />
-          <Popconfirm
-            title="Вы точно хотите удалить эту группу?"
-            open={openPopconfirm}
-            onConfirm={onOkPopconfirm}
-            okButtonProps={{ loading: status === "loading" }}
-            onCancel={onCancelPopconfirm}
-          >
-            <DeleteOutlined
-              className={styles.deleteIcon}
-              onClick={showPopconfirm}
+          <RequireAuthComponent allowedRoles={[Roles.isAdmin]}>
+            <EditOutlined
+              className={styles.editIcon}
+              onClick={() => onEdit(groupInfo.id)}
             />
-          </Popconfirm>
+          </RequireAuthComponent>
+          <RequireAuthComponent allowedRoles={[Roles.isAdmin]}>
+            <Popconfirm
+              title="Вы точно хотите удалить эту группу?"
+              open={openPopconfirm}
+              onConfirm={onOkPopconfirm}
+              okButtonProps={{ loading: status === "loading" }}
+              onCancel={onCancelPopconfirm}
+            >
+              <DeleteOutlined
+                className={styles.deleteIcon}
+                onClick={showPopconfirm}
+              />
+            </Popconfirm>
+          </RequireAuthComponent>
         </div>
       </div>
     </Card>

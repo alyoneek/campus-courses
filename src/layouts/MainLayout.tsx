@@ -9,17 +9,17 @@ import { FC, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const MainLayout: FC = () => {
-  const { token, roles } = useAuth();
+  const { isLoggedIn, roles } = useAuth();
   const dispatch = useAppDispatch();
 
   history.navigate = useNavigate();
   history.location = useLocation();
 
   useEffect(() => {
-    if (!!token && !roles) {
+    if (isLoggedIn && !roles) {
       dispatch(getRoles());
     }
-  }, [token, dispatch]);
+  }, [isLoggedIn, dispatch]);
 
   return (
     <Layout className="min-h-full">

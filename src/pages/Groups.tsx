@@ -4,7 +4,9 @@ import EditGroupForm from "@/components/forms/EditGroupForm";
 import GroupsList from "@/components/GroupsList";
 import ModalForm from "@/components/ModalForm";
 import DataContent from "@/layouts/content/DataContent";
+import RequireAuthComponent from "@/router/RequireAuthComponent";
 import { useAppDispatch, useAppSelector } from "@/store";
+import { Roles } from "@/store/features/account/accountSlice";
 import { getGroups } from "@/store/features/groups/groupsActions";
 import { Button, Form } from "antd";
 import useForm from "antd/es/form/hooks/useForm";
@@ -43,14 +45,16 @@ const Groups: FC = () => {
 
   return (
     <DataContent title="Группы кампусных курсов">
-      <Button
-        type="primary"
-        htmlType="button"
-        className="mb-2"
-        onClick={showCreateModal}
-      >
-        Создать
-      </Button>
+      <RequireAuthComponent allowedRoles={[Roles.isAdmin]}>
+        <Button
+          type="primary"
+          htmlType="button"
+          className="mb-2"
+          onClick={showCreateModal}
+        >
+          Создать
+        </Button>
+      </RequireAuthComponent>
       <GroupsList onEditGroup={showEditModal} groups={groups} />
       <ModalForm
         title="Создание группы"

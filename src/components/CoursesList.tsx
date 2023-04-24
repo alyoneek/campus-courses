@@ -9,8 +9,8 @@ interface CoursesListProps {
 const CoursesList: FC<CoursesListProps> = ({ courses }) => {
   return (
     <>
-      {courses.map((course, i) => (
-        <CourseCard key={i} courseInfo={course} />
+      {courses.map((course) => (
+        <CourseCard key={course.id} courseInfo={course} />
       ))}
     </>
   );
