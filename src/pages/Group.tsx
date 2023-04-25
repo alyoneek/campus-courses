@@ -1,5 +1,5 @@
 import CoursesList from "@/components/CoursesList";
-import CreateCourseForm from "@/components/forms/CreateCourseForm";
+import CourseForm from "@/components/forms/CourseForm";
 import ModalForm from "@/components/ModalForm";
 import DataContent from "@/layouts/content/DataContent";
 import { Button, Form } from "antd";
@@ -36,7 +36,7 @@ const Group = () => {
         onCancel={handleCreateModalCancel}
         form={createCourseForm}
       >
-        <CreateCourseForm afterFinish={handleCreateModalCancel} />
+        <CourseForm />
       </ModalForm>
     </DataContent>
   );

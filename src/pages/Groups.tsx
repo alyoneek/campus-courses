@@ -3,7 +3,7 @@ import EditGroupForm from "@/components/forms/EditGroupForm";
 import GroupsList from "@/components/GroupsList";
 import ModalForm from "@/components/ModalForm";
 import DataContent from "@/layouts/content/DataContent";
-import { Button, Form } from "antd";
+import { Button } from "antd";
 import useForm from "antd/es/form/hooks/useForm";
 import { FC, useState } from "react";
 
@@ -11,7 +11,7 @@ const Groups: FC = () => {
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [choosenGroupId, setChoosenGroupId] = useState("");
-  const [createGroupForm] = Form.useForm();
+  const [createGroupForm] = useForm();
   const [editGroupForm] = useForm();
 
   const showCreateModal = () => {
@@ -41,25 +41,25 @@ const Groups: FC = () => {
       >
         Создать
       </Button>
+
       <GroupsList onEditGroup={showEditModal} />
+
       <ModalForm
         title="Создание группы"
         open={isCreateModalOpen}
         onCancel={handleCreateModalCancel}
         form={createGroupForm}
       >
-        <CreateGroupForm afterFinish={handleCreateModalCancel} />
+        <CreateGroupForm />
       </ModalForm>
+
       <ModalForm
         title="Редактирование группы"
         open={isEditModalOpen}
         onCancel={handleEditModalCancel}
         form={editGroupForm}
       >
-        <EditGroupForm
-          idGroup={choosenGroupId}
-          afterFinish={handleEditModalCancel}
-        />
+        <EditGroupForm idGroup={choosenGroupId} />
       </ModalForm>
     </DataContent>
   );

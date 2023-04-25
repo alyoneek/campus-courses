@@ -1,18 +1,18 @@
-import { Button, List, Tag } from "antd";
+import { Button, List } from "antd";
+import Certification from "./Certification";
 
-const StudentItem = ({ studentData }) => {
+const StudentItem = ({ data }) => {
   return (
     <List.Item>
       <div className="w-full flex items-center justify-between text-base">
         <div>
-          <h3>{studentData.name}</h3>
+          <h3>{data.name}</h3>
           <p>
-            Статус -{" "}
-            <span className="text-green-500">{studentData.status}</span>
+            Статус - <span className="text-green-500">{data.status}</span>
           </p>
-          <p>{studentData.email}</p>
+          <p>{data.email}</p>
         </div>
-        {studentData.status == "InQueue" ? (
+        {data.status == "InQueue" ? (
           <div className="flex gap-3">
             <Button type="primary">Принять</Button>
             <Button type="primary" danger>
@@ -20,26 +20,11 @@ const StudentItem = ({ studentData }) => {
             </Button>
           </div>
         ) : (
-          <div className="flex gap-10">
-            <div>
-              <Button className="text-base" type="link">
-                Промежуточная аттестация
-              </Button>{" "}
-              -
-              <Tag color="green" className="ml-2">
-                успешно пройдена
-              </Tag>
-            </div>
-            <div>
-              <Button className="text-base" type="link">
-                Финальная аттестация
-              </Button>{" "}
-              -
-              <Tag color="grey" className="ml-2">
-                отметки нет
-              </Tag>
-            </div>
-          </div>
+          <Certification
+            name={data.name}
+            midtermResult={data.midtermResult}
+            finalResult={data.finalResult}
+          />
         )}
       </div>
     </List.Item>

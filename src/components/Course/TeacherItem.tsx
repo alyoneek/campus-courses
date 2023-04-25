@@ -1,18 +1,18 @@
 import { List, Tag } from "antd";
 
-const TeacherItem = ({ teacherData }) => {
+const TeacherItem = ({ data }) => {
   return (
     <List.Item>
       <div>
         <div className="flex">
-          <h3>{teacherData.name}</h3>
-          {teacherData.isMain && (
+          <h3>{data.name}</h3>
+          {data.isMain && (
             <Tag color="gold" className="ml-2">
               основной
             </Tag>
           )}
         </div>
-        <p>{teacherData.email}</p>
+        <p>{data.email}</p>
       </div>
     </List.Item>
   );

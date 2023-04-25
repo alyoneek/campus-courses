@@ -1,4 +1,6 @@
-import { Alert, Badge, Button, List, Tabs } from "antd";
+import { Badge, Tabs } from "antd";
+
+import NotificationsBlock from "@/components/Course/NotificationsBlock";
 
 const data = ["one", "two", "three"];
 
@@ -26,25 +28,7 @@ const ExtendedInfo = () => {
             </Badge>
           ),
           key: "3",
-          children: (
-            <>
-              <Button type="primary" className="mb-5">
-                Добавить уведомление
-              </Button>
-              <List
-                itemLayout="horizontal"
-                dataSource={data}
-                renderItem={
-                  (item) => (
-                    <List.Item>
-                      <Alert message={item} type="error" className="w-full" />
-                    </List.Item>
-                  )
-                  //   <List.Item>{item}</List.Item>
-                }
-              />
-            </>
-          ),
+          children: <NotificationsBlock data={data} />,
         },
       ]}
     />

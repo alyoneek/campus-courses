@@ -186,3 +186,54 @@ export const createCourseFormValidation = {
     },
   ],
 };
+
+export const editCourseFormValidation = {
+  requirements: [
+    {
+      required: true,
+      message: "Введите требования",
+    },
+  ],
+  annotations: [
+    {
+      required: true,
+      message: "Введите аннотации",
+    },
+  ],
+};
+
+export const courseStatusFormValidation = {
+  status: [
+    {
+      required: true,
+      message: "Выберите статус",
+    },
+  ],
+};
+
+export const notificationFormValidation = {
+  description: [
+    {
+      required: true,
+      message: "Введите текст",
+    },
+  ],
+};
+
+export const teacherFormValidation = {
+  teacher: [
+    {
+      required: true,
+      message: "Выберите преподавателя",
+    },
+  ],
+};
+
+export const resultFormValidation = {
+  mark: [
+    {
+      required: true,
+      message: "Выберите оценку",
+    },
+  ],
+};
