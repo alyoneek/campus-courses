@@ -8,7 +8,7 @@ import RequireAuthComponent from "@/router/RequireAuthComponent";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { Roles } from "@/store/features/account/accountSlice";
 import { getGroups } from "@/store/features/groups/groupsActions";
-import { Button, Form } from "antd";
+import { Button } from "antd";
 import useForm from "antd/es/form/hooks/useForm";
 import { FC, useEffect, useState } from "react";
 
@@ -16,7 +16,7 @@ const Groups: FC = () => {
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [choosenGroupId, setChoosenGroupId] = useState("");
-  const [createGroupForm] = Form.useForm();
+  const [createGroupForm] = useForm();
   const [editGroupForm] = useForm();
 
   const dispatch = useAppDispatch();
@@ -62,8 +62,9 @@ const Groups: FC = () => {
         onCancel={handleCreateModalCancel}
         form={createGroupForm}
       >
-        <CreateGroupForm afterFinish={handleCreateModalCancel} />
+        <CreateGroupForm />
       </ModalForm>
+
       <ModalForm
         title="Редактирование группы"
         open={isEditModalOpen}
@@ -74,7 +75,6 @@ const Groups: FC = () => {
           groupInfo={
             groups.find((group) => group.id === choosenGroupId) as IGropResponse
           }
-          afterFinish={handleEditModalCancel}
         />
       </ModalForm>
     </DataContent>

@@ -1,5 +1,9 @@
+import { Button, Form } from "antd";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 import CoursesList from "@/components/CoursesList";
-import CreateCourseForm from "@/components/forms/CreateCourseForm";
+import CourseForm from "@/components/forms/CourseForm";
 import ModalForm from "@/components/ModalForm";
 import DataContent from "@/layouts/content/DataContent";
 import { history } from "@/router/history";
@@ -7,9 +11,6 @@ import RequireAuthComponent from "@/router/RequireAuthComponent";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { Roles } from "@/store/features/account/accountSlice";
 import { getCourses } from "@/store/features/groups/groupsActions";
-import { Button, Form } from "antd";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
 const Group = () => {
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
@@ -54,10 +55,7 @@ const Group = () => {
         onCancel={handleCreateModalCancel}
         form={createCourseForm}
       >
-        <CreateCourseForm
-          idGroup={idGroup as string}
-          afterFinish={handleCreateModalCancel}
-        />
+        <CourseForm idGroup={idGroup as string} />
       </ModalForm>
     </DataContent>
   );

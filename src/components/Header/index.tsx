@@ -1,10 +1,12 @@
+import { Layout, Menu } from "antd";
+import { FC } from "react";
+import { NavLink } from "react-router-dom";
+
 import RequireAuthComponent from "@/router/RequireAuthComponent";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { logout } from "@/store/features/account/accountActions";
 import { Roles } from "@/store/features/account/accountSlice";
-import { Layout, Menu } from "antd";
-import { FC } from "react";
-import { NavLink } from "react-router-dom";
+
 import styles from "./header.module.scss";
 
 const { Header: AntHeader } = Layout;

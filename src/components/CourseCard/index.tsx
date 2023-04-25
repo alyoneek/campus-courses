@@ -1,6 +1,7 @@
 import { ICourseInGroupResponse } from "@/api/groups/types";
 import { Badge, Collapse } from "antd";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 const { Panel } = Collapse;
 
@@ -50,6 +51,7 @@ const CourseCard: FC<CourseCardProps> = ({ courseInfo }) => {
           <p className="mb-1">
             Мест свободно - {courseInfo.remainingSlotsCount}
           </p>
+          <Link to="/courses/1">Подробнее</Link>
         </Panel>
       </Collapse>
     </Badge.Ribbon>

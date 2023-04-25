@@ -1,7 +1,7 @@
 import { useResetFormOnCloseModal } from "@/hooks/useResetFormOnCloseModal";
 import { useAppSelector } from "@/store";
 import { Button, FormInstance, Modal } from "antd";
-import { cloneElement, ReactElement } from "react";
+import { ReactElement, cloneElement } from "react";
 
 interface ModalFormProps {
   title?: string;
@@ -30,6 +30,7 @@ const ModalForm = ({
       return cloneElement(children, {
         ...children.props,
         form: form,
+        afterFinish: onCancel,
       });
     }
     return null;

@@ -1,4 +1,4 @@
-import { createCourseFormValidation } from "@/helpers/validation";
+import { courseFormValidation } from "@/helpers/validation";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { createCourse } from "@/store/features/groups/groupsActions";
 import { getUsers } from "@/store/features/users/usersActions";
@@ -8,9 +8,9 @@ import {
   FormInstance,
   Input,
   InputNumber,
-  message,
   Radio,
   Select,
+  message,
 } from "antd";
 import { FC, useEffect } from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -75,7 +75,7 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({
         <Form.Item
           name="name"
           label="Название курса"
-          rules={createCourseFormValidation.name}
+          rules={courseFormValidation.name}
         >
           <Input size="large" />
         </Form.Item>
@@ -83,7 +83,7 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({
         <Form.Item
           name="startYear"
           label="Год начала курса"
-          rules={createCourseFormValidation.startYear}
+          rules={courseFormValidation.startYear}
         >
           <DatePicker size="large" picker="year" className="w-full" />
         </Form.Item>
@@ -91,7 +91,7 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({
         <Form.Item
           name="maximumStudentsCount"
           label="Общее количество мест"
-          rules={createCourseFormValidation.maximumStudentsCount}
+          rules={courseFormValidation.maximumStudentsCount}
         >
           <InputNumber size="large" min={1} className="w-full" />
         </Form.Item>
@@ -99,7 +99,7 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({
         <Form.Item
           name="semester"
           label="Семестр"
-          rules={createCourseFormValidation.semester}
+          rules={courseFormValidation.semester}
         >
           <Radio.Group>
             <Radio value="Autmn">Осенний</Radio>
@@ -110,7 +110,7 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({
         <Form.Item
           name="mainTeacherId"
           label="Основной преподаватель курса"
-          rules={createCourseFormValidation.mainTeacherId}
+          rules={courseFormValidation.mainTeacherId}
         >
           <Select size="large">
             {users.map((user) => (
@@ -124,17 +124,17 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({
         <Form.Item
           name="requirements"
           label="Требования"
-          rules={createCourseFormValidation.requirements}
+          rules={courseFormValidation.requirements}
         >
-          <TextEditor onChange={changeRequirementsField} />
+          <TextEditor handleChange={changeRequirementsField} />
         </Form.Item>
 
         <Form.Item
           name="annotations"
           label="Аннотации"
-          rules={createCourseFormValidation.annotations}
+          rules={courseFormValidation.annotations}
         >
-          <TextEditor onChange={changeAnnotationsField} />
+          <TextEditor handleChange={changeAnnotationsField} />
         </Form.Item>
       </Form>
     </>

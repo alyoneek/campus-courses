@@ -14,3 +14,15 @@ body,
 #root {
   height: 100%;
 }
+
+.ant-tabs-nav-list {
+  @apply w-full;
+}
+
+.ant-tabs-tab {
+  @apply flex-1;
+}
+
+.ant-tabs-tab-btn {
+  @apply w-full text-center;
+}

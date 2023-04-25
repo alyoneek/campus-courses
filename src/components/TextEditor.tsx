@@ -38,10 +38,11 @@ const toolbar =
   "removeformat";
 
 interface TextEditorProps {
-  onChange: (value: string) => void;
+  handleChange: (value: string) => void;
+  value?: string;
 }
 
-const TextEditor: FC<TextEditorProps> = ({ onChange }) => {
+const TextEditor: FC<TextEditorProps> = ({ handleChange, value }) => {
   return (
     <>
       {/* <div
@@ -50,7 +51,8 @@ const TextEditor: FC<TextEditorProps> = ({ onChange }) => {
       ></div> */}
       <Editor
         apiKey={API_KEY}
-        onChange={(e) => onChange(e.target.getContent())}
+        onChange={(e) => handleChange(e.target.getContent())}
+        value={value}
         init={{
           height: 200,
           menubar: true,
