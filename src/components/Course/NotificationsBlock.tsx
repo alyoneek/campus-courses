@@ -1,16 +1,20 @@
 import { Alert, Button, List } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useState } from "react";
-import ModalForm from "../ModalForm";
-import NotificationForm from "../forms/NotificationForm";
+import { useParams } from "react-router-dom";
 
-type Props = {
-  data: string[];
-};
+import ModalForm from "@/components/ModalForm";
+import NotificationForm from "@/components/forms/NotificationForm";
+import { useAppSelector } from "@/store";
 
-const NotificationsBlock = ({ data }: Props) => {
+const NotificationsBlock = () => {
   const [isNotificationModalOpen, setNotificationModalOpen] = useState(false);
   const [notificationForm] = useForm();
+
+  const { idCourse } = useParams();
+  const notifications = useAppSelector(
+    (state) => state.courses.allNotifications
+  );
 
   const showNotificationModal = () => {
     setNotificationModalOpen(true);
@@ -22,6 +26,24 @@ const NotificationsBlock = ({ data }: Props) => {
 
   return (
     <>
+      <Button type="primary" className="mb-5" onClick={showNotificationModal}>
+        Добавить уведомление
+      </Button>
+
+      <List
+        itemLayout="horizontal"
+        dataSource={notifications}
+        renderItem={(item) => (
+          <List.Item>
+            {item.isImportant ? (
+              <Alert message={item.text} type="error" className="w-full" />
+            ) : (
+              <div>{item.text}</div>
+            )}
+          </List.Item>
+        )}
+      />
+
       <ModalForm
         title="Создание уведомления"
         open={isNotificationModalOpen}
@@ -30,20 +52,6 @@ const NotificationsBlock = ({ data }: Props) => {
       >
         <NotificationForm />
       </ModalForm>
-
-      <Button type="primary" className="mb-5" onClick={showNotificationModal}>
-        Добавить уведомление
-      </Button>
-
-      <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item>
-            <Alert message={item} type="error" className="w-full" />
-          </List.Item>
-        )}
-      />
     </>
   );
 };

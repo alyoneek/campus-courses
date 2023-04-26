@@ -1,7 +1,3 @@
-import { courseFormValidation } from "@/helpers/validation";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { createCourse } from "@/store/features/groups/groupsActions";
-import { getUsers } from "@/store/features/users/usersActions";
 import {
   DatePicker,
   Form,
@@ -14,6 +10,11 @@ import {
 } from "antd";
 import { FC, useEffect } from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
+import { courseFormValidation } from "@/helpers/validation";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { createCourse } from "@/store/features/groups/groupsActions";
+import { getUsers } from "@/store/features/users/usersActions";
 import TextEditor from "../TextEditor";
 
 interface CreateCourseFormProps {
@@ -22,7 +23,7 @@ interface CreateCourseFormProps {
   afterFinish?: () => void;
 }
 
-const CreateCourseForm: FC<CreateCourseFormProps> = ({
+const CourseForm: FC<CreateCourseFormProps> = ({
   idGroup,
   form,
   afterFinish,
@@ -141,4 +142,4 @@ const CreateCourseForm: FC<CreateCourseFormProps> = ({
   );
 };
 
-export default CreateCourseForm;
+export default CourseForm;

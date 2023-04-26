@@ -1,10 +1,23 @@
 import { Badge, Tabs } from "antd";
+import DOMPurify from "dompurify";
 
 import NotificationsBlock from "@/components/Course/NotificationsBlock";
+import { useAppSelector } from "@/store";
 
-const data = ["one", "two", "three"];
+const createMarkup = (html: string | undefined) => {
+  return {
+    __html: DOMPurify.sanitize(html ? html : ""),
+  };
+};
 
 const ExtendedInfo = () => {
+  const courseDescription = useAppSelector(
+    (state) => state.courses.courseDescription
+  );
+  const notifications = useAppSelector(
+    (state) => state.courses.allNotifications
+  );
+
   return (
     <Tabs
       defaultActiveKey="1"
@@ -14,21 +27,37 @@ const ExtendedInfo = () => {
         {
           label: "Требования к курсу",
           key: "1",
-          children: "Content of Specifications",
+          children: (
+            <div
+              dangerouslySetInnerHTML={createMarkup(
+                courseDescription?.requirements
+              )}
+            ></div>
+          ),
         },
         {
           label: "Аннотация",
           key: "2",
-          children: "Content of Reviews",
+          children: (
+            <div
+              dangerouslySetInnerHTML={createMarkup(
+                courseDescription?.annotations
+              )}
+            ></div>
+          ),
         },
         {
           label: (
-            <Badge count={data.length} overflowCount={3} offset={[15, 5]}>
+            <Badge
+              count={notifications.length}
+              overflowCount={3}
+              offset={[15, 5]}
+            >
               <div>Уведомления</div>
             </Badge>
           ),
           key: "3",
-          children: <NotificationsBlock data={data} />,
+          children: <NotificationsBlock />,
         },
       ]}
     />

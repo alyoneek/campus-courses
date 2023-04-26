@@ -51,7 +51,7 @@ const CourseCard: FC<CourseCardProps> = ({ courseInfo }) => {
           <p className="mb-1">
             Мест свободно - {courseInfo.remainingSlotsCount}
           </p>
-          <Link to="/courses/1">Подробнее</Link>
+          <Link to={`/courses/${courseInfo.id}`}>Подробнее</Link>
         </Panel>
       </Collapse>
     </Badge.Ribbon>

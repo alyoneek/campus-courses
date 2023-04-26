@@ -5,16 +5,13 @@ import { useState } from "react";
 import TeacherItem from "@/components/Course/TeacherItem";
 import ModalForm from "@/components/ModalForm";
 import TeacherForm from "@/components/forms/TeacherForm";
-
-const teachers = [
-  { name: "Препод1111111111111111", email: "cool@gmail.com", isMain: true },
-  { name: "Препод2", email: "cool2@gmail.com", isMain: false },
-  { name: "Препод3", email: "cool3@gmail.com", isMain: false },
-];
+import { useAppSelector } from "@/store";
 
 const TeachersBlock = () => {
   const [isTeacherModalOpen, setTeacherModalOpen] = useState(false);
   const [teacherForm] = useForm();
+
+  const teachers = useAppSelector((state) => state.courses.allTeachers);
 
   const showTeacherModal = () => {
     setTeacherModalOpen(true);
@@ -42,7 +39,7 @@ const TeachersBlock = () => {
       <List
         itemLayout="horizontal"
         dataSource={teachers}
-        renderItem={(item) => <TeacherItem data={item} />}
+        renderItem={(item) => <TeacherItem teacherInfo={item} />}
       />
     </>
   );

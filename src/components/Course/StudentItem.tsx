@@ -1,18 +1,26 @@
 import { Button, List } from "antd";
+import { FC } from "react";
+
+import { IStudent } from "@/api/courses/types";
 import Certification from "./Certification";
 
-const StudentItem = ({ data }) => {
+interface StudentItemProps {
+  studentInfo: IStudent;
+}
+
+const StudentItem: FC<StudentItemProps> = ({ studentInfo }) => {
   return (
     <List.Item>
       <div className="w-full flex items-center justify-between text-base">
         <div>
-          <h3>{data.name}</h3>
+          <h3>{studentInfo.name}</h3>
           <p>
-            Статус - <span className="text-green-500">{data.status}</span>
+            Статус -{" "}
+            <span className="text-green-500">{studentInfo.status}</span>
           </p>
-          <p>{data.email}</p>
+          <p>{studentInfo.email}</p>
         </div>
-        {data.status == "InQueue" ? (
+        {studentInfo.status == "InQueue" ? (
           <div className="flex gap-3">
             <Button type="primary">Принять</Button>
             <Button type="primary" danger>
@@ -21,9 +29,9 @@ const StudentItem = ({ data }) => {
           </div>
         ) : (
           <Certification
-            name={data.name}
-            midtermResult={data.midtermResult}
-            finalResult={data.finalResult}
+            name={studentInfo.name}
+            midtermResult={studentInfo.midtermResult}
+            finalResult={studentInfo.finalResult}
           />
         )}
       </div>

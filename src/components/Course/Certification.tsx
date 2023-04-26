@@ -43,7 +43,7 @@ const Certification = ({ name, midtermResult, finalResult }) => {
           </Button>{" "}
           -
           <Tag color="green" className="ml-2">
-            успешно пройдена
+            {midtermResult}
           </Tag>
         </div>
         <div>
@@ -56,7 +56,7 @@ const Certification = ({ name, midtermResult, finalResult }) => {
           </Button>{" "}
           -
           <Tag color="grey" className="ml-2">
-            отметки нет
+            {finalResult}
           </Tag>
         </div>
       </div>

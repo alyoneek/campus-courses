@@ -1,12 +1,5 @@
 import { Editor } from "@tinymce/tinymce-react";
-// import DOMPurify from "dompurify";
 import { FC } from "react";
-
-// const createMarkup = (html) => {
-//   return {
-//     __html: DOMPurify.sanitize(html),
-//   };
-// };
 
 const plugins = [
   "advlist",
@@ -45,10 +38,6 @@ interface TextEditorProps {
 const TextEditor: FC<TextEditorProps> = ({ handleChange, value }) => {
   return (
     <>
-      {/* <div
-        className="preview"
-        dangerouslySetInnerHTML={createMarkup(content)}
-      ></div> */}
       <Editor
         apiKey={API_KEY}
         onChange={(e) => handleChange(e.target.getContent())}

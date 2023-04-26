@@ -1,3 +1,5 @@
+import { CourseStatus, Semester } from "@/api/courses/types";
+
 export interface IGropRequest {
   name: string;
 }
@@ -18,6 +20,3 @@ export interface ICourseInGroupRequest {
 export interface ICourseInGroupResponse extends ICourseInGroupRequest {
   id: string;
 }
-
-type CourseStatus = "Created" | "OpenForAssigning" | "Started" | "Finished";
-type Semester = "Autumn" | "Spring";
