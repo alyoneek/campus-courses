@@ -1,11 +1,23 @@
 import { Button, Tag } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { useState } from "react";
+import { FC, useState } from "react";
 
+import { MarkType } from "@/api/courses/types";
 import ModalForm from "@/components/ModalForm";
 import ResultForm from "@/components/forms/ResultForm";
+import { StudentMarks, marksColors } from "@/helpers/constants";
 
-const Certification = ({ name, midtermResult, finalResult }) => {
+interface CertificationProps {
+  name: string;
+  midtermResult: MarkType;
+  finalResult: MarkType;
+}
+
+const Certification: FC<CertificationProps> = ({
+  name,
+  midtermResult,
+  finalResult,
+}) => {
   const [isResultModalOpen, setResultModalOpen] = useState(false);
   const [markType, setMarkType] = useState<string>("midtearm");
   const [resultForm] = useForm();
@@ -40,10 +52,10 @@ const Certification = ({ name, midtermResult, finalResult }) => {
             onClick={() => showResultModal("midtearm")}
           >
             Промежуточная аттестация
-          </Button>{" "}
+          </Button>
           -
-          <Tag color="green" className="ml-2">
-            {midtermResult}
+          <Tag color={marksColors[midtermResult]} className="ml-2">
+            {StudentMarks[midtermResult]}
           </Tag>
         </div>
         <div>
@@ -53,10 +65,10 @@ const Certification = ({ name, midtermResult, finalResult }) => {
             onClick={() => showResultModal("final")}
           >
             Финальная аттестация
-          </Button>{" "}
+          </Button>
           -
-          <Tag color="grey" className="ml-2">
-            {finalResult}
+          <Tag color={marksColors[finalResult]} className="ml-2">
+            {StudentMarks[finalResult]}
           </Tag>
         </div>
       </div>

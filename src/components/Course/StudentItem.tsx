@@ -2,6 +2,7 @@ import { Button, List } from "antd";
 import { FC } from "react";
 
 import { IStudent } from "@/api/courses/types";
+import { StudentStatuses, studentStatusColors } from "@/helpers/constants";
 import Certification from "./Certification";
 
 interface StudentItemProps {
@@ -16,18 +17,25 @@ const StudentItem: FC<StudentItemProps> = ({ studentInfo }) => {
           <h3>{studentInfo.name}</h3>
           <p>
             Статус -{" "}
-            <span className="text-green-500">{studentInfo.status}</span>
+            <span
+              className={`text-${studentStatusColors[studentInfo.status]}-600`}
+            >
+              {StudentStatuses[studentInfo.status]}
+            </span>
           </p>
           <p>{studentInfo.email}</p>
         </div>
-        {studentInfo.status == "InQueue" ? (
+
+        {studentInfo.status == "InQueue" && (
           <div className="flex gap-3">
             <Button type="primary">Принять</Button>
             <Button type="primary" danger>
               Отклонить заявку
             </Button>
           </div>
-        ) : (
+        )}
+
+        {studentInfo.status == "Accepted" && (
           <Certification
             name={studentInfo.name}
             midtermResult={studentInfo.midtermResult}

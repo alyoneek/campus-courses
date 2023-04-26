@@ -6,6 +6,11 @@ import ModalForm from "@/components/ModalForm";
 import CourseForm from "@/components/forms/CourseForm";
 import CourseStatusForm from "@/components/forms/CourseStatusForm";
 import ShortCourseForm from "@/components/forms/ShortCourseForm";
+import {
+  CourseStatuses,
+  Semesters,
+  courseStatusColors,
+} from "@/helpers/constants";
 import { useAppSelector } from "@/store";
 
 const gridFullStyle: React.CSSProperties = {
@@ -41,6 +46,8 @@ const GeneralInfo = () => {
     setStatusModalOpen(true);
   };
 
+  if (!courseInfo) return null;
+
   return (
     <>
       <div className="mb-10">
@@ -56,7 +63,13 @@ const GeneralInfo = () => {
             <div className="flex justify-between align-middle">
               <div>
                 <h3>Статус курса</h3>
-                <p className="text-base">{courseInfo?.status}</p>
+                <p
+                  className={`text-base text-${
+                    courseStatusColors[courseInfo.status]
+                  }-600`}
+                >
+                  {CourseStatuses[courseInfo.status]}
+                </p>
               </div>
               <Button type="primary" onClick={showStatusModal}>
                 Изменить
@@ -66,29 +79,29 @@ const GeneralInfo = () => {
 
           <Card.Grid hoverable={false} style={gridHalfStyle}>
             <h3>Учебный год</h3>
-            <p className="text-base">{`${courseInfo?.startYear} - ${
-              courseInfo && courseInfo.startYear + 1
+            <p className="text-base">{`${courseInfo.startYear} - ${
+              courseInfo.startYear + 1
             }`}</p>
           </Card.Grid>
 
           <Card.Grid hoverable={false} style={gridHalfStyle}>
             <h3>Семестр</h3>
-            <p className="text-base">{courseInfo?.semester}</p>
+            <p className="text-base">{Semesters[courseInfo.semester]}</p>
           </Card.Grid>
 
           <Card.Grid hoverable={false} style={gridHalfStyle}>
             <h3>Всего мест</h3>
-            <p className="text-base">{courseInfo?.maximumStudentsCount}</p>
+            <p className="text-base">{courseInfo.maximumStudentsCount}</p>
           </Card.Grid>
 
           <Card.Grid hoverable={false} style={gridHalfStyle}>
             <h3>Студентов зачислено</h3>
-            <p className="text-base">{courseInfo?.studentsEnrolledCount}</p>
+            <p className="text-base">{courseInfo.studentsEnrolledCount}</p>
           </Card.Grid>
 
           <Card.Grid hoverable={false} style={gridFullStyle}>
             <h3>Зявок на рассмотрении</h3>
-            <p className="text-base">{courseInfo?.studentsInQueueCount}</p>
+            <p className="text-base">{courseInfo.studentsInQueueCount}</p>
           </Card.Grid>
         </Card>
       </div>

@@ -46,5 +46,5 @@ export type CourseStatus =
   | "Started"
   | "Finished";
 export type Semester = "Autumn" | "Spring";
-export type StudentStatus = "InQueue" | "Accepted" | "Declined ";
-export type MarkType = "NotDefined" | "Passed" | "Failed  ";
+export type StudentStatus = "InQueue" | "Accepted" | "Declined";
+export type MarkType = "NotDefined" | "Passed" | "Failed";

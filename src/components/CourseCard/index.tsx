@@ -1,7 +1,13 @@
-import { ICourseInGroupResponse } from "@/api/groups/types";
 import { Badge, Collapse } from "antd";
 import { FC } from "react";
 import { Link } from "react-router-dom";
+
+import { ICourseInGroupResponse } from "@/api/groups/types";
+import {
+  CourseStatuses,
+  Semesters,
+  courseStatusColors,
+} from "@/helpers/constants";
 
 const { Panel } = Collapse;
 
@@ -9,33 +15,13 @@ interface CourseCardProps {
   courseInfo: ICourseInGroupResponse;
 }
 
-enum Semesters {
-  Autumn = "Осенний",
-  Spring = "Весенний",
-}
-
-enum Statuses {
-  Created = "Создан",
-  OpenForAssigning = "Открыт для записи",
-  Started = "В процессе обучения",
-  Finished = "Закрыт",
-}
-
-const ribbonColors = {
-  Created: "grey",
-  OpenForAssigning: "green",
-  Started: "blue",
-  Finished: "red",
-};
-
 const CourseCard: FC<CourseCardProps> = ({ courseInfo }) => {
   return (
     <Badge.Ribbon
-      text={Statuses[courseInfo.status]}
-      color={ribbonColors[courseInfo.status]}
+      text={CourseStatuses[courseInfo.status]}
+      color={courseStatusColors[courseInfo.status]}
     >
       <Collapse
-        defaultActiveKey={["0"]}
         size="large"
         //   bordered={false}
         className="bg-white mt-2"
