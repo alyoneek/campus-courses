@@ -6,22 +6,22 @@ import { Form, FormInstance, Input, message } from "antd";
 import { FC, useEffect } from "react";
 
 interface EditGroupFormProps {
-  groupInfo: IGropResponse;
+  initial: IGropResponse;
   form?: FormInstance;
   afterFinish?: () => void;
 }
 
 const EditGroupForm: FC<EditGroupFormProps> = ({
-  groupInfo,
+  initial,
   form,
   afterFinish,
 }) => {
   const dispatch = useAppDispatch();
 
-  useEffect(() => form?.resetFields(), [groupInfo]);
+  useEffect(() => form?.resetFields(), [initial]);
 
   const onFinish = (values: IGropRequest) => {
-    dispatch(updateGroup({ id: groupInfo.id, data: values }))
+    dispatch(updateGroup({ id: initial.id, data: values }))
       .unwrap()
       .then(() => onFinishSuccess())
       .catch((e) => onFinishFailed(e.message));
@@ -42,7 +42,7 @@ const EditGroupForm: FC<EditGroupFormProps> = ({
       layout="vertical"
       onFinish={onFinish}
       autoComplete="off"
-      initialValues={{ name: groupInfo.name }}
+      initialValues={{ name: initial.name }}
     >
       <Form.Item
         name="name"

@@ -7,15 +7,15 @@ export const getGroups = (): AxiosPromise<groupsTypes.IGropResponse[]> =>
   axiosInstance.get(Endpoints.GROUPS.ALL_GROUPS);
 
 export const createGroup = (
-  params: groupsTypes.IGropRequest
+  data: groupsTypes.IGropRequest
 ): AxiosPromise<groupsTypes.IGropResponse> =>
-  axiosInstance.post(Endpoints.GROUPS.ALL_GROUPS, params);
+  axiosInstance.post(Endpoints.GROUPS.ALL_GROUPS, data);
 
 export const updateGroup = (
   idGroup: string,
-  params: groupsTypes.IGropRequest
+  data: groupsTypes.IGropRequest
 ): AxiosPromise<groupsTypes.IGropResponse> =>
-  axiosInstance.put(Endpoints.GROUPS.GROUP_BY_ID(idGroup), params);
+  axiosInstance.put(Endpoints.GROUPS.GROUP_BY_ID(idGroup), data);
 
 export const deleteGroup = (idGroup: string): AxiosPromise =>
   axiosInstance.delete(Endpoints.GROUPS.GROUP_BY_ID(idGroup));
@@ -27,6 +27,6 @@ export const getCoursesInGroup = (
 
 export const createCourseInGroup = (
   idGroup: string,
-  params: groupsTypes.ICourseInGroupRequest
+  data: groupsTypes.ICourseInGroupRequest
 ): AxiosPromise<groupsTypes.ICourseInGroupResponse[]> =>
-  axiosInstance.post(Endpoints.GROUPS.COURSE_IN_GROUP(idGroup), params);
+  axiosInstance.post(Endpoints.GROUPS.COURSE_IN_GROUP(idGroup), data);

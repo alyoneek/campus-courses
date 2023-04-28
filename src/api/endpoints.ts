@@ -19,6 +19,7 @@ const Endpoints = {
 
   COURSES: {
     COURSE_BY_ID: (id: string) => `/courses/${id}/details`,
+    STATUS: (id: string) => `/courses/${id}/status`,
   },
 };
 

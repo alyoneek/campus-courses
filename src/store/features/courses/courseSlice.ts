@@ -6,7 +6,7 @@ import {
   ITeacher,
 } from "@/api/courses/types";
 import { createSlice } from "@reduxjs/toolkit";
-import { getCourseDetails } from "./courseActions";
+import { changeCourseStatus, getCourseDetails } from "./courseActions";
 
 interface ICoursesState {
   courseInfo: ICourseInfo | null;
@@ -51,6 +51,10 @@ const coursesSlice = createSlice({
       state.allTeachers = teachers;
       state.allNotifications = notifications;
     },
+
+    changeStatus: (state, { payload }) => {
+      if (state.courseInfo) state.courseInfo.status = payload;
+    },
   },
   extraReducers: (builder) => {
     // getCourseDetails
@@ -64,6 +68,21 @@ const coursesSlice = createSlice({
     });
 
     builder.addCase(getCourseDetails.rejected, (state, { payload }) => {
+      state.status = "error";
+      state.error = payload?.message;
+    });
+
+    // changeCourseStatus
+    builder.addCase(changeCourseStatus.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(changeCourseStatus.fulfilled, (state) => {
+      state.status = "success";
+    });
+
+    builder.addCase(changeCourseStatus.rejected, (state, { payload }) => {
       state.status = "error";
       state.error = payload?.message;
     });

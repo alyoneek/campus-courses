@@ -12,6 +12,7 @@ import {
   courseStatusColors,
 } from "@/helpers/constants";
 import { useAppSelector } from "@/store";
+import { useParams } from "react-router-dom";
 
 const gridFullStyle: React.CSSProperties = {
   width: "100%",
@@ -28,6 +29,7 @@ const GeneralInfo = () => {
   const [statusCourseForm] = useForm();
   const test = false;
 
+  const { idCourse } = useParams();
   const courseInfo = useAppSelector((state) => state.courses.courseInfo);
 
   const handleEditModalCancel = () => {
@@ -121,7 +123,10 @@ const GeneralInfo = () => {
         onCancel={handleStatusModalCancel}
         form={statusCourseForm}
       >
-        <CourseStatusForm />
+        <CourseStatusForm
+          idCourse={idCourse as string}
+          initial={courseInfo.status}
+        />
       </ModalForm>
     </>
   );

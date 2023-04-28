@@ -55,7 +55,9 @@ const Groups: FC = () => {
           Создать
         </Button>
       </RequireAuthComponent>
+
       <GroupsList onEditGroup={showEditModal} groups={groups} />
+
       <ModalForm
         title="Создание группы"
         open={isCreateModalOpen}
@@ -72,7 +74,7 @@ const Groups: FC = () => {
         form={editGroupForm}
       >
         <EditGroupForm
-          groupInfo={
+          initial={
             groups.find((group) => group.id === choosenGroupId) as IGropResponse
           }
         />

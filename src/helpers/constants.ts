@@ -30,7 +30,7 @@ export const courseStatusColors = {
 };
 
 export const studentStatusColors = {
-  InQueue: "blue  ",
+  InQueue: "blue",
   Accepted: "green",
   Declined: "red",
 };
