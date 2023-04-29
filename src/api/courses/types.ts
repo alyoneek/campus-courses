@@ -53,6 +53,10 @@ export interface INotificationRequest {
   isImportant: boolean;
 }
 
+export interface IStudentStatusRequest {
+  status: StudentStatus;
+}
+
 export type CourseStatus =
   | "Created"
   | "OpenForAssigning"

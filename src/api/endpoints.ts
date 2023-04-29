@@ -23,7 +23,7 @@ const Endpoints = {
     TEACHERS: (idCourse: string) => `/courses/${idCourse}/teachers`,
     NOTIFICATIONS: (idCourse: string) => `/courses/${idCourse}/notifications`,
     STUDENT_STATUS: (idCourse: string, idStudent: string) =>
-      `​/courses​/${idCourse}​/student-status​/${idStudent}`,
+      `/courses/${idCourse}/student-status/${idStudent}`,
   },
 };
 

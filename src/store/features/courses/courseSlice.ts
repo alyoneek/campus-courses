@@ -6,7 +6,7 @@ import {
   ITeacher,
 } from "@/api/courses/types";
 import { createSlice } from "@reduxjs/toolkit";
-import { changeCourseStatus, getCourseDetails } from "./courseActions";
+import * as CourseActions from "./courseActions";
 
 interface ICoursesState {
   courseInfo: ICourseInfo | null;
@@ -63,37 +63,107 @@ const coursesSlice = createSlice({
     addNotification: (state, { payload }) => {
       state.allNotifications.push(payload);
     },
+
+    changeStudentStatus: (state, { payload }) => {
+      const student = state.allStudents.find(
+        (student) => student.id === payload.idStudent
+      );
+      if (student) student.status = payload.status;
+    },
   },
   extraReducers: (builder) => {
     // getCourseDetails
-    builder.addCase(getCourseDetails.pending, (state) => {
+    builder.addCase(CourseActions.getCourseDetails.pending, (state) => {
       state.status = "loading";
       state.error = null;
     });
 
-    builder.addCase(getCourseDetails.fulfilled, (state) => {
+    builder.addCase(CourseActions.getCourseDetails.fulfilled, (state) => {
       state.status = "success";
     });
 
-    builder.addCase(getCourseDetails.rejected, (state, { payload }) => {
-      state.status = "error";
-      state.error = payload?.message;
-    });
+    builder.addCase(
+      CourseActions.getCourseDetails.rejected,
+      (state, { payload }) => {
+        state.status = "error";
+        state.error = payload?.message;
+      }
+    );
 
     // changeCourseStatus
-    builder.addCase(changeCourseStatus.pending, (state) => {
+    builder.addCase(CourseActions.changeCourseStatus.pending, (state) => {
       state.status = "loading";
       state.error = null;
     });
 
-    builder.addCase(changeCourseStatus.fulfilled, (state) => {
+    builder.addCase(CourseActions.changeCourseStatus.fulfilled, (state) => {
       state.status = "success";
     });
 
-    builder.addCase(changeCourseStatus.rejected, (state, { payload }) => {
-      state.status = "error";
-      state.error = payload?.message;
+    builder.addCase(
+      CourseActions.changeCourseStatus.rejected,
+      (state, { payload }) => {
+        state.status = "error";
+        state.error = payload?.message;
+      }
+    );
+
+    // addTeacherToCourse
+    builder.addCase(CourseActions.addTeacherToCourse.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
     });
+
+    builder.addCase(CourseActions.addTeacherToCourse.fulfilled, (state) => {
+      state.status = "success";
+    });
+
+    builder.addCase(
+      CourseActions.addTeacherToCourse.rejected,
+      (state, { payload }) => {
+        state.status = "error";
+        state.error = payload?.message;
+      }
+    );
+
+    // addNotificationToCourse
+    builder.addCase(CourseActions.addNotificationToCourse.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(
+      CourseActions.addNotificationToCourse.fulfilled,
+      (state) => {
+        state.status = "success";
+      }
+    );
+
+    builder.addCase(
+      CourseActions.addNotificationToCourse.rejected,
+      (state, { payload }) => {
+        state.status = "error";
+        state.error = payload?.message;
+      }
+    );
+
+    // changeStudentStatus
+    builder.addCase(CourseActions.changeStudentStatus.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(CourseActions.changeStudentStatus.fulfilled, (state) => {
+      state.status = "success";
+    });
+
+    builder.addCase(
+      CourseActions.changeStudentStatus.rejected,
+      (state, { payload }) => {
+        state.status = "error";
+        state.error = payload?.message;
+      }
+    );
   },
 });
 

@@ -23,7 +23,7 @@ const CourseStatusForm: FC<CourseStatusFormProps> = ({
   const dispatch = useAppDispatch();
 
   const onFinish = (values: any) => {
-    dispatch(changeCourseStatus({ id: idCourse, data: values }))
+    dispatch(changeCourseStatus({ idCourse, data: values }))
       .unwrap()
       .then(() => onFinishSuccess())
       .catch((e) => onFinishFailed(e.message));

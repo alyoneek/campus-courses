@@ -1,5 +1,9 @@
 import api from "@/api";
-import { INotificationRequest, ITeacherRequest } from "@/api/courses/types";
+import {
+  INotificationRequest,
+  IStudentStatusRequest,
+  ITeacherRequest,
+} from "@/api/courses/types";
 import { ICourseInGroupRequest } from "@/api/groups/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { coursesActions } from "./courseSlice";
@@ -67,17 +71,43 @@ export const addTeacherToCourse = createAsyncThunk(
 );
 
 export const addNotificationToCourse = createAsyncThunk(
-  "courses/addTeacher",
+  "courses/addNotification",
   async (
     payload: IPayload<INotificationRequest>,
     { rejectWithValue, dispatch }
   ) => {
     try {
-      const response = await api.courses.addNotificationToCourse(
+      await api.courses.addNotificationToCourse(payload.idCourse, payload.data);
+      dispatch(coursesActions.addNotification(payload.data));
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);
+
+interface IStudentStatusPayload extends IPayload<IStudentStatusRequest> {
+  idStudent: string;
+}
+
+export const changeStudentStatus = createAsyncThunk(
+  "courses/changeStudentStatus",
+  async (payload: IStudentStatusPayload, { rejectWithValue, dispatch }) => {
+    try {
+      await api.courses.changeStudentStatus(
         payload.idCourse,
+        payload.idStudent,
         payload.data
       );
-      dispatch(coursesActions.addNotification(payload.data));
+      dispatch(
+        coursesActions.changeStudentStatus({
+          idStudent: payload.idStudent,
+          status: payload.data.status,
+        })
+      );
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });

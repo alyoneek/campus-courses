@@ -25,3 +25,13 @@ export const addNotificationToCourse = (
   data: coursesTypes.INotificationRequest
 ): AxiosPromise<coursesTypes.ICourseResponse> =>
   axiosInstance.post(Endpoints.COURSES.NOTIFICATIONS(idCourse), data);
+
+export const changeStudentStatus = (
+  idCourse: string,
+  idStudent: string,
+  data: coursesTypes.IStudentStatusRequest
+): AxiosPromise<coursesTypes.ICourseResponse> =>
+  axiosInstance.post(
+    Endpoints.COURSES.STUDENT_STATUS(idCourse, idStudent),
+    data
+  );

@@ -1,15 +1,46 @@
 import { Button, List } from "antd";
 import { FC } from "react";
+import { useParams } from "react-router-dom";
 
 import { IStudent } from "@/api/courses/types";
+import Certification from "@/components/Course/Certification";
 import { StudentStatuses, studentStatusColors } from "@/helpers/constants";
-import Certification from "./Certification";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { changeStudentStatus } from "@/store/features/courses/courseActions";
 
 interface StudentItemProps {
   studentInfo: IStudent;
 }
 
 const StudentItem: FC<StudentItemProps> = ({ studentInfo }) => {
+  const { idCourse } = useParams();
+  const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.courses.status);
+
+  const onAccept = () => {
+    if (idCourse) {
+      dispatch(
+        changeStudentStatus({
+          idCourse,
+          idStudent: studentInfo.id,
+          data: { status: "Accepted" },
+        })
+      );
+    }
+  };
+
+  const onDecline = () => {
+    if (idCourse) {
+      dispatch(
+        changeStudentStatus({
+          idCourse,
+          idStudent: studentInfo.id,
+          data: { status: "Declined" },
+        })
+      );
+    }
+  };
+
   return (
     <List.Item>
       <div className="w-full flex items-center justify-between text-base">
@@ -28,8 +59,14 @@ const StudentItem: FC<StudentItemProps> = ({ studentInfo }) => {
 
         {studentInfo.status == "InQueue" && (
           <div className="flex gap-3">
-            <Button type="primary">Принять</Button>
-            <Button type="primary" danger>
+            <Button
+              type="primary"
+              loading={status === "loading"}
+              onClick={onAccept}
+            >
+              Принять
+            </Button>
+            <Button type="primary" danger onClick={onDecline}>
               Отклонить заявку
             </Button>
           </div>
