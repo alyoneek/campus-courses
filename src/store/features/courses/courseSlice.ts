@@ -59,6 +59,10 @@ const coursesSlice = createSlice({
     updateTeachers: (state, { payload }) => {
       state.allTeachers = payload;
     },
+
+    addNotification: (state, { payload }) => {
+      state.allNotifications.push(payload);
+    },
   },
   extraReducers: (builder) => {
     // getCourseDetails

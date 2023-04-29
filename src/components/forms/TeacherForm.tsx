@@ -1,7 +1,7 @@
 import { Form, FormInstance, Select, message } from "antd";
 import { FC, useEffect } from "react";
 
-import { IteacherRequest } from "@/api/courses/types";
+import { ITeacherRequest } from "@/api/courses/types";
 import { teacherFormValidation } from "@/helpers/validation";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { addTeacherToCourse } from "@/store/features/courses/courseActions";
@@ -21,7 +21,7 @@ const TeacherForm: FC<TeacherFormProps> = ({ idCourse, form, afterFinish }) => {
     dispatch(getUsers());
   }, [dispatch]);
 
-  const onFinish = (values: IteacherRequest) => {
+  const onFinish = (values: ITeacherRequest) => {
     dispatch(addTeacherToCourse({ idCourse, data: values }))
       .unwrap()
       .then(() => onFinishSuccess())

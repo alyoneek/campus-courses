@@ -44,8 +44,13 @@ export interface IStatusRequest {
   status: CourseStatus;
 }
 
-export interface IteacherRequest {
+export interface ITeacherRequest {
   userId: string;
+}
+
+export interface INotificationRequest {
+  text: string;
+  isImportant: boolean;
 }
 
 export type CourseStatus =

@@ -16,6 +16,12 @@ export const changeCourseStatus = (
 
 export const addTeacherToCourse = (
   idCourse: string,
-  data: coursesTypes.IteacherRequest
+  data: coursesTypes.ITeacherRequest
 ): AxiosPromise<coursesTypes.ICourseResponse> =>
   axiosInstance.post(Endpoints.COURSES.TEACHERS(idCourse), data);
+
+export const addNotificationToCourse = (
+  idCourse: string,
+  data: coursesTypes.INotificationRequest
+): AxiosPromise<coursesTypes.ICourseResponse> =>
+  axiosInstance.post(Endpoints.COURSES.NOTIFICATIONS(idCourse), data);

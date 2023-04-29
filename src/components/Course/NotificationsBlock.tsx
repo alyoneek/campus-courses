@@ -50,7 +50,7 @@ const NotificationsBlock = () => {
         onCancel={handleNotificationModalCancel}
         form={notificationForm}
       >
-        <NotificationForm />
+        <NotificationForm idCourse={idCourse as string} />
       </ModalForm>
     </>
   );

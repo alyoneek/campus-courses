@@ -197,7 +197,7 @@ export const courseStatusFormValidation = {
 };
 
 export const notificationFormValidation = {
-  description: [
+  text: [
     {
       required: true,
       message: "Введите текст",
