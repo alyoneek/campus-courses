@@ -1,4 +1,5 @@
 import api from "@/api";
+import { IteacherRequest } from "@/api/courses/types";
 import { ICourseInGroupRequest } from "@/api/groups/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { coursesActions } from "./courseSlice";
@@ -33,6 +34,30 @@ export const changeCourseStatus = createAsyncThunk(
         payload.data
       );
       dispatch(coursesActions.changeStatus(response.data.status));
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);
+
+interface IPayloadForAddTeacher {
+  idCourse: string;
+  data: IteacherRequest;
+}
+
+export const addTeacherToCourse = createAsyncThunk(
+  "courses/addTeacher",
+  async (payload: IPayloadForAddTeacher, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await api.courses.addTeacherToCourse(
+        payload.idCourse,
+        payload.data
+      );
+      dispatch(coursesActions.updateTeachers(response.data.teachers));
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });

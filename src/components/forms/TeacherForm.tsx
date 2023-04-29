@@ -1,31 +1,55 @@
+import { Form, FormInstance, Select, message } from "antd";
+import { FC, useEffect } from "react";
+
+import { IteacherRequest } from "@/api/courses/types";
 import { teacherFormValidation } from "@/helpers/validation";
-import { Form, FormInstance, Select } from "antd";
-import { FC } from "react";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { addTeacherToCourse } from "@/store/features/courses/courseActions";
+import { getUsers } from "@/store/features/users/usersActions";
 
 interface TeacherFormProps {
+  idCourse: string;
   form?: FormInstance;
   afterFinish?: () => void;
 }
 
-const TeacherForm: FC<TeacherFormProps> = ({ form, afterFinish }) => {
-  const onFinish = (values: any) => {
-    setTimeout(() => {
-      console.log(values);
-      afterFinish && afterFinish();
-    }, 1000);
+const TeacherForm: FC<TeacherFormProps> = ({ idCourse, form, afterFinish }) => {
+  const dispatch = useAppDispatch();
+  const users = useAppSelector((state) => state.users.allUsers);
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
+  const onFinish = (values: IteacherRequest) => {
+    dispatch(addTeacherToCourse({ idCourse, data: values }))
+      .unwrap()
+      .then(() => onFinishSuccess())
+      .catch((e) => onFinishFailed(e.message));
+  };
+
+  const onFinishSuccess = () => {
+    message.success("Преподаватель добавлен успешно");
+    afterFinish && afterFinish();
+  };
+
+  const onFinishFailed = (value: string) => {
+    message.error(value);
   };
 
   return (
     <Form form={form} layout="vertical" onFinish={onFinish} autoComplete="off">
       <Form.Item
-        name="teacher"
+        name="userId"
         label="Выберите преподавателя"
-        rules={teacherFormValidation.teacher}
+        rules={teacherFormValidation.userId}
       >
         <Select size="large">
-          <Select.Option value="demo1">Demo1</Select.Option>
-          <Select.Option value="demo2">Demo2</Select.Option>
-          <Select.Option value="demo3">Demo3</Select.Option>
+          {users.map((user) => (
+            <Select.Option key={user.id} value={user.id}>
+              {user.fullName}
+            </Select.Option>
+          ))}
         </Select>
       </Form.Item>
     </Form>

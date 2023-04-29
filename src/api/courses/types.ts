@@ -44,6 +44,10 @@ export interface IStatusRequest {
   status: CourseStatus;
 }
 
+export interface IteacherRequest {
+  userId: string;
+}
+
 export type CourseStatus =
   | "Created"
   | "OpenForAssigning"

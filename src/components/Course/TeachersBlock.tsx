@@ -1,6 +1,7 @@
 import { Button, List } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import TeacherItem from "@/components/Course/TeacherItem";
 import ModalForm from "@/components/ModalForm";
@@ -11,6 +12,7 @@ const TeachersBlock = () => {
   const [isTeacherModalOpen, setTeacherModalOpen] = useState(false);
   const [teacherForm] = useForm();
 
+  const { idCourse } = useParams();
   const teachers = useAppSelector((state) => state.courses.allTeachers);
 
   const showTeacherModal = () => {
@@ -29,7 +31,7 @@ const TeachersBlock = () => {
         onCancel={handleTeacherModalCancel}
         form={teacherForm}
       >
-        <TeacherForm />
+        <TeacherForm idCourse={idCourse as string} />
       </ModalForm>
 
       <Button type="primary" className="my-3" onClick={showTeacherModal}>

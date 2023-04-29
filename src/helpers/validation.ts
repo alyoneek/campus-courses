@@ -206,7 +206,7 @@ export const notificationFormValidation = {
 };
 
 export const teacherFormValidation = {
-  teacher: [
+  userId: [
     {
       required: true,
       message: "Выберите преподавателя",

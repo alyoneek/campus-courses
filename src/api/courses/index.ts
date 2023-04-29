@@ -13,3 +13,9 @@ export const changeCourseStatus = (
   data: coursesTypes.IStatusRequest
 ): AxiosPromise<coursesTypes.ICourseResponse> =>
   axiosInstance.post(Endpoints.COURSES.STATUS(idCourse), data);
+
+export const addTeacherToCourse = (
+  idCourse: string,
+  data: coursesTypes.IteacherRequest
+): AxiosPromise<coursesTypes.ICourseResponse> =>
+  axiosInstance.post(Endpoints.COURSES.TEACHERS(idCourse), data);
