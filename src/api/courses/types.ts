@@ -57,6 +57,11 @@ export interface IStudentStatusRequest {
   status: StudentStatus;
 }
 
+export interface IStudentMarkRequest {
+  markType: CertificationType;
+  mark: MarkType;
+}
+
 export type CourseStatus =
   | "Created"
   | "OpenForAssigning"
@@ -65,3 +70,4 @@ export type CourseStatus =
 export type Semester = "Autumn" | "Spring";
 export type StudentStatus = "InQueue" | "Accepted" | "Declined";
 export type MarkType = "NotDefined" | "Passed" | "Failed";
+export type CertificationType = "Midterm" | "Final";

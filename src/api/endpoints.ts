@@ -24,6 +24,8 @@ const Endpoints = {
     NOTIFICATIONS: (idCourse: string) => `/courses/${idCourse}/notifications`,
     STUDENT_STATUS: (idCourse: string, idStudent: string) =>
       `/courses/${idCourse}/student-status/${idStudent}`,
+    STUDENT_MARK: (idCourse: string, idStudent: string) =>
+      `/courses/${idCourse}/marks/${idStudent}`,
   },
 };
 

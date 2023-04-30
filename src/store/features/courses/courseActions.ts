@@ -1,6 +1,7 @@
 import api from "@/api";
 import {
   INotificationRequest,
+  IStudentMarkRequest,
   IStudentStatusRequest,
   ITeacherRequest,
 } from "@/api/courses/types";
@@ -89,13 +90,16 @@ export const addNotificationToCourse = createAsyncThunk(
   }
 );
 
-interface IStudentStatusPayload extends IPayload<IStudentStatusRequest> {
+interface IStudentPayload<T> extends IPayload<T> {
   idStudent: string;
 }
 
 export const changeStudentStatus = createAsyncThunk(
   "courses/changeStudentStatus",
-  async (payload: IStudentStatusPayload, { rejectWithValue, dispatch }) => {
+  async (
+    payload: IStudentPayload<IStudentStatusRequest>,
+    { rejectWithValue, dispatch }
+  ) => {
     try {
       await api.courses.changeStudentStatus(
         payload.idCourse,
@@ -105,7 +109,35 @@ export const changeStudentStatus = createAsyncThunk(
       dispatch(
         coursesActions.changeStudentStatus({
           idStudent: payload.idStudent,
-          status: payload.data.status,
+          data: payload.data,
+        })
+      );
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);
+
+export const changeStudentMark = createAsyncThunk(
+  "courses/changeStudentMark",
+  async (
+    payload: IStudentPayload<IStudentMarkRequest>,
+    { rejectWithValue, dispatch }
+  ) => {
+    try {
+      await api.courses.changeStudentMark(
+        payload.idCourse,
+        payload.idStudent,
+        payload.data
+      );
+      dispatch(
+        coursesActions.changeStudentMark({
+          idStudent: payload.idStudent,
+          data: payload.data,
         })
       );
     } catch (error: any) {

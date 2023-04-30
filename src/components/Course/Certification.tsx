@@ -1,28 +1,30 @@
 import { Button, Tag } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { FC, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import { MarkType } from "@/api/courses/types";
+import { CertificationType, IStudent, MarkType } from "@/api/courses/types";
 import ModalForm from "@/components/ModalForm";
 import ResultForm from "@/components/forms/ResultForm";
 import { StudentMarks, marksColors } from "@/helpers/constants";
 
 interface CertificationProps {
-  name: string;
+  studentInfo: IStudent;
   midtermResult: MarkType;
   finalResult: MarkType;
 }
 
 const Certification: FC<CertificationProps> = ({
-  name,
+  studentInfo,
   midtermResult,
   finalResult,
 }) => {
   const [isResultModalOpen, setResultModalOpen] = useState(false);
-  const [markType, setMarkType] = useState<string>("midtearm");
+  const [markType, setMarkType] = useState<CertificationType>("Midterm");
   const [resultForm] = useForm();
+  const { idCourse } = useParams();
 
-  const showResultModal = (value: string) => {
+  const showResultModal = (value: CertificationType) => {
     setMarkType(value);
     setResultModalOpen(true);
   };
@@ -35,13 +37,18 @@ const Certification: FC<CertificationProps> = ({
     <>
       <ModalForm
         title={`Изменение отметки ${
-          markType === "midtearm" ? "промежуточной" : "итоговой"
+          markType === "Midterm" ? "промежуточной" : "итоговой"
         } аттестации`}
         open={isResultModalOpen}
         onCancel={handleResultModalCancel}
         form={resultForm}
       >
-        <ResultForm markType={markType} studentName={name} />
+        <ResultForm
+          markType={markType}
+          initial={markType === "Midterm" ? midtermResult : finalResult}
+          studentInfo={studentInfo}
+          idCourse={idCourse as string}
+        />
       </ModalForm>
 
       <div className="flex gap-10">
@@ -49,7 +56,7 @@ const Certification: FC<CertificationProps> = ({
           <Button
             className="text-base"
             type="link"
-            onClick={() => showResultModal("midtearm")}
+            onClick={() => showResultModal("Midterm")}
           >
             Промежуточная аттестация
           </Button>
@@ -62,7 +69,7 @@ const Certification: FC<CertificationProps> = ({
           <Button
             className="text-base"
             type="link"
-            onClick={() => showResultModal("final")}
+            onClick={() => showResultModal("Final")}
           >
             Финальная аттестация
           </Button>

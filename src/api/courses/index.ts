@@ -35,3 +35,10 @@ export const changeStudentStatus = (
     Endpoints.COURSES.STUDENT_STATUS(idCourse, idStudent),
     data
   );
+
+export const changeStudentMark = (
+  idCourse: string,
+  idStudent: string,
+  data: coursesTypes.IStudentMarkRequest
+): AxiosPromise<coursesTypes.ICourseResponse> =>
+  axiosInstance.post(Endpoints.COURSES.STUDENT_MARK(idCourse, idStudent), data);

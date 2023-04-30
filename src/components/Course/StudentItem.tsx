@@ -74,7 +74,7 @@ const StudentItem: FC<StudentItemProps> = ({ studentInfo }) => {
 
         {studentInfo.status == "Accepted" && (
           <Certification
-            name={studentInfo.name}
+            studentInfo={studentInfo}
             midtermResult={studentInfo.midtermResult}
             finalResult={studentInfo.finalResult}
           />

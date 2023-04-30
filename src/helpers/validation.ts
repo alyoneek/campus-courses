@@ -218,7 +218,18 @@ export const resultFormValidation = {
   mark: [
     {
       required: true,
-      message: "Выберите оценку",
     },
+    ({ getFieldValue }: { getFieldValue: (name: NamePath) => any }) => ({
+      validator() {
+        console.log(getFieldValue("mark"));
+        if (
+          getFieldValue("mark") !== "Failed" &&
+          getFieldValue("mark") !== "Passed"
+        ) {
+          return Promise.reject("Выберите оценку");
+        }
+        return Promise.resolve();
+      },
+    }),
   ],
 };

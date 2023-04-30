@@ -68,7 +68,17 @@ const coursesSlice = createSlice({
       const student = state.allStudents.find(
         (student) => student.id === payload.idStudent
       );
-      if (student) student.status = payload.status;
+      if (student) student.status = payload.data.status;
+    },
+
+    changeStudentMark: (state, { payload }) => {
+      const student = state.allStudents.find(
+        (student) => student.id === payload.idStudent
+      );
+
+      const key = (payload.data.markType.toLowerCase() +
+        "Result") as keyof IStudent;
+      if (student) (student as any)[key] = payload.data.mark;
     },
   },
   extraReducers: (builder) => {
@@ -159,6 +169,24 @@ const coursesSlice = createSlice({
 
     builder.addCase(
       CourseActions.changeStudentStatus.rejected,
+      (state, { payload }) => {
+        state.status = "error";
+        state.error = payload?.message;
+      }
+    );
+
+    // changeStudentMark
+    builder.addCase(CourseActions.changeStudentMark.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(CourseActions.changeStudentMark.fulfilled, (state) => {
+      state.status = "success";
+    });
+
+    builder.addCase(
+      CourseActions.changeStudentMark.rejected,
       (state, { payload }) => {
         state.status = "error";
         state.error = payload?.message;
