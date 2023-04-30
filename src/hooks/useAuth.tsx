@@ -1,8 +1,8 @@
 import { useAppSelector } from "@/store";
 
 const useAuth = () => {
-  const token = useAppSelector((state) => state.account.userToken);
-  const roles = useAppSelector((state) => state.account.userRoles);
+  const token = useAppSelector((state) => state.auth.token);
+  const roles = useAppSelector((state) => state.account.roles);
 
   return {
     isLoggedIn: !!token,

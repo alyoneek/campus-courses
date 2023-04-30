@@ -1,21 +1,38 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {
+  AnyAction,
+  Reducer,
+  combineReducers,
+  configureStore,
+} from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-import { accountReducer } from "./features/account/accountSlice";
-import { coursesReducer } from "./features/courses/courseSlice";
-import { groupsReducer } from "./features/groups/groupsSlice";
-import { usersReducer } from "./features/users/usersSlice";
+import { accountReducer } from "@/store/features/account/accountSlice";
+import { authReducer } from "@/store/features/auth/authSlice";
+import { coursesReducer } from "@/store/features/courses/courseSlice";
+import { groupsReducer } from "@/store/features/groups/groupsSlice";
+import { usersReducer } from "@/store/features/users/usersSlice";
 
-export const store = configureStore({
-  reducer: {
-    account: accountReducer,
-    groups: groupsReducer,
-    users: usersReducer,
-    courses: coursesReducer,
-  },
+const combinedReducer = combineReducers({
+  auth: authReducer,
+  account: accountReducer,
+  groups: groupsReducer,
+  users: usersReducer,
+  courses: coursesReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
+  console.log(state);
+  if (action.type === "auth/clearState") {
+    state = {} as RootState;
+  }
+  return combinedReducer(state, action);
+};
+
+export const store = configureStore({
+  reducer: rootReducer,
+});
+
+export type RootState = ReturnType<typeof combinedReducer>;
 export type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch: () => AppDispatch = useDispatch;

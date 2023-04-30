@@ -1,11 +1,11 @@
 import Endpoints from "@/api/endpoints";
 import { store } from "@/store";
-import { accountActions } from "@/store/features/account/accountSlice";
+import { authActions } from "@/store/features/auth/authSlice";
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 const BASE_URL = "https://camp-courses.api.kreosoft.space";
 
-const urlsSkipAuth = [Endpoints.ACCOUNT.LOGIN, Endpoints.ACCOUNT.SIGNUP];
+const urlsSkipAuth = [Endpoints.AUTH.LOGIN, Endpoints.AUTH.SIGNUP];
 
 export const axiosInstance = axios.create({ baseURL: BASE_URL });
 
@@ -15,7 +15,7 @@ axiosInstance.interceptors.request.use(
       return config;
     }
 
-    const token = store.getState().account.userToken;
+    const token = store.getState().auth.token;
 
     if (token) {
       const autharization = `Bearer ${token}`;
@@ -33,14 +33,13 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    const isLoggedIn = !!store.getState().account.userToken;
+    const isLoggedIn = !!store.getState().auth.token;
 
     if (error.response?.status === 401) {
       if (isLoggedIn) {
-        store.dispatch(accountActions.clearState());
+        store.dispatch(authActions.clearState());
       }
       error.message = "Необходима повторная авторизация";
-      //   if (history.navigate) history.navigate("/login");
     }
 
     throw error;

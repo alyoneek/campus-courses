@@ -4,15 +4,15 @@ import { NavLink } from "react-router-dom";
 
 import RequireAuthComponent from "@/router/RequireAuthComponent";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { logout } from "@/store/features/account/accountActions";
 import { Roles } from "@/store/features/account/accountSlice";
+import { logout } from "@/store/features/auth/authActions";
 
 import styles from "./header.module.scss";
 
 const { Header: AntHeader } = Layout;
 
 const Header: FC = () => {
-  const email = useAppSelector((state) => state.account.userEmail);
+  const email = useAppSelector((state) => state.auth.email);
   const dispatch = useAppDispatch();
 
   return (

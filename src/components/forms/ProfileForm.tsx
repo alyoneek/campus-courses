@@ -1,10 +1,11 @@
+import { Button, DatePicker, Form, Input, message } from "antd";
+import dayjs from "dayjs";
+import { FC, useEffect, useState } from "react";
+
 import { IProfileResponse } from "@/api/account/types";
 import { profileFormValidation } from "@/helpers/validation";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { editProfile } from "@/store/features/account/accountActions";
-import { Button, DatePicker, Form, Input, message } from "antd";
-import dayjs from "dayjs";
-import { FC, useEffect, useState } from "react";
 
 interface ProfileFormProps {
   profileInfo: IProfileResponse;

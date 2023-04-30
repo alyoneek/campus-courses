@@ -1,10 +1,11 @@
+import { Button, Form, Input, message } from "antd";
+import { FC } from "react";
+
 import { loginFormValidation } from "@/helpers/validation";
 import { history } from "@/router/history";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { login } from "@/store/features/account/accountActions";
+import { login } from "@/store/features/auth/authActions";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input, message } from "antd";
-import { FC } from "react";
 
 const LoginForm: FC = () => {
   const status = useAppSelector((state) => state.account.status);

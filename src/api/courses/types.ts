@@ -13,13 +13,6 @@ export interface ICourseDescription {
   annotations: string;
 }
 
-export interface ICourseResponse extends ICourseInfo, ICourseDescription {
-  id: string;
-  students: IStudent[];
-  teachers: ITeacher[];
-  notifications: INotification[];
-}
-
 export interface IStudent {
   id: string;
   name: string;
@@ -38,6 +31,22 @@ export interface ITeacher {
 export interface INotification {
   text: string;
   isImportant: boolean;
+}
+
+export interface ICourseRequest
+  extends Omit<
+      ICourseInfo,
+      "studentsEnrolledCount" | "studentsInQueueCount" | "status"
+    >,
+    ICourseDescription {
+  mainTeacherId: string;
+}
+
+export interface ICourseResponse extends ICourseInfo, ICourseDescription {
+  id: string;
+  students: IStudent[];
+  teachers: ITeacher[];
+  notifications: INotification[];
 }
 
 export interface IStatusRequest {

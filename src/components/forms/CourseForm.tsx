@@ -11,11 +11,11 @@ import {
 import { FC, useEffect } from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
+import TextEditor from "@/components/TextEditor";
 import { courseFormValidation } from "@/helpers/validation";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { createCourse } from "@/store/features/groups/groupsActions";
 import { getUsers } from "@/store/features/users/usersActions";
-import TextEditor from "../TextEditor";
 
 interface CreateCourseFormProps {
   idGroup: string;

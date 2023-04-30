@@ -1,8 +1,11 @@
 const Endpoints = {
-  ACCOUNT: {
+  AUTH: {
     SIGNUP: "/registration",
     LOGIN: "/login",
     LOGOUT: "/logout",
+  },
+
+  ACCOUNT: {
     ROLES: "/roles",
     PROFILE: "/profile",
   },
@@ -18,7 +21,8 @@ const Endpoints = {
   },
 
   COURSES: {
-    COURSE_BY_ID: (id: string) => `/courses/${id}/details`,
+    COURSE_BY_ID: (id: string) => `courses/${id}`,
+    DETAILS: (id: string) => `/courses/${id}/details`,
     STATUS: (idCourse: string) => `/courses/${idCourse}/status`,
     TEACHERS: (idCourse: string) => `/courses/${idCourse}/teachers`,
     NOTIFICATIONS: (idCourse: string) => `/courses/${idCourse}/notifications`,

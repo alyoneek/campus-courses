@@ -1,4 +1,4 @@
-import { CourseStatus, Semester } from "@/api/courses/types";
+import { ICourseInfo } from "../courses/types";
 
 export interface IGropRequest {
   name: string;
@@ -8,15 +8,8 @@ export interface IGropResponse extends IGropRequest {
   id: string;
 }
 
-export interface ICourseInGroupRequest {
-  name: string;
-  startYear: number;
-  maximumStudentsCount: number;
-  remainingSlotsCount: number;
-  status: CourseStatus;
-  semester: Semester;
-}
-
-export interface ICourseInGroupResponse extends ICourseInGroupRequest {
+export interface ICourseInGroupResponse
+  extends Omit<ICourseInfo, "studentsEnrolledCount" | "studentsInQueueCount"> {
   id: string;
+  remainingSlotsCount: number;
 }

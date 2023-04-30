@@ -1,3 +1,4 @@
+import { ICourseRequest } from "@/api/courses/types";
 import Endpoints from "@/api/endpoints";
 import { axiosInstance } from "@/api/instance";
 import { AxiosPromise } from "axios";
@@ -27,6 +28,6 @@ export const getCoursesInGroup = (
 
 export const createCourseInGroup = (
   idGroup: string,
-  data: groupsTypes.ICourseInGroupRequest
+  data: ICourseRequest
 ): AxiosPromise<groupsTypes.ICourseInGroupResponse[]> =>
   axiosInstance.post(Endpoints.GROUPS.COURSE_IN_GROUP(idGroup), data);

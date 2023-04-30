@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 const Profile = () => {
   const dispatch = useAppDispatch();
-  const profileInfo = useAppSelector((state) => state.account.userProfile);
+  const profileInfo = useAppSelector((state) => state.account.profile);
 
   useEffect(() => {
     dispatch(getProfile());

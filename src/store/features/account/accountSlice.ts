@@ -1,20 +1,8 @@
 import { IProfileResponse } from "@/api/account/types";
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  editProfile,
-  getProfile,
-  getRoles,
-  login,
-  logout,
-  signup,
-} from "./accountActions";
-import {
-  convertRolesResponeToArray,
-  getEmail,
-  getToken,
-  resetEmail,
-  resetToken,
-} from "./helpers";
+
+import { editProfile, getProfile, getRoles } from "./accountActions";
+import { convertRolesResponeToArray } from "./helpers";
 
 export enum Roles {
   isStudent = "Student",
@@ -27,19 +15,15 @@ export interface IError {
 }
 
 interface IAccountState {
-  userToken: string | null;
-  userEmail: string | null;
-  userRoles: Roles[] | null;
-  userProfile: IProfileResponse;
+  roles: Roles[] | null;
+  profile: IProfileResponse;
   status: "init" | "loading" | "error" | "success";
   error: string | null;
 }
 
 const initialState: IAccountState = {
-  userToken: getToken(),
-  userEmail: getEmail(),
-  userRoles: null,
-  userProfile: {} as IProfileResponse,
+  roles: null,
+  profile: {} as IProfileResponse,
   status: "init",
   error: null,
 };
@@ -47,72 +31,8 @@ const initialState: IAccountState = {
 const accountSlice = createSlice({
   name: "account",
   initialState,
-  reducers: {
-    clearState: () => {
-      resetToken();
-      resetEmail();
-      return {
-        ...initialState,
-        userToken: getToken(),
-        userEmail: getEmail(),
-      };
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    // signup
-    builder.addCase(signup.pending, (state) => {
-      state.status = "loading";
-      state.error = null;
-    });
-
-    builder.addCase(signup.fulfilled, (state) => {
-      state.status = "success";
-      state.userToken = getToken();
-      state.userEmail = getEmail();
-    });
-
-    builder.addCase(signup.rejected, (state, { payload }) => {
-      state.status = "error";
-      state.error = payload?.message;
-    });
-
-    // login
-    builder.addCase(login.pending, (state) => {
-      state.status = "loading";
-      state.error = null;
-    });
-
-    builder.addCase(login.fulfilled, (state) => {
-      state.status = "success";
-      state.userToken = getToken();
-      state.userEmail = getEmail();
-    });
-
-    builder.addCase(login.rejected, (state, { payload }) => {
-      state.status = "error";
-      state.error = payload?.message;
-    });
-
-    // logout
-    builder.addCase(logout.pending, (state) => {
-      state.status = "loading";
-      state.error = null;
-    });
-
-    builder.addCase(logout.fulfilled, () => {
-      resetToken();
-      resetEmail();
-      return {
-        ...initialState,
-        userToken: getToken(),
-        userEmail: getEmail(),
-      };
-    });
-
-    builder.addCase(logout.rejected, (state) => {
-      state.status = "error";
-    });
-
     // getRoles
     builder.addCase(getRoles.pending, (state) => {
       state.status = "loading";
@@ -121,7 +41,7 @@ const accountSlice = createSlice({
 
     builder.addCase(getRoles.fulfilled, (state, { payload }) => {
       state.status = "success";
-      state.userRoles = convertRolesResponeToArray(payload);
+      state.roles = convertRolesResponeToArray(payload);
     });
 
     builder.addCase(getRoles.rejected, (state) => {
@@ -136,7 +56,7 @@ const accountSlice = createSlice({
 
     builder.addCase(getProfile.fulfilled, (state, { payload }) => {
       state.status = "success";
-      state.userProfile = payload;
+      state.profile = payload;
     });
 
     builder.addCase(getProfile.rejected, (state) => {
@@ -151,10 +71,7 @@ const accountSlice = createSlice({
 
     builder.addCase(editProfile.fulfilled, (state, { payload }) => {
       state.status = "success";
-      state.userProfile = {
-        ...state.userProfile,
-        ...payload,
-      };
+      state.profile = payload;
     });
 
     builder.addCase(editProfile.rejected, (state, { payload }) => {
