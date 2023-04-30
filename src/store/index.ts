@@ -21,7 +21,6 @@ const combinedReducer = combineReducers({
 });
 
 const rootReducer: Reducer = (state: RootState, action: AnyAction) => {
-  console.log(state);
   if (action.type === "auth/clearState") {
     state = {} as RootState;
   }
@@ -36,6 +35,4 @@ export type RootState = ReturnType<typeof combinedReducer>;
 export type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<
-  ReturnType<typeof store.getState>
-> = useSelector;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

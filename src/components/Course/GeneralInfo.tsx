@@ -1,6 +1,7 @@
-import { Button, Card } from "antd";
+import { Button, Card, Popconfirm, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import ModalForm from "@/components/ModalForm";
 import CourseForm from "@/components/forms/CourseForm";
@@ -11,8 +12,10 @@ import {
   Semesters,
   courseStatusColors,
 } from "@/helpers/constants";
-import { useAppSelector } from "@/store";
-import { useParams } from "react-router-dom";
+import usePopconfirm from "@/hooks/usePopconfirm";
+import { history } from "@/router/history";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { deleteCourse } from "@/store/features/courses/courseActions";
 
 const gridFullStyle: React.CSSProperties = {
   width: "100%",
@@ -27,10 +30,31 @@ const GeneralInfo = () => {
   const [isStatusModalOpen, setStatusModalOpen] = useState(false);
   const [editCourseForm] = useForm();
   const [statusCourseForm] = useForm();
+
+  const { openPopconfirm, showPopconfirm, onCancelPopconfirm } =
+    usePopconfirm();
+
   const test = false;
 
   const { idCourse } = useParams();
   const courseInfo = useAppSelector((state) => state.courses.courseInfo);
+  const dispatch = useAppDispatch();
+
+  const onOkPopconfirm = () => {
+    dispatch(deleteCourse(idCourse as string))
+      .unwrap()
+      .then(() => onFinishSuccess())
+      .catch((e) => onFinishFailed(e.message));
+  };
+
+  const onFinishFailed = (value: string) => {
+    message.error(value);
+  };
+
+  const onFinishSuccess = () => {
+    message.success("Курс успешно удален");
+    history.navigate && history.navigate(-1);
+  };
 
   const handleEditModalCancel = () => {
     setEditModalOpen(false);
@@ -55,9 +79,30 @@ const GeneralInfo = () => {
       <div className="mb-10">
         <div className="flex justify-between mb-3">
           <h2>Основные данные курса</h2>
-          <Button type="primary" size="large" onClick={showEditModal}>
-            Редактировать
-          </Button>
+          <div>
+            <Button type="primary" size="large" onClick={showEditModal}>
+              Редактировать
+            </Button>
+            <Popconfirm
+              title="Удалить курс"
+              description="Вы уверены, что хотите удалить этот курс?"
+              open={openPopconfirm}
+              onConfirm={onOkPopconfirm}
+              onCancel={onCancelPopconfirm}
+              okText="Да"
+              cancelText="Нет"
+            >
+              <Button
+                type="primary"
+                danger
+                size="large"
+                className="ml-3"
+                onClick={showPopconfirm}
+              >
+                Удалить
+              </Button>
+            </Popconfirm>
+          </div>
         </div>
 
         <Card>

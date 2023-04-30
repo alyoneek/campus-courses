@@ -2,7 +2,7 @@ import { Badge, Collapse } from "antd";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { ICourseInGroupResponse } from "@/api/groups/types";
+import { ICourseShortResponse } from "@/api/courses/types";
 import {
   CourseStatuses,
   Semesters,
@@ -12,7 +12,7 @@ import {
 const { Panel } = Collapse;
 
 interface CourseCardProps {
-  courseInfo: ICourseInGroupResponse;
+  courseInfo: ICourseShortResponse;
 }
 
 const CourseCard: FC<CourseCardProps> = ({ courseInfo }) => {

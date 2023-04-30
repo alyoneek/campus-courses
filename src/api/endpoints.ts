@@ -8,6 +8,8 @@ const Endpoints = {
   ACCOUNT: {
     ROLES: "/roles",
     PROFILE: "/profile",
+    STUDING_COURSES: "/courses/my",
+    TEACHING_COURSES: "/courses/teaching",
   },
 
   GROUPS: {

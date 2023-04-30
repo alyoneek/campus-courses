@@ -1,13 +1,54 @@
 import api from "@/api";
 import {
+  ICourseRequest,
+  ICourseStatusRequest,
   INotificationRequest,
   IStudentMarkRequest,
   IStudentStatusRequest,
   ITeacherRequest,
 } from "@/api/courses/types";
-import { ICourseInGroupRequest } from "@/api/groups/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { coursesActions } from "./courseSlice";
+
+interface IPayload<T> {
+  idCourse: string;
+  data: T;
+}
+
+export const deleteCourse = createAsyncThunk(
+  "courses/delete",
+  async (idCourse: string, { rejectWithValue, dispatch }) => {
+    try {
+      await api.courses.deleteCourse(idCourse);
+      dispatch(coursesActions.deleteCourse());
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);
+
+export const editCourse = createAsyncThunk(
+  "courses/delete",
+  async (payload: IPayload<ICourseRequest>, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await api.courses.editCourse(
+        payload.idCourse,
+        payload.data
+      );
+      dispatch(coursesActions.splitDetailsInfo(response.data));
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);
 
 export const getCourseDetails = createAsyncThunk(
   "courses/getCourseDetails",
@@ -25,15 +66,10 @@ export const getCourseDetails = createAsyncThunk(
   }
 );
 
-interface IPayload<T> {
-  idCourse: string;
-  data: T;
-}
-
 export const changeCourseStatus = createAsyncThunk(
   "courses/changeCourseStatus",
   async (
-    payload: IPayload<ICourseInGroupRequest>,
+    payload: IPayload<ICourseStatusRequest>,
     { rejectWithValue, dispatch }
   ) => {
     try {

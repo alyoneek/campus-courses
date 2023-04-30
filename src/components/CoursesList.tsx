@@ -1,9 +1,9 @@
-import { ICourseInGroupResponse } from "@/api/groups/types";
+import { ICourseShortResponse } from "@/api/courses/types";
 import CourseCard from "@components/CourseCard";
 import { FC } from "react";
 
 interface CoursesListProps {
-  courses: ICourseInGroupResponse[];
+  courses: ICourseShortResponse[];
 }
 
 const CoursesList: FC<CoursesListProps> = ({ courses }) => {

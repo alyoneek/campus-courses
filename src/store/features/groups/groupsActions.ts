@@ -1,5 +1,6 @@
 import api from "@/api";
-import { ICourseInGroupRequest, IGropRequest } from "@/api/groups/types";
+import { ICourseRequest } from "@/api/courses/types";
+import { IGropRequest } from "@/api/groups/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { groupsActions } from "./groupsSlice";
 
@@ -79,7 +80,7 @@ export const getCourses = createAsyncThunk(
 
 interface IPayloadForCreateCourse {
   idGroup: string;
-  data: ICourseInGroupRequest;
+  data: ICourseRequest;
 }
 
 export const createCourse = createAsyncThunk(

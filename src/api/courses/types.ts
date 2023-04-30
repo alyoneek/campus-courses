@@ -49,7 +49,13 @@ export interface ICourseResponse extends ICourseInfo, ICourseDescription {
   notifications: INotification[];
 }
 
-export interface IStatusRequest {
+export interface ICourseShortResponse
+  extends Omit<ICourseInfo, "studentsEnrolledCount" | "studentsInQueueCount"> {
+  id: string;
+  remainingSlotsCount: number;
+}
+
+export interface ICourseStatusRequest {
   status: CourseStatus;
 }
 

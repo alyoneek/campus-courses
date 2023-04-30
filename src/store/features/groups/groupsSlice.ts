@@ -1,5 +1,7 @@
-import { ICourseInGroupResponse, IGropResponse } from "@/api/groups/types";
 import { createSlice } from "@reduxjs/toolkit";
+
+import { ICourseShortResponse } from "@/api/courses/types";
+import { IGropResponse } from "@/api/groups/types";
 import {
   createCourse,
   createGroup,
@@ -11,7 +13,7 @@ import {
 
 interface IGroupsState {
   allGroups: IGropResponse[];
-  currentGroupCourses: ICourseInGroupResponse[];
+  currentGroupCourses: ICourseShortResponse[];
   status: "init" | "loading" | "error" | "success";
   error: string | null;
 }

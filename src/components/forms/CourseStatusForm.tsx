@@ -1,7 +1,7 @@
 import { Form, FormInstance, Radio, message } from "antd";
 import { FC } from "react";
 
-import { CourseStatus } from "@/api/courses/types";
+import { CourseStatus, ICourseStatusRequest } from "@/api/courses/types";
 import { CourseStatuses } from "@/helpers/constants";
 import { courseStatusFormValidation } from "@/helpers/validation";
 import { useAppDispatch } from "@/store";
@@ -22,7 +22,7 @@ const CourseStatusForm: FC<CourseStatusFormProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: ICourseStatusRequest) => {
     dispatch(changeCourseStatus({ idCourse, data: values }))
       .unwrap()
       .then(() => onFinishSuccess())

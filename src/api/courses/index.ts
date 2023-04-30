@@ -19,7 +19,7 @@ export const getCourseDetails = (
 
 export const changeCourseStatus = (
   idCourse: string,
-  data: coursesTypes.IStatusRequest
+  data: coursesTypes.ICourseStatusRequest
 ): AxiosPromise<coursesTypes.ICourseResponse> =>
   axiosInstance.post(Endpoints.COURSES.STATUS(idCourse), data);
 

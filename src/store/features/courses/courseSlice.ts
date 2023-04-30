@@ -52,6 +52,8 @@ const coursesSlice = createSlice({
       state.allNotifications = notifications;
     },
 
+    deleteCourse: () => initialState,
+
     changeStatus: (state, { payload }) => {
       if (state.courseInfo) state.courseInfo.status = payload;
     },
