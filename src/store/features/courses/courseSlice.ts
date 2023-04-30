@@ -52,6 +52,10 @@ const coursesSlice = createSlice({
       state.allNotifications = notifications;
     },
 
+    editCourseDetails: (state, { payload }) => {
+      state.courseDescription = payload;
+    },
+
     deleteCourse: () => initialState,
 
     changeStatus: (state, { payload }) => {
@@ -194,6 +198,8 @@ const coursesSlice = createSlice({
         state.error = payload?.message;
       }
     );
+
+    // not some
   },
 });
 

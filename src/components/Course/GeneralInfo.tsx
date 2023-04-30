@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ModalForm from "@/components/ModalForm";
-import CourseForm from "@/components/forms/CourseForm";
 import CourseStatusForm from "@/components/forms/CourseStatusForm";
 import ShortCourseForm from "@/components/forms/ShortCourseForm";
 import {
@@ -34,10 +33,13 @@ const GeneralInfo = () => {
   const { openPopconfirm, showPopconfirm, onCancelPopconfirm } =
     usePopconfirm();
 
-  const test = false;
+  const test = true;
 
   const { idCourse } = useParams();
   const courseInfo = useAppSelector((state) => state.courses.courseInfo);
+  const courseDescription = useAppSelector(
+    (state) => state.courses.courseDescription
+  );
   const dispatch = useAppDispatch();
 
   const onOkPopconfirm = () => {
@@ -159,7 +161,17 @@ const GeneralInfo = () => {
         onCancel={handleEditModalCancel}
         form={editCourseForm}
       >
-        {test ? <ShortCourseForm /> : <CourseForm />}
+        {
+          test && (
+            <ShortCourseForm
+              idCourse={idCourse}
+              courseDescription={courseDescription}
+            />
+          )
+          // : (
+          //   <CourseForm/>
+          // )
+        }
       </ModalForm>
 
       <ModalForm

@@ -9,7 +9,6 @@ import {
   message,
 } from "antd";
 import { FC, useEffect } from "react";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 import TextEditor from "@/components/TextEditor";
 import { courseFormValidation } from "@/helpers/validation";
@@ -19,12 +18,21 @@ import { getUsers } from "@/store/features/users/usersActions";
 
 interface CreateCourseFormProps {
   idGroup: string;
+  // idCourse?: string;
+  // edit?: boolean;
+  // courseInfo?: ICourseInfo;
+  // courseDescription?: ICourseDescription;
+  // mainTeacher?: ITeacher,
   form?: FormInstance;
   afterFinish?: () => void;
 }
 
 const CourseForm: FC<CreateCourseFormProps> = ({
   idGroup,
+  // idCourse,
+  // edit = false,
+  // courseInfo,
+  // courseDescription,
   form,
   afterFinish,
 }) => {
@@ -71,7 +79,18 @@ const CourseForm: FC<CreateCourseFormProps> = ({
         layout="vertical"
         onFinish={onFinish}
         autoComplete="off"
-        initialValues={{ semester: "Autmn" }}
+        initialValues={
+          // edit
+          //   ? {
+          //       ...courseInfo,
+          //       startYear: dayjs(
+          //         `${courseInfo?.startYear}-01-01`,
+          //         "YYYY-MM-DD"
+          //       ),
+          //       ...courseDescription,
+          //     }:
+          { semester: "Autumn" }
+        }
       >
         <Form.Item
           name="name"
@@ -102,8 +121,8 @@ const CourseForm: FC<CreateCourseFormProps> = ({
           label="Семестр"
           rules={courseFormValidation.semester}
         >
-          <Radio.Group>
-            <Radio value="Autmn">Осенний</Radio>
+          <Radio.Group defaultValue="Autumn">
+            <Radio value="Autumn">Осенний</Radio>
             <Radio value="Spring">Весенний</Radio>
           </Radio.Group>
         </Form.Item>

@@ -8,7 +8,7 @@ export const deleteCourse = (idCourse: string): AxiosPromise =>
 
 export const editCourse = (
   idCourse: string,
-  data: coursesTypes.ICourseRequest
+  data: coursesTypes.ICourseShortRequest
 ): AxiosPromise<coursesTypes.ICourseResponse> =>
   axiosInstance.put(Endpoints.COURSES.COURSE_BY_ID(idCourse), data);
 

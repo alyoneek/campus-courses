@@ -1,6 +1,6 @@
 import api from "@/api";
 import {
-  ICourseRequest,
+  ICourseShortRequest,
   ICourseStatusRequest,
   INotificationRequest,
   IStudentMarkRequest,
@@ -33,13 +33,13 @@ export const deleteCourse = createAsyncThunk(
 
 export const editCourse = createAsyncThunk(
   "courses/delete",
-  async (payload: IPayload<ICourseRequest>, { rejectWithValue, dispatch }) => {
+  async (
+    payload: IPayload<ICourseShortRequest>,
+    { rejectWithValue, dispatch }
+  ) => {
     try {
-      const response = await api.courses.editCourse(
-        payload.idCourse,
-        payload.data
-      );
-      dispatch(coursesActions.splitDetailsInfo(response.data));
+      await api.courses.editCourse(payload.idCourse, payload.data);
+      dispatch(coursesActions.editCourseDetails(payload.data));
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });

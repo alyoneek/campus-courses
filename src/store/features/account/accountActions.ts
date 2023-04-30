@@ -27,3 +27,35 @@ export const editProfile = createAsyncThunk(
     }
   }
 );
+
+export const getStudingCourses = createAsyncThunk(
+  "account/studingCourses",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.account.getStudingCourses();
+      return response.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);
+
+export const getTeachingCourses = createAsyncThunk(
+  "account/teachingCourses",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.account.getTeachingCourses();
+      return response.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);

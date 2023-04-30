@@ -1,7 +1,14 @@
 import { IProfileResponse } from "@/api/account/types";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { editProfile, getProfile, getRoles } from "./accountActions";
+import { ICourseShortResponse } from "@/api/courses/types";
+import {
+  editProfile,
+  getProfile,
+  getRoles,
+  getStudingCourses,
+  getTeachingCourses,
+} from "./accountActions";
 import { convertRolesResponeToArray } from "./helpers";
 
 export enum Roles {
@@ -17,6 +24,8 @@ export interface IError {
 interface IAccountState {
   roles: Roles[] | null;
   profile: IProfileResponse;
+  studingCourses: ICourseShortResponse[];
+  teachingCourses: ICourseShortResponse[];
   status: "init" | "loading" | "error" | "success";
   error: string | null;
 }
@@ -24,6 +33,8 @@ interface IAccountState {
 const initialState: IAccountState = {
   roles: null,
   profile: {} as IProfileResponse,
+  studingCourses: [],
+  teachingCourses: [],
   status: "init",
   error: null,
 };
@@ -75,6 +86,38 @@ const accountSlice = createSlice({
     });
 
     builder.addCase(editProfile.rejected, (state, { payload }) => {
+      state.status = "error";
+      state.error = payload?.message;
+    });
+
+    // studingCourses
+    builder.addCase(getStudingCourses.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(getStudingCourses.fulfilled, (state, { payload }) => {
+      state.status = "success";
+      state.studingCourses = payload;
+    });
+
+    builder.addCase(getStudingCourses.rejected, (state, { payload }) => {
+      state.status = "error";
+      state.error = payload?.message;
+    });
+
+    // teachingCourses
+    builder.addCase(getTeachingCourses.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(getTeachingCourses.fulfilled, (state, { payload }) => {
+      state.status = "success";
+      state.teachingCourses = payload;
+    });
+
+    builder.addCase(getTeachingCourses.rejected, (state, { payload }) => {
       state.status = "error";
       state.error = payload?.message;
     });

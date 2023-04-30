@@ -41,7 +41,7 @@ const TextEditor: FC<TextEditorProps> = ({ handleChange, value }) => {
       <Editor
         apiKey={API_KEY}
         onChange={(e) => handleChange(e.target.getContent())}
-        value={value}
+        initialValue={value}
         init={{
           height: 200,
           menubar: true,

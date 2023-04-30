@@ -42,6 +42,8 @@ export interface ICourseRequest
   mainTeacherId: string;
 }
 
+export type ICourseShortRequest = ICourseDescription;
+
 export interface ICourseResponse extends ICourseInfo, ICourseDescription {
   id: string;
   students: IStudent[];
