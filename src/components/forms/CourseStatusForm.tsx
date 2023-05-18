@@ -50,11 +50,14 @@ const CourseStatusForm: FC<CourseStatusFormProps> = ({
         <Radio.Group>
           {(
             Object.keys(CourseStatuses) as Array<keyof typeof CourseStatuses>
-          ).map((key, i) => (
-            <Radio key={i} value={key}>
-              {CourseStatuses[key]}
-            </Radio>
-          ))}
+          ).map(
+            (key, i) =>
+              key != "Created" && (
+                <Radio key={i} value={key}>
+                  {CourseStatuses[key]}
+                </Radio>
+              )
+          )}
         </Radio.Group>
       </Form.Item>
     </Form>

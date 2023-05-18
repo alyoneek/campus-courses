@@ -18,17 +18,6 @@ const RequireAuthRoute = ({ allowedRoles }: RequireAuthRouteProps) => {
   } else {
     return <Navigate to="/login" />;
   }
-  {
-    /* {isLoggedIn ? (
-        !allowedRoles || roles?.find((role) => allowedRoles?.includes(role)) ? (
-          <Outlet />
-        ) : (
-          <Unauthorized />
-        )
-      ) : (
-        <Navigate to="/login" />
-      )} */
-  }
 };
 
 export default RequireAuthRoute;
