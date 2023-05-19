@@ -185,3 +185,19 @@ export const changeStudentMark = createAsyncThunk(
     }
   }
 );
+
+export const signUpForCourse = createAsyncThunk(
+  "courses/sign-up",
+  async (idCourse: string, { rejectWithValue, dispatch }) => {
+    try {
+      await api.courses.signUpForCourse(idCourse);
+      dispatch(getCourseDetails(idCourse));
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);

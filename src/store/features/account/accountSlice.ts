@@ -22,7 +22,7 @@ export interface IError {
 }
 
 interface IAccountState {
-  roles: Roles[] | null;
+  roles: Roles[];
   profile: IProfileResponse;
   studingCourses: ICourseShortResponse[];
   teachingCourses: ICourseShortResponse[];
@@ -31,7 +31,7 @@ interface IAccountState {
 }
 
 const initialState: IAccountState = {
-  roles: null,
+  roles: [],
   profile: {} as IProfileResponse,
   studingCourses: [],
   teachingCourses: [],

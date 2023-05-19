@@ -16,7 +16,7 @@ const RequireAuthComponent = ({
   const { isLoggedIn, roles } = useAuth();
 
   const isRoleMatch =
-    !allowedRoles || roles?.find((role) => allowedRoles?.includes(role));
+    !allowedRoles || roles.find((role) => allowedRoles?.includes(role));
 
   const isAuthStatusMatch = loggedOut ? !isLoggedIn : !!isLoggedIn;
 

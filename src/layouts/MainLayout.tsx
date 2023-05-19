@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Layout } from "antd";
+import { FC, useEffect } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+
 import Header from "@/components/Header";
 import useAuth from "@/hooks/useAuth";
 import { history } from "@/router/history";
 import { useAppDispatch } from "@/store";
 import { getRoles } from "@/store/features/account/accountActions";
-import { Layout } from "antd";
-import { FC, useEffect } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const MainLayout: FC = () => {
   const { isLoggedIn, roles } = useAuth();
@@ -16,7 +17,7 @@ const MainLayout: FC = () => {
   history.location = useLocation();
 
   useEffect(() => {
-    if (isLoggedIn && !roles) {
+    if (isLoggedIn) {
       dispatch(getRoles());
     }
   }, [isLoggedIn, dispatch]);

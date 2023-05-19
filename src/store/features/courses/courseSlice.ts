@@ -9,8 +9,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import * as CourseActions from "./courseActions";
 
 interface ICoursesState {
-  courseInfo: ICourseInfo | null;
-  courseDescription: ICourseDescription | null;
+  courseInfo: ICourseInfo;
+  courseDescription: ICourseDescription;
   allStudents: IStudent[];
   allTeachers: ITeacher[];
   allNotifications: INotification[];
@@ -19,8 +19,8 @@ interface ICoursesState {
 }
 
 const initialState: ICoursesState = {
-  courseInfo: null,
-  courseDescription: null,
+  courseInfo: {} as ICourseInfo,
+  courseDescription: {} as ICourseDescription,
   allStudents: [],
   allTeachers: [],
   allNotifications: [],
@@ -193,6 +193,24 @@ const coursesSlice = createSlice({
 
     builder.addCase(
       CourseActions.changeStudentMark.rejected,
+      (state, { payload }) => {
+        state.status = "error";
+        state.error = payload?.message;
+      }
+    );
+
+    // sign-up
+    builder.addCase(CourseActions.signUpForCourse.pending, (state) => {
+      state.status = "loading";
+      state.error = null;
+    });
+
+    builder.addCase(CourseActions.signUpForCourse.fulfilled, (state) => {
+      state.status = "success";
+    });
+
+    builder.addCase(
+      CourseActions.signUpForCourse.rejected,
       (state, { payload }) => {
         state.status = "error";
         state.error = payload?.message;

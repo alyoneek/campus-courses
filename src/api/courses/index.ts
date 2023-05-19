@@ -51,3 +51,6 @@ export const changeStudentMark = (
   data: coursesTypes.IStudentMarkRequest
 ): AxiosPromise<coursesTypes.ICourseResponse> =>
   axiosInstance.post(Endpoints.COURSES.STUDENT_MARK(idCourse, idStudent), data);
+
+export const signUpForCourse = (idCourse: string): AxiosPromise =>
+  axiosInstance.post(Endpoints.COURSES.SIGN_UP(idCourse));

@@ -29,7 +29,7 @@ const TeacherForm: FC<TeacherFormProps> = ({ idCourse, form, afterFinish }) => {
   };
 
   const onFinishSuccess = () => {
-    message.success("Преподаватель добавлен успешно");
+    message.success("Преподаватель успешно добавлен");
     afterFinish && afterFinish();
   };
 

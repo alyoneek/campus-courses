@@ -6,6 +6,10 @@ import ExtendedInfo from "@/components/Course/ExtendedInfo";
 import GeneralInfo from "@/components/Course/GeneralInfo";
 import PeopleInfo from "@/components/Course/PeopleInfo";
 import DataContent from "@/layouts/content/DataContent";
+import {
+  getStudingCourses,
+  getTeachingCourses,
+} from "@/store/features/account/accountActions";
 import { getCourseDetails } from "@/store/features/courses/courseActions";
 
 const Course = () => {
@@ -15,6 +19,8 @@ const Course = () => {
 
   useEffect(() => {
     if (idCourse) dispatch(getCourseDetails(idCourse));
+    dispatch(getTeachingCourses());
+    dispatch(getStudingCourses());
   }, [dispatch, idCourse]);
 
   return (

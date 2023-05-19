@@ -11,7 +11,7 @@ const RequireAuthRoute = ({ allowedRoles }: RequireAuthRouteProps) => {
   const { isLoggedIn, roles } = useAuth();
 
   const isRoleMatch =
-    !allowedRoles || roles?.find((role) => allowedRoles?.includes(role));
+    !allowedRoles || roles.find((role) => allowedRoles?.includes(role));
 
   if (isLoggedIn) {
     return <>{isRoleMatch ? <Outlet /> : <Unauthorized />}</>;

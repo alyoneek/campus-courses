@@ -1,3 +1,5 @@
+import { Routes as ReactRoutes, Route } from "react-router-dom";
+
 import MainLayout from "@/layouts/MainLayout";
 import Course from "@/pages/Course";
 import Group from "@/pages/Group";
@@ -8,8 +10,8 @@ import NotFound from "@/pages/NotFound";
 import OwnCourses from "@/pages/OwnCourses";
 import Profile from "@/pages/Profile";
 import Registration from "@/pages/Registration";
+import TeachingCourses from "@/pages/TeachingCourses";
 import { Roles } from "@/store/features/account/accountSlice";
-import { Routes as ReactRoutes, Route } from "react-router-dom";
 import RequireAuthRoute from "./RequireAuthRoute";
 
 const Routes = () => {
@@ -33,10 +35,14 @@ const Routes = () => {
           <Route path="courses">
             <Route path=":idCourse" element={<Course />} />
             <Route
-              element={<RequireAuthRoute allowedRoles={[Roles.isAdmin]} />}
+              element={<RequireAuthRoute allowedRoles={[Roles.isStudent]} />}
             >
               <Route path="my" element={<OwnCourses />} />
-              <Route path="teaching" element={<Course />} />
+            </Route>
+            <Route
+              element={<RequireAuthRoute allowedRoles={[Roles.isTeacher]} />}
+            >
+              <Route path="teaching" element={<TeachingCourses />} />
             </Route>
           </Route>
         </Route>

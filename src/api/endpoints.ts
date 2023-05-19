@@ -32,6 +32,7 @@ const Endpoints = {
       `/courses/${idCourse}/student-status/${idStudent}`,
     STUDENT_MARK: (idCourse: string, idStudent: string) =>
       `/courses/${idCourse}/marks/${idStudent}`,
+    SIGN_UP: (idCourse: string) => `/courses/${idCourse}/sign-up`,
   },
 };
 

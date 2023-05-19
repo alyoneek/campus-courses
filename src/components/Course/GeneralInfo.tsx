@@ -1,4 +1,4 @@
-import { Button, Card, Popconfirm, message } from "antd";
+import { Button, Card } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -11,10 +11,10 @@ import {
   Semesters,
   courseStatusColors,
 } from "@/helpers/constants";
-import usePopconfirm from "@/hooks/usePopconfirm";
-import { history } from "@/router/history";
+import useRoles from "@/hooks/useRoles";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { deleteCourse } from "@/store/features/courses/courseActions";
+import { signUpForCourse } from "@/store/features/courses/courseActions";
+import DeleteCourseButton from "./DeleteCourseButton";
 
 const gridFullStyle: React.CSSProperties = {
   width: "100%",
@@ -30,33 +30,15 @@ const GeneralInfo = () => {
   const [editCourseForm] = useForm();
   const [statusCourseForm] = useForm();
 
-  const { openPopconfirm, showPopconfirm, onCancelPopconfirm } =
-    usePopconfirm();
-
-  const test = true;
+  const dispatch = useAppDispatch();
 
   const { idCourse } = useParams();
+  const { isUserCourseEditor, isUserCourseSigner } = useRoles();
+
   const courseInfo = useAppSelector((state) => state.courses.courseInfo);
   const courseDescription = useAppSelector(
     (state) => state.courses.courseDescription
   );
-  const dispatch = useAppDispatch();
-
-  const onOkPopconfirm = () => {
-    dispatch(deleteCourse(idCourse as string))
-      .unwrap()
-      .then(() => onFinishSuccess())
-      .catch((e) => onFinishFailed(e.message));
-  };
-
-  const onFinishFailed = (value: string) => {
-    message.error(value);
-  };
-
-  const onFinishSuccess = () => {
-    message.success("Курс успешно удален");
-    history.navigate && history.navigate(-1);
-  };
 
   const handleEditModalCancel = () => {
     setEditModalOpen(false);
@@ -74,37 +56,32 @@ const GeneralInfo = () => {
     setStatusModalOpen(true);
   };
 
-  if (!courseInfo) return null;
+  const onSignup = () => {
+    dispatch(signUpForCourse(idCourse as string));
+  };
 
   return (
     <>
       <div className="mb-10">
         <div className="flex justify-between mb-3">
           <h2>Основные данные курса</h2>
-          <div>
-            <Button type="primary" size="large" onClick={showEditModal}>
-              Редактировать
-            </Button>
-            <Popconfirm
-              title="Удалить курс"
-              description="Вы уверены, что хотите удалить этот курс?"
-              open={openPopconfirm}
-              onConfirm={onOkPopconfirm}
-              onCancel={onCancelPopconfirm}
-              okText="Да"
-              cancelText="Нет"
-            >
-              <Button
-                type="primary"
-                danger
-                size="large"
-                className="ml-3"
-                onClick={showPopconfirm}
-              >
-                Удалить
+          {courseInfo.status === "OpenForAssigning" &&
+            isUserCourseSigner(idCourse as string) && (
+              <div>
+                <Button type="primary" size="large" onClick={onSignup}>
+                  Записаться
+                </Button>
+              </div>
+            )}
+
+          {isUserCourseEditor(idCourse as string) && (
+            <div>
+              <Button type="primary" size="large" onClick={showEditModal}>
+                Редактировать
               </Button>
-            </Popconfirm>
-          </div>
+              <DeleteCourseButton idCourse={idCourse as string} />
+            </div>
+          )}
         </div>
 
         <Card>
@@ -161,17 +138,10 @@ const GeneralInfo = () => {
         onCancel={handleEditModalCancel}
         form={editCourseForm}
       >
-        {
-          test && (
-            <ShortCourseForm
-              idCourse={idCourse}
-              courseDescription={courseDescription}
-            />
-          )
-          // : (
-          //   <CourseForm/>
-          // )
-        }
+        <ShortCourseForm
+          idCourse={idCourse as string}
+          courseDescription={courseDescription}
+        />
       </ModalForm>
 
       <ModalForm
