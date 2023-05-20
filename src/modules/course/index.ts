@@ -1,6 +1,6 @@
-import CourseExtendedInfo from "@modules/course/CourseExtendedInfo";
-import CourseGeneralInfo from "@modules/course/CourseGeneralInfo";
-import CoursePeopleInfo from "@modules/course/CoursePeopleInfo";
+import CourseExtendedInfo from "@modules/course/components/CourseExtendedInfo";
+import CourseGeneralInfo from "@modules/course/components/CourseGeneralInfo";
+import CoursePeopleInfo from "@modules/course/components/CoursePeopleInfo";
 
 import { getCourseDetails } from "@modules/course/store/courseActions";
 import { getCourseInfo } from "@modules/course/store/courseSelectors";

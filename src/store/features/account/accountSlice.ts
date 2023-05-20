@@ -1,7 +1,7 @@
 import { IProfileResponse } from "@/api/account/types";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { ICourseShortResponse } from "@/api/courses/types";
+import { ICourseShortResponse } from "@/modules/course/api/types";
 import {
   editProfile,
   getProfile,

@@ -6,7 +6,6 @@ import TeacherItem from "./TeacherItem";
 
 const TeachersList = () => {
   const teachers = useAppSelector(getCourseTeachers);
-  console.log(1);
 
   return (
     <List

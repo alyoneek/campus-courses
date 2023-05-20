@@ -2,7 +2,7 @@ import { AxiosPromise } from "axios";
 
 import Endpoints from "@/api/endpoints";
 import { axiosInstance } from "@/api/instance";
-import { ICourseShortResponse } from "../courses/types";
+import { ICourseShortResponse } from "../../modules/course/api/types";
 import * as accountTypes from "./types";
 
 export const getRoles = (): AxiosPromise<accountTypes.IRolesResponse> =>

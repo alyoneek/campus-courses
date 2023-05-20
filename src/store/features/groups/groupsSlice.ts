@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { ICourseShortResponse } from "@/api/courses/types";
 import { IGropResponse } from "@/api/groups/types";
+import { ICourseShortResponse } from "@/modules/course/api/types";
 import {
   createCourse,
   createGroup,

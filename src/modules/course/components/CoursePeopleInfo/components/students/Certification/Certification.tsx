@@ -2,9 +2,9 @@ import { Button, Tag } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { FC, useState } from "react";
 
-import { CertificationType, IStudent } from "@/api/courses/types";
 import ModalForm from "@/components/ModalForm";
 import { StudentMarks, marksColors } from "@/helpers/constants";
+import { CertificationType, IStudent } from "@/modules/course/api/types";
 import { getCourseId } from "@/modules/course/store/courseSelectors";
 import { useAppSelector } from "@/store";
 import ResultForm from "./ResultForm";

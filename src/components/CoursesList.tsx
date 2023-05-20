@@ -1,4 +1,4 @@
-import { ICourseShortResponse } from "@/api/courses/types";
+import { ICourseShortResponse } from "@/modules/course/api/types";
 import CourseCard from "@components/CourseCard";
 import { FC } from "react";
 

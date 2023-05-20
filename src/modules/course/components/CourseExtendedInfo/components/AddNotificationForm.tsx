@@ -1,7 +1,7 @@
 import { Checkbox, Form, FormInstance, Input, message } from "antd";
 import { FC } from "react";
 
-import { INotificationRequest } from "@/api/courses/types";
+import { INotificationRequest } from "@/modules/course/api/types";
 import { notificationFormValidation } from "@/modules/course/helpers/validation";
 import { addNotificationToCourse } from "@/modules/course/store/courseActions";
 import { useAppDispatch, useAppSelector } from "@/store";

@@ -1,4 +1,6 @@
-import api from "@/api";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+import * as api from "@/modules/course/api";
 import {
   ICourseShortRequest,
   ICourseStatusRequest,
@@ -6,8 +8,7 @@ import {
   IStudentMarkRequest,
   IStudentStatusRequest,
   ITeacherRequest,
-} from "@/api/courses/types";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+} from "@/modules/course/api/types";
 import { coursesActions } from "./courseSlice";
 
 interface IPayload<T> {
@@ -19,7 +20,7 @@ export const getCourseDetails = createAsyncThunk(
   "courses/getCourseDetails",
   async (idCourse: string, { rejectWithValue, dispatch }) => {
     try {
-      const response = await api.courses.getCourseDetails(idCourse);
+      const response = await api.getCourseDetails(idCourse);
       dispatch(coursesActions.splitDetailsInfo(response.data));
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -35,7 +36,7 @@ export const deleteCourse = createAsyncThunk(
   "courses/delete",
   async (idCourse: string, { rejectWithValue, dispatch }) => {
     try {
-      await api.courses.deleteCourse(idCourse);
+      await api.deleteCourse(idCourse);
       dispatch(coursesActions.deleteCourse());
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -54,7 +55,7 @@ export const editCourse = createAsyncThunk(
     { rejectWithValue, dispatch }
   ) => {
     try {
-      await api.courses.editCourse(payload.idCourse, payload.data);
+      await api.editCourse(payload.idCourse, payload.data);
       dispatch(coursesActions.editCourseDetails(payload.data));
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -73,7 +74,7 @@ export const changeCourseStatus = createAsyncThunk(
     { rejectWithValue, dispatch }
   ) => {
     try {
-      const response = await api.courses.changeCourseStatus(
+      const response = await api.changeCourseStatus(
         payload.idCourse,
         payload.data
       );
@@ -92,7 +93,7 @@ export const addTeacherToCourse = createAsyncThunk(
   "courses/addTeacher",
   async (payload: IPayload<ITeacherRequest>, { rejectWithValue, dispatch }) => {
     try {
-      const response = await api.courses.addTeacherToCourse(
+      const response = await api.addTeacherToCourse(
         payload.idCourse,
         payload.data
       );
@@ -114,7 +115,7 @@ export const addNotificationToCourse = createAsyncThunk(
     { rejectWithValue, dispatch }
   ) => {
     try {
-      await api.courses.addNotificationToCourse(payload.idCourse, payload.data);
+      await api.addNotificationToCourse(payload.idCourse, payload.data);
       dispatch(coursesActions.addNotification(payload.data));
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -137,7 +138,7 @@ export const changeStudentStatus = createAsyncThunk(
     { rejectWithValue, dispatch }
   ) => {
     try {
-      await api.courses.changeStudentStatus(
+      await api.changeStudentStatus(
         payload.idCourse,
         payload.idStudent,
         payload.data
@@ -165,7 +166,7 @@ export const changeStudentMark = createAsyncThunk(
     { rejectWithValue, dispatch }
   ) => {
     try {
-      await api.courses.changeStudentMark(
+      await api.changeStudentMark(
         payload.idCourse,
         payload.idStudent,
         payload.data
@@ -190,7 +191,7 @@ export const signUpForCourse = createAsyncThunk(
   "courses/sign-up",
   async (idCourse: string, { rejectWithValue, dispatch }) => {
     try {
-      await api.courses.signUpForCourse(idCourse);
+      await api.signUpForCourse(idCourse);
       dispatch(getCourseDetails(idCourse));
     } catch (error: any) {
       if (error.response && error.response.data.message) {

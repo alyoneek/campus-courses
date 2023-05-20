@@ -1,6 +1,6 @@
 import api from "@/api";
-import { ICourseRequest } from "@/api/courses/types";
 import { IGropRequest } from "@/api/groups/types";
+import { ICourseRequest } from "@/modules/course/api/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { groupsActions } from "./groupsSlice";
 

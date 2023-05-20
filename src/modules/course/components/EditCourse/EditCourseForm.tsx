@@ -1,8 +1,8 @@
 import { Form, FormInstance, message } from "antd";
 import { FC } from "react";
 
-import { ICourseShortRequest } from "@/api/courses/types";
 import TextEditor from "@/components/TextEditor";
+import { ICourseShortRequest } from "@/modules/course/api/types";
 import { editCourse } from "@/modules/course/store/courseActions";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { courseFormValidation } from "@modules/course/helpers/validation";

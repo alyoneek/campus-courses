@@ -1,7 +1,7 @@
 import { Tag } from "antd";
 import { FC } from "react";
 
-import { ITeacher } from "@/api/courses/types";
+import { ITeacher } from "@/modules/course/api/types";
 
 interface TeacherItemProps {
   teacherInfo: ITeacher;

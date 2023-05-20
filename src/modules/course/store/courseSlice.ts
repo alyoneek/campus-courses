@@ -4,7 +4,7 @@ import {
   INotification,
   IStudent,
   ITeacher,
-} from "@/api/courses/types";
+} from "@/modules/course/api/types";
 import { createSlice } from "@reduxjs/toolkit";
 import * as CourseActions from "./courseActions";
 

@@ -1,8 +1,8 @@
 import { Form, FormInstance, Radio, message } from "antd";
 import { FC } from "react";
 
-import { ICourseStatusRequest } from "@/api/courses/types";
 import { CourseStatuses } from "@/helpers/constants";
+import { ICourseStatusRequest } from "@/modules/course/api/types";
 import { changeCourseStatus } from "@/modules/course/store/courseActions";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { courseStatusFormValidation } from "@modules/course/helpers/validation";

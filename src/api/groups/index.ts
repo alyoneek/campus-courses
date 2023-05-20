@@ -1,8 +1,11 @@
 import { AxiosPromise } from "axios";
 
-import { ICourseRequest, ICourseShortResponse } from "@/api/courses/types";
 import Endpoints from "@/api/endpoints";
 import { axiosInstance } from "@/api/instance";
+import {
+  ICourseRequest,
+  ICourseShortResponse,
+} from "@/modules/course/api/types";
 import * as groupsTypes from "./types";
 
 export const getGroups = (): AxiosPromise<groupsTypes.IGropResponse[]> =>

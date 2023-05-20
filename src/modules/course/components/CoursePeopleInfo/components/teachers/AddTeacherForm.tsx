@@ -1,7 +1,7 @@
 import { Form, FormInstance, Select, message } from "antd";
 import { FC, useEffect } from "react";
 
-import { ITeacherRequest } from "@/api/courses/types";
+import { ITeacherRequest } from "@/modules/course/api/types";
 import { teacherFormValidation } from "@/modules/course/helpers/validation";
 import { addTeacherToCourse } from "@/modules/course/store/courseActions";
 import { getCourseId } from "@/modules/course/store/courseSelectors";

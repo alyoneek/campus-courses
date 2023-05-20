@@ -6,9 +6,9 @@ import {
   courseStatusColors,
 } from "@/helpers/constants";
 import useRoles from "@/hooks/useRoles";
+import EditCourseButton from "@/modules/course/components/EditCourse/EditCourseButton";
+import EditCourseStatusButton from "@/modules/course/components/EditCourseStatus/EditCourseStatusButton";
 import { useAppSelector } from "@/store";
-import EditCourseButton from "@modules/course/EditCourse/EditCourseButton";
-import EditCourseStatusButton from "@modules/course/EditCourseStatus/EditCourseStatusButton";
 import * as courseSelectors from "@modules/course/store/courseSelectors";
 import DeleteCourseButton from "./components/DeleteCourseButton";
 import SignupCourseButton from "./components/SignupCourseButton";

@@ -1,9 +1,10 @@
-import { IGropRequest } from "@/api/groups/types";
-import { createGroupFormValidation } from "@/helpers/validation";
-import { useAppDispatch } from "@/store";
-import { createGroup } from "@/store/features/groups/groupsActions";
 import { Form, FormInstance, Input, message } from "antd";
 import { FC } from "react";
+
+import { IGropRequest } from "@/api/groups/types";
+import { useAppDispatch } from "@/store";
+import { createGroup } from "@/store/features/groups/groupsActions";
+import { createGroupFormValidation } from "@modules/groups/helpers/validation";
 
 interface CreateGroupFormProps {
   form?: FormInstance;

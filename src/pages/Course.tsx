@@ -20,8 +20,11 @@ const Course = () => {
   const dispatch = useAppDispatch();
   const courseInfo = useAppSelector(courseSelectors.getCourseInfo);
 
+  console.log(courseActions);
+
   useEffect(() => {
     if (idCourse) dispatch(courseActions.getCourseDetails(idCourse));
+    //TODO
     dispatch(getTeachingCourses());
     dispatch(getStudingCourses());
   }, [dispatch, idCourse]);

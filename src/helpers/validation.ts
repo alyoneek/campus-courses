@@ -131,17 +131,6 @@ export const profileFormValidation = {
   ],
 };
 
-export const createGroupFormValidation = {
-  name: [
-    {
-      required: true,
-      message: "Введите название группы",
-    },
-  ],
-};
-
-export const editGroupFormValidation = createGroupFormValidation;
-
 export const courseFormValidation = {
   name: [
     {

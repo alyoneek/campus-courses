@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import { IStudent } from "@/api/courses/types";
 import { StudentStatuses, studentStatusColors } from "@/helpers/constants";
+import { IStudent } from "@/modules/course/api/types";
 import AccepteStudentButton from "./AccepteStudentButton";
 import Certification from "./Certification/Certification";
 import RejectStudentButton from "./RejectStudentButton";

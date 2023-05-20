@@ -1,13 +1,13 @@
 import { Form, FormInstance, Radio, message } from "antd";
 import { FC, useEffect } from "react";
 
+import { StudentMarks } from "@/helpers/constants";
 import {
   CertificationType,
   IStudent,
   IStudentMarkRequest,
   MarkType,
-} from "@/api/courses/types";
-import { StudentMarks } from "@/helpers/constants";
+} from "@/modules/course/api/types";
 import { resultFormValidation } from "@/modules/course/helpers/validation";
 import { changeStudentMark } from "@/modules/course/store/courseActions";
 import { useAppDispatch } from "@/store";
