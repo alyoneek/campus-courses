@@ -46,13 +46,17 @@ const AddTeacherForm: FC<TeacherFormProps> = ({ form, afterFinish }) => {
         label="Выберите преподавателя"
         rules={teacherFormValidation.userId}
       >
-        <Select showSearch size="large">
-          {users.map((user) => (
-            <Select.Option key={user.id} value={user.id}>
-              {user.fullName}
-            </Select.Option>
-          ))}
-        </Select>
+        <Select
+          showSearch
+          size="large"
+          filterOption={(input, option) =>
+            (option?.label.toLowerCase() ?? "").startsWith(input.toLowerCase())
+          }
+          options={users.map((user) => ({
+            value: user.id,
+            label: user.fullName,
+          }))}
+        />
       </Form.Item>
     </Form>
   );

@@ -23,7 +23,7 @@ const useRoles = () => {
     roles.find((role) => checkedRoles?.includes(role));
 
   const isUserCourseEditor = (idCourse: string) =>
-    isUserInRoles([Roles.isAdmin]) || isUserTeacherInCourse(idCourse);
+    !!isUserInRoles([Roles.isAdmin]) || !!isUserTeacherInCourse(idCourse);
 
   const isUserCourseSigner = (idCourse: string) =>
     !isUserStudentInCourse(idCourse) && !isUserTeacherInCourse(idCourse);
