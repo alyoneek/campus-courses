@@ -186,37 +186,3 @@ export const courseFormValidation = {
     },
   ],
 };
-
-export const courseStatusFormValidation = {
-  status: [
-    {
-      required: true,
-      message: "Выберите статус",
-    },
-    ({ getFieldValue }: { getFieldValue: (name: NamePath) => any }) => ({
-      validator() {
-        if (getFieldValue("status") === "Created") {
-          return Promise.reject("Выберите статус");
-        }
-        return Promise.resolve();
-      },
-    }),
-  ],
-};
-
-export const resultFormValidation = {
-  mark: [
-    {
-      required: true,
-      message: "Выберите оценку",
-    },
-    ({ getFieldValue }: { getFieldValue: (name: NamePath) => any }) => ({
-      validator() {
-        if (getFieldValue("mark") === "NotDefined") {
-          return Promise.reject("Выберите оценку");
-        }
-        return Promise.resolve();
-      },
-    }),
-  ],
-};

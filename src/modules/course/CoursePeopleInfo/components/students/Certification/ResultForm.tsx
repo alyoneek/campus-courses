@@ -8,7 +8,7 @@ import {
   MarkType,
 } from "@/api/courses/types";
 import { StudentMarks } from "@/helpers/constants";
-import { resultFormValidation } from "@/helpers/validation";
+import { resultFormValidation } from "@/modules/course/helpers/validation";
 import { changeStudentMark } from "@/modules/course/store/courseActions";
 import { useAppDispatch } from "@/store";
 

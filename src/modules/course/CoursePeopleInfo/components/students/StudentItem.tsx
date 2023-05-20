@@ -2,8 +2,8 @@ import { FC } from "react";
 
 import { IStudent } from "@/api/courses/types";
 import { StudentStatuses, studentStatusColors } from "@/helpers/constants";
-import Certification from "@/modules/course/CoursePeopleInfo/components/students/Certification";
 import AccepteStudentButton from "./AccepteStudentButton";
+import Certification from "./Certification/Certification";
 import RejectStudentButton from "./RejectStudentButton";
 
 interface StudentItemProps {
@@ -34,11 +34,7 @@ const StudentItem: FC<StudentItemProps> = ({ studentInfo }) => {
       )}
 
       {studentInfo.status == "Accepted" && (
-        <Certification
-          studentInfo={studentInfo}
-          midtermResult={studentInfo.midtermResult}
-          finalResult={studentInfo.finalResult}
-        />
+        <Certification studentInfo={studentInfo} />
       )}
     </div>
   );

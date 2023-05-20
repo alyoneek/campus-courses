@@ -1,10 +1,12 @@
-import { useAppSelector } from "@/store";
 import { List } from "antd";
+
+import { getCourseStudents } from "@/modules/course/store/courseSelectors";
+import { useAppSelector } from "@/store";
 import StudentItem from "./StudentItem";
 
 const StudentsList = () => {
-  // TODO
-  const students = useAppSelector((state) => state.courses.allStudents);
+  const students = useAppSelector(getCourseStudents);
+  console.log(1);
 
   return (
     <List

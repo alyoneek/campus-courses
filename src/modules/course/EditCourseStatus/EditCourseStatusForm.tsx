@@ -3,9 +3,9 @@ import { FC } from "react";
 
 import { ICourseStatusRequest } from "@/api/courses/types";
 import { CourseStatuses } from "@/helpers/constants";
-import { courseStatusFormValidation } from "@/helpers/validation";
 import { changeCourseStatus } from "@/modules/course/store/courseActions";
 import { useAppDispatch, useAppSelector } from "@/store";
+import { courseStatusFormValidation } from "@modules/course/helpers/validation";
 import * as courseSelectors from "@modules/course/store/courseSelectors";
 
 interface CourseStatusFormProps {

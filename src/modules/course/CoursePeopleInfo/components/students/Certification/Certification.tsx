@@ -1,28 +1,23 @@
 import { Button, Tag } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { FC, useState } from "react";
-import { useParams } from "react-router-dom";
 
-import { CertificationType, IStudent, MarkType } from "@/api/courses/types";
+import { CertificationType, IStudent } from "@/api/courses/types";
 import ModalForm from "@/components/ModalForm";
-import ResultForm from "@/components/forms/ResultForm";
 import { StudentMarks, marksColors } from "@/helpers/constants";
+import { getCourseId } from "@/modules/course/store/courseSelectors";
+import { useAppSelector } from "@/store";
+import ResultForm from "./ResultForm";
 
 interface CertificationProps {
   studentInfo: IStudent;
-  midtermResult: MarkType;
-  finalResult: MarkType;
 }
 
-const Certification: FC<CertificationProps> = ({
-  studentInfo,
-  midtermResult,
-  finalResult,
-}) => {
+const Certification: FC<CertificationProps> = ({ studentInfo }) => {
   const [isResultModalOpen, setResultModalOpen] = useState(false);
   const [markType, setMarkType] = useState<CertificationType>("Midterm");
   const [resultForm] = useForm();
-  const { idCourse } = useParams();
+  const idCourse = useAppSelector(getCourseId);
 
   const showResultModal = (value: CertificationType) => {
     setMarkType(value);
@@ -45,9 +40,13 @@ const Certification: FC<CertificationProps> = ({
       >
         <ResultForm
           markType={markType}
-          initial={markType === "Midterm" ? midtermResult : finalResult}
+          initial={
+            markType === "Midterm"
+              ? studentInfo.midtermResult
+              : studentInfo.finalResult
+          }
           studentInfo={studentInfo}
-          idCourse={idCourse as string}
+          idCourse={idCourse}
         />
       </ModalForm>
 
@@ -61,8 +60,8 @@ const Certification: FC<CertificationProps> = ({
             Промежуточная аттестация
           </Button>
           -
-          <Tag color={marksColors[midtermResult]} className="ml-2">
-            {StudentMarks[midtermResult]}
+          <Tag color={marksColors[studentInfo.midtermResult]} className="ml-2">
+            {StudentMarks[studentInfo.midtermResult]}
           </Tag>
         </div>
         <div>
@@ -74,8 +73,8 @@ const Certification: FC<CertificationProps> = ({
             Финальная аттестация
           </Button>
           -
-          <Tag color={marksColors[finalResult]} className="ml-2">
-            {StudentMarks[finalResult]}
+          <Tag color={marksColors[studentInfo.finalResult]} className="ml-2">
+            {StudentMarks[studentInfo.finalResult]}
           </Tag>
         </div>
       </div>
