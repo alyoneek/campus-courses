@@ -4,8 +4,15 @@ import { FC } from "react";
 
 import { ButtonProps } from "./types";
 
-const DeleteButton: FC<ButtonProps> = ({ onClick }) => {
-  return <Button danger icon={<DeleteOutlined />} onClick={onClick} />;
+const DeleteButton: FC<ButtonProps> = ({ onClick, className = "" }) => {
+  return (
+    <Button
+      danger
+      icon={<DeleteOutlined />}
+      onClick={onClick}
+      className={className}
+    />
+  );
 };
 
 export default DeleteButton;

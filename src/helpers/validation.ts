@@ -204,24 +204,6 @@ export const courseStatusFormValidation = {
   ],
 };
 
-export const notificationFormValidation = {
-  text: [
-    {
-      required: true,
-      message: "Введите текст",
-    },
-  ],
-};
-
-export const teacherFormValidation = {
-  userId: [
-    {
-      required: true,
-      message: "Выберите преподавателя",
-    },
-  ],
-};
-
 export const resultFormValidation = {
   mark: [
     {

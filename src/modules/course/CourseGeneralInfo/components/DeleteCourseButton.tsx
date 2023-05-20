@@ -1,17 +1,16 @@
-import { Button, Popconfirm, message } from "antd";
+import { Popconfirm, message } from "antd";
 import { FC } from "react";
 
 import usePopconfirm from "@/hooks/usePopconfirm";
+import { deleteCourse } from "@/modules/course/store/courseActions";
 import { history } from "@/router/history";
-import { useAppDispatch } from "@/store";
-import { deleteCourse } from "@/store/features/courses/courseActions";
+import { useAppDispatch, useAppSelector } from "@/store";
+import DeleteButton from "@/ui/buttons/DeleteButton";
+import { getCourseId } from "@modules/course/store/courseSelectors";
 
-interface DeleteCourseButtonProps {
-  idCourse: string;
-}
-
-const DeleteCourseButton: FC<DeleteCourseButtonProps> = ({ idCourse }) => {
+const DeleteCourseButton: FC = () => {
   const dispatch = useAppDispatch();
+  const idCourse = useAppSelector(getCourseId);
 
   const { openPopconfirm, showPopconfirm, onCancelPopconfirm } =
     usePopconfirm();
@@ -42,15 +41,7 @@ const DeleteCourseButton: FC<DeleteCourseButtonProps> = ({ idCourse }) => {
       okText="Да"
       cancelText="Нет"
     >
-      <Button
-        type="primary"
-        danger
-        size="large"
-        className="ml-3"
-        onClick={showPopconfirm}
-      >
-        Удалить
-      </Button>
+      <DeleteButton className="ml-3" onClick={showPopconfirm} />
     </Popconfirm>
   );
 };

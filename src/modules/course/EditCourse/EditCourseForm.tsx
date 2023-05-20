@@ -1,26 +1,24 @@
 import { Form, FormInstance, message } from "antd";
-
-import { ICourseDescription, ICourseShortRequest } from "@/api/courses/types";
-import TextEditor from "@/components/TextEditor";
-import { courseFormValidation } from "@/helpers/validation";
-import { useAppDispatch } from "@/store";
-import { editCourse } from "@/store/features/courses/courseActions";
 import { FC } from "react";
 
+import { ICourseShortRequest } from "@/api/courses/types";
+import TextEditor from "@/components/TextEditor";
+import { editCourse } from "@/modules/course/store/courseActions";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { courseFormValidation } from "@modules/course/helpers/validation";
+import * as courseSelectors from "@modules/course/store/courseSelectors";
+
 interface ShortCourseFormProps {
-  idCourse: string;
-  courseDescription: ICourseDescription;
   form?: FormInstance;
   afterFinish?: () => void;
 }
 
-const ShortCourseForm: FC<ShortCourseFormProps> = ({
-  idCourse,
-  courseDescription,
-  form,
-  afterFinish,
-}) => {
+const ShortCourseForm: FC<ShortCourseFormProps> = ({ form, afterFinish }) => {
   const dispatch = useAppDispatch();
+  const courseDescription = useAppSelector(
+    courseSelectors.getCourseDescription
+  );
+  const idCourse = useAppSelector(courseSelectors.getCourseId);
 
   const changeRequirementsField = (value: string) => {
     form?.setFieldValue("requirements", value);

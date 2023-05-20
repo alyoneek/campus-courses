@@ -9,8 +9,8 @@ import {
 } from "@/api/courses/types";
 import { StudentMarks } from "@/helpers/constants";
 import { resultFormValidation } from "@/helpers/validation";
+import { changeStudentMark } from "@/modules/course/store/courseActions";
 import { useAppDispatch } from "@/store";
-import { changeStudentMark } from "@/store/features/courses/courseActions";
 
 interface NotificationFormProps {
   idCourse: string;

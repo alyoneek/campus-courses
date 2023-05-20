@@ -9,6 +9,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import * as CourseActions from "./courseActions";
 
 interface ICoursesState {
+  idCourse: string;
   courseInfo: ICourseInfo;
   courseDescription: ICourseDescription;
   allStudents: IStudent[];
@@ -19,6 +20,7 @@ interface ICoursesState {
 }
 
 const initialState: ICoursesState = {
+  idCourse: "",
   courseInfo: {} as ICourseInfo,
   courseDescription: {} as ICourseDescription,
   allStudents: [],
@@ -39,9 +41,11 @@ const coursesSlice = createSlice({
         students,
         teachers,
         notifications,
+        id,
         ...info
       } = payload;
 
+      state.idCourse = id;
       state.courseInfo = info;
       state.courseDescription = {
         requirements,

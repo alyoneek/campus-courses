@@ -1,17 +1,22 @@
 import { AppstoreAddOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 import { ButtonProps } from "./types";
 
 interface AddButtonProps extends ButtonProps {
-  name: string;
+  children: ReactNode;
 }
 
-const AddButton: FC<AddButtonProps> = ({ onClick, name }) => {
+const AddButton: FC<AddButtonProps> = ({ onClick, className, children }) => {
   return (
-    <Button danger icon={<AppstoreAddOutlined />} onClick={onClick}>
-      {name}
+    <Button
+      icon={<AppstoreAddOutlined />}
+      type="primary"
+      className={className}
+      onClick={onClick}
+    >
+      {children}
     </Button>
   );
 };

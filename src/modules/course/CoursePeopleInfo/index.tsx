@@ -1,9 +1,9 @@
 import { Tabs } from "antd";
 
-import StudentsBlock from "./StudentsBlock";
-import TeachersBlock from "./TeachersBlock";
+import StudentsBlock from "./components/students/StudentsBlock";
+import TeachersBlock from "./components/teachers/TeachersBlock";
 
-const PeopleInfo = () => {
+const CoursePeopleInfo = () => {
   return (
     <Tabs
       defaultActiveKey="1"
@@ -25,4 +25,4 @@ const PeopleInfo = () => {
   );
 };
 
-export default PeopleInfo;
+export default CoursePeopleInfo;

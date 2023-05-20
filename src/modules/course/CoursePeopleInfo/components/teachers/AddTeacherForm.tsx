@@ -2,19 +2,21 @@ import { Form, FormInstance, Select, message } from "antd";
 import { FC, useEffect } from "react";
 
 import { ITeacherRequest } from "@/api/courses/types";
-import { teacherFormValidation } from "@/helpers/validation";
+import { teacherFormValidation } from "@/modules/course/helpers/validation";
+import { addTeacherToCourse } from "@/modules/course/store/courseActions";
+import { getCourseId } from "@/modules/course/store/courseSelectors";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { addTeacherToCourse } from "@/store/features/courses/courseActions";
 import { getUsers } from "@/store/features/users/usersActions";
 
 interface TeacherFormProps {
-  idCourse: string;
   form?: FormInstance;
   afterFinish?: () => void;
 }
 
-const TeacherForm: FC<TeacherFormProps> = ({ idCourse, form, afterFinish }) => {
+const AddTeacherForm: FC<TeacherFormProps> = ({ form, afterFinish }) => {
   const dispatch = useAppDispatch();
+  //TODO
+  const idCourse = useAppSelector(getCourseId);
   const users = useAppSelector((state) => state.users.allUsers);
 
   useEffect(() => {
@@ -44,7 +46,7 @@ const TeacherForm: FC<TeacherFormProps> = ({ idCourse, form, afterFinish }) => {
         label="Выберите преподавателя"
         rules={teacherFormValidation.userId}
       >
-        <Select size="large">
+        <Select showSearch size="large">
           {users.map((user) => (
             <Select.Option key={user.id} value={user.id}>
               {user.fullName}
@@ -56,4 +58,4 @@ const TeacherForm: FC<TeacherFormProps> = ({ idCourse, form, afterFinish }) => {
   );
 };
 
-export default TeacherForm;
+export default AddTeacherForm;

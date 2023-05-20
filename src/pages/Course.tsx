@@ -2,32 +2,35 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import ExtendedInfo from "@/components/Course/ExtendedInfo";
-import GeneralInfo from "@/components/Course/GeneralInfo";
-import PeopleInfo from "@/components/Course/PeopleInfo";
 import DataContent from "@/layouts/content/DataContent";
+import {
+  CourseExtendedInfo,
+  CourseGeneralInfo,
+  CoursePeopleInfo,
+  courseActions,
+  courseSelectors,
+} from "@/modules/course";
 import {
   getStudingCourses,
   getTeachingCourses,
 } from "@/store/features/account/accountActions";
-import { getCourseDetails } from "@/store/features/courses/courseActions";
 
 const Course = () => {
   const { idCourse } = useParams();
   const dispatch = useAppDispatch();
-  const courseInfo = useAppSelector((state) => state.courses.courseInfo);
+  const courseInfo = useAppSelector(courseSelectors.getCourseInfo);
 
   useEffect(() => {
-    if (idCourse) dispatch(getCourseDetails(idCourse));
+    if (idCourse) dispatch(courseActions.getCourseDetails(idCourse));
     dispatch(getTeachingCourses());
     dispatch(getStudingCourses());
   }, [dispatch, idCourse]);
 
   return (
     <DataContent title={courseInfo?.name}>
-      <GeneralInfo />
-      <ExtendedInfo />
-      <PeopleInfo />
+      <CourseGeneralInfo />
+      <CourseExtendedInfo />
+      <CoursePeopleInfo />
     </DataContent>
   );
 };

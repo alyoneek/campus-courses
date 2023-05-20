@@ -1,6 +1,8 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { FC } from "react";
+
 import { IGropResponse } from "@/api/groups/types";
 import GroupCard from "@/components/GroupCard";
-import { FC } from "react";
 
 interface GroupsListProps {
   groups: IGropResponse[];
@@ -8,11 +10,15 @@ interface GroupsListProps {
 }
 
 const GroupsList: FC<GroupsListProps> = ({ groups, onEditGroup }) => {
+  const [parent] = useAutoAnimate();
+
   return (
     <>
-      {groups.map((group) => (
-        <GroupCard key={group.id} groupInfo={group} onEdit={onEditGroup} />
-      ))}
+      <div ref={parent}>
+        {groups.map((group) => (
+          <GroupCard key={group.id} groupInfo={group} onEdit={onEditGroup} />
+        ))}
+      </div>
     </>
   );
 };

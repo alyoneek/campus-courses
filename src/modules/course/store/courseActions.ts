@@ -15,6 +15,22 @@ interface IPayload<T> {
   data: T;
 }
 
+export const getCourseDetails = createAsyncThunk(
+  "courses/getCourseDetails",
+  async (idCourse: string, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await api.courses.getCourseDetails(idCourse);
+      dispatch(coursesActions.splitDetailsInfo(response.data));
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue({ message: error.response.data.message });
+      } else {
+        return rejectWithValue({ message: error.message });
+      }
+    }
+  }
+);
+
 export const deleteCourse = createAsyncThunk(
   "courses/delete",
   async (idCourse: string, { rejectWithValue, dispatch }) => {
@@ -40,22 +56,6 @@ export const editCourse = createAsyncThunk(
     try {
       await api.courses.editCourse(payload.idCourse, payload.data);
       dispatch(coursesActions.editCourseDetails(payload.data));
-    } catch (error: any) {
-      if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
-      } else {
-        return rejectWithValue({ message: error.message });
-      }
-    }
-  }
-);
-
-export const getCourseDetails = createAsyncThunk(
-  "courses/getCourseDetails",
-  async (idCourse: string, { rejectWithValue, dispatch }) => {
-    try {
-      const response = await api.courses.getCourseDetails(idCourse);
-      dispatch(coursesActions.splitDetailsInfo(response.data));
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });

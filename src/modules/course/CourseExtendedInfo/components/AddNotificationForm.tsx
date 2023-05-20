@@ -2,24 +2,24 @@ import { Checkbox, Form, FormInstance, Input, message } from "antd";
 import { FC } from "react";
 
 import { INotificationRequest } from "@/api/courses/types";
-import { notificationFormValidation } from "@/helpers/validation";
-import { useAppDispatch } from "@/store";
-import { addNotificationToCourse } from "@/store/features/courses/courseActions";
+import { notificationFormValidation } from "@/modules/course/helpers/validation";
+import { addNotificationToCourse } from "@/modules/course/store/courseActions";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { getCourseId } from "@modules/course/store/courseSelectors";
 
 const { TextArea } = Input;
 
 interface NotificationFormProps {
-  idCourse: string;
   form?: FormInstance;
   afterFinish?: () => void;
 }
 
-const NotificationForm: FC<NotificationFormProps> = ({
-  idCourse,
+const AddNotificationForm: FC<NotificationFormProps> = ({
   form,
   afterFinish,
 }) => {
   const dispatch = useAppDispatch();
+  const idCourse = useAppSelector(getCourseId);
 
   const onFinish = (values: INotificationRequest) => {
     dispatch(addNotificationToCourse({ idCourse, data: values }))
@@ -56,4 +56,4 @@ const NotificationForm: FC<NotificationFormProps> = ({
   );
 };
 
-export default NotificationForm;
+export default AddNotificationForm;

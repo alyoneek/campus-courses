@@ -1,26 +1,25 @@
 import { Form, FormInstance, Radio, message } from "antd";
 import { FC } from "react";
 
-import { CourseStatus, ICourseStatusRequest } from "@/api/courses/types";
+import { ICourseStatusRequest } from "@/api/courses/types";
 import { CourseStatuses } from "@/helpers/constants";
 import { courseStatusFormValidation } from "@/helpers/validation";
-import { useAppDispatch } from "@/store";
-import { changeCourseStatus } from "@/store/features/courses/courseActions";
+import { changeCourseStatus } from "@/modules/course/store/courseActions";
+import { useAppDispatch, useAppSelector } from "@/store";
+import * as courseSelectors from "@modules/course/store/courseSelectors";
 
 interface CourseStatusFormProps {
-  idCourse: string;
-  initial: CourseStatus;
   form?: FormInstance;
   afterFinish?: () => void;
 }
 
-const CourseStatusForm: FC<CourseStatusFormProps> = ({
-  idCourse,
-  initial,
+const EditCourseStatusForm: FC<CourseStatusFormProps> = ({
   form,
   afterFinish,
 }) => {
   const dispatch = useAppDispatch();
+  const courseInfo = useAppSelector(courseSelectors.getCourseInfo);
+  const idCourse = useAppSelector(courseSelectors.getCourseId);
 
   const onFinish = (values: ICourseStatusRequest) => {
     dispatch(changeCourseStatus({ idCourse, data: values }))
@@ -44,7 +43,7 @@ const CourseStatusForm: FC<CourseStatusFormProps> = ({
       layout="vertical"
       onFinish={onFinish}
       autoComplete="off"
-      initialValues={{ status: initial }}
+      initialValues={{ status: courseInfo.status }}
     >
       <Form.Item name="status" rules={courseStatusFormValidation.status}>
         <Radio.Group>
@@ -64,4 +63,4 @@ const CourseStatusForm: FC<CourseStatusFormProps> = ({
   );
 };
 
-export default CourseStatusForm;
+export default EditCourseStatusForm;

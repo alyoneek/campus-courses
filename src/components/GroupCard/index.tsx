@@ -40,7 +40,7 @@ const GroupCard: FC<GroupCardProps> = ({ groupInfo, onEdit }) => {
 
   return (
     <Card className="mt-2">
-      <div className={styles.innerContainer}>
+      <div key={groupInfo.id} className={styles.innerContainer}>
         <Link
           to={`/groups/${groupInfo.id}`}
           className={styles.link}
