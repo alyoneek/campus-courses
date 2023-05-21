@@ -6,9 +6,9 @@ import {
 } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
+import { accountReducer } from "@/modules/account/store/accountSlice";
 import { coursesReducer } from "@/modules/course";
 import { groupsReducer } from "@/modules/groups";
-import { accountReducer } from "@/store/features/account/accountSlice";
 import { authReducer } from "@/store/features/auth/authSlice";
 import { usersReducer } from "@/store/features/users/usersSlice";
 

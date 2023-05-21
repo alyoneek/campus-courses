@@ -6,7 +6,10 @@ import { getCourseDetails } from "@modules/course/store/courseActions";
 import { getCourseInfo } from "@modules/course/store/courseSelectors";
 import { coursesReducer } from "@modules/course/store/courseSlice";
 
-import { ICourseRequest, ICourseShortResponse } from "./api/types";
+import {
+  ICourseRequest,
+  ICourseShortResponse,
+} from "@modules/course/api/types";
 
 const courseActions = {
   getCourseDetails,

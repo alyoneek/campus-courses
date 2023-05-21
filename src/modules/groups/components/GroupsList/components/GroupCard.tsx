@@ -2,11 +2,11 @@ import { Card } from "antd";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
+import { Roles } from "@/modules/account";
 import { IGropResponse } from "@/modules/groups/api/types";
 import DeleteGroupButton from "@/modules/groups/components/DeleteGroup/DeleteGroupButton";
 import EditGroupButton from "@/modules/groups/components/EditGroup/EditGroupButton";
 import RequireAuthComponent from "@/router/RequireAuthComponent";
-import { Roles } from "@/store/features/account/accountSlice";
 
 interface GroupCardProps {
   groupInfo: IGropResponse;

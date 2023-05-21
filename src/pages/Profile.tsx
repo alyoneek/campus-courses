@@ -1,20 +1,19 @@
-import ProfileForm from "@/components/forms/ProfileForm";
-import DataContent from "@/layouts/content/DataContent";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { getProfile } from "@/store/features/account/accountActions";
 import { useEffect } from "react";
+
+import DataContent from "@/layouts/content/DataContent";
+import { ProfileForm, accountActions } from "@/modules/account";
+import { useAppDispatch } from "@/store";
 
 const Profile = () => {
   const dispatch = useAppDispatch();
-  const profileInfo = useAppSelector((state) => state.account.profile);
 
   useEffect(() => {
-    dispatch(getProfile());
+    dispatch(accountActions.getProfile());
   }, [dispatch]);
 
   return (
     <DataContent title="Профиль">
-      <ProfileForm profileInfo={profileInfo} />
+      <ProfileForm />
     </DataContent>
   );
 };

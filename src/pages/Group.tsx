@@ -6,11 +6,11 @@ import CoursesList from "@/components/CoursesList";
 import ModalForm from "@/components/ModalForm";
 import CourseForm from "@/components/forms/CourseForm";
 import DataContent from "@/layouts/content/DataContent";
+import { Roles } from "@/modules/account";
 import { getCourses } from "@/modules/groups/store/groupsActions";
 import RequireAuthComponent from "@/router/RequireAuthComponent";
 import { history } from "@/router/history";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { Roles } from "@/store/features/account/accountSlice";
 
 const Group = () => {
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);

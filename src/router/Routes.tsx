@@ -1,6 +1,7 @@
 import { Routes as ReactRoutes, Route } from "react-router-dom";
 
 import MainLayout from "@/layouts/MainLayout";
+import { Roles } from "@/modules/account";
 import Course from "@/pages/Course";
 import Group from "@/pages/Group";
 import Groups from "@/pages/Groups";
@@ -11,7 +12,6 @@ import OwnCourses from "@/pages/OwnCourses";
 import Profile from "@/pages/Profile";
 import Registration from "@/pages/Registration";
 import TeachingCourses from "@/pages/TeachingCourses";
-import { Roles } from "@/store/features/account/accountSlice";
 import RequireAuthRoute from "./RequireAuthRoute";
 
 const Routes = () => {

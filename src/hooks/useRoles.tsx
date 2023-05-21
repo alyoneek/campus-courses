@@ -1,5 +1,5 @@
+import { Roles } from "@/modules/account";
 import { useAppSelector } from "@/store";
-import { Roles } from "@/store/features/account/accountSlice";
 import useAuth from "./useAuth";
 
 const useRoles = () => {

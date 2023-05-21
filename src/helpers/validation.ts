@@ -6,7 +6,7 @@ type getFieldValueType = {
   getFieldValue: (name: NamePath) => any;
 };
 
-const validateDate = (_: Rule, value: Dayjs) => {
+export const validateBirthDate = (_: Rule, value: Dayjs) => {
   if (!value) {
     return Promise.resolve();
   }
@@ -17,17 +17,13 @@ const validateDate = (_: Rule, value: Dayjs) => {
 
   if (choosenDate.getTime() < minDate.getTime()) {
     return Promise.reject(
-      new Error(
-        `Дата должна быть не меньше ${minDate.toLocaleDateString("en-US")}`
-      )
+      `Дата должна быть не меньше ${minDate.toLocaleDateString("en-US")}`
     );
   }
 
   if (choosenDate.getTime() > maxDate.getTime()) {
     return Promise.reject(
-      new Error(
-        `Дата должна быть не больше ${maxDate.toLocaleDateString("en-US")}`
-      )
+      `Дата должна быть не больше ${maxDate.toLocaleDateString("en-US")}`
     );
   }
 
@@ -47,7 +43,7 @@ export const registerFormValidation = {
       message: "Введите дату рождения",
     },
     {
-      validator: validateDate,
+      validator: validateBirthDate,
     },
   ],
   email: [
@@ -88,7 +84,7 @@ export const registerFormValidation = {
         if (!value || getFieldValue("password") === value) {
           return Promise.resolve();
         }
-        return Promise.reject(new Error("Пароли не совпадают"));
+        return Promise.reject("Пароли не совпадают");
       },
     }),
   ],
@@ -109,24 +105,6 @@ export const loginFormValidation = {
     {
       required: true,
       message: "Введите пароль",
-    },
-  ],
-};
-
-export const profileFormValidation = {
-  fullName: [
-    {
-      required: true,
-      message: "Введите ФИО",
-    },
-  ],
-  birthDate: [
-    {
-      required: true,
-      message: "Введите дату рождения",
-    },
-    {
-      validator: validateDate,
     },
   ],
 };

@@ -5,9 +5,9 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import Header from "@/components/Header";
 import useAuth from "@/hooks/useAuth";
+import { accountActions } from "@/modules/account";
 import { history } from "@/router/history";
 import { useAppDispatch } from "@/store";
-import { getRoles } from "@/store/features/account/accountActions";
 
 const MainLayout: FC = () => {
   const { isLoggedIn, roles } = useAuth();
@@ -18,7 +18,7 @@ const MainLayout: FC = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(getRoles());
+      dispatch(accountActions.getRoles());
     }
   }, [isLoggedIn, dispatch]);
 

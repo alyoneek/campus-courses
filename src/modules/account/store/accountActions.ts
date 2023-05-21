@@ -1,14 +1,15 @@
-import api from "@/api";
-import { IProfileEditRequest } from "@/api/account/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import * as api from "@/modules/account/api";
+import { IProfileEditRequest } from "@/modules/account/api/types";
+
 export const getRoles = createAsyncThunk("account/getRoles", async () => {
-  const response = await api.account.getRoles();
+  const response = await api.getRoles();
   return response.data;
 });
 
-export const getProfile = createAsyncThunk("account/getProfile", async () => {
-  const response = await api.account.getProfile();
+export const getProfile = createAsyncThunk("account/getProfile1", async () => {
+  const response = await api.getProfile();
   return response.data;
 });
 
@@ -16,7 +17,7 @@ export const editProfile = createAsyncThunk(
   "account/editProfile",
   async (data: IProfileEditRequest, { rejectWithValue }) => {
     try {
-      const response = await api.account.editProfile(data);
+      const response = await api.editProfile(data);
       return response.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -32,7 +33,7 @@ export const getStudingCourses = createAsyncThunk(
   "account/studingCourses",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await api.account.getStudingCourses();
+      const response = await api.getStudingCourses();
       return response.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -48,7 +49,7 @@ export const getTeachingCourses = createAsyncThunk(
   "account/teachingCourses",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await api.account.getTeachingCourses();
+      const response = await api.getTeachingCourses();
       return response.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {

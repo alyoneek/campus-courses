@@ -1,8 +1,10 @@
+import { accountSelectors } from "@/modules/account";
 import { useAppSelector } from "@/store";
 
 const useAuth = () => {
+  //TODO
   const { token, email } = useAppSelector((state) => state.auth);
-  const roles = useAppSelector((state) => state.account.roles);
+  const roles = useAppSelector(accountSelectors.getRoles);
 
   return {
     isLoggedIn: !!token,

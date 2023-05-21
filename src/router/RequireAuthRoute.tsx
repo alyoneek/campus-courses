@@ -1,6 +1,6 @@
 import useAuth from "@/hooks/useAuth";
+import { Roles } from "@/modules/account";
 import Unauthorized from "@/pages/Unauthorized";
-import { Roles } from "@/store/features/account/accountSlice";
 import { Navigate, Outlet } from "react-router-dom";
 
 interface RequireAuthRouteProps {

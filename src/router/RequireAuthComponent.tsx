@@ -1,6 +1,7 @@
-import useAuth from "@/hooks/useAuth";
-import { Roles } from "@/store/features/account/accountSlice";
 import { ReactNode } from "react";
+
+import useAuth from "@/hooks/useAuth";
+import { Roles } from "@/modules/account";
 
 interface RequireAuthComponentProps {
   loggedOut?: boolean;

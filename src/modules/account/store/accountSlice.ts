@@ -1,7 +1,9 @@
-import { IProfileResponse } from "@/api/account/types";
+import { IProfileResponse } from "@/modules/account/api/types";
 import { createSlice } from "@reduxjs/toolkit";
 
 import { ICourseShortResponse } from "@/modules/course/api/types";
+import { convertRolesResponeToArray } from "@modules/account/helpers/rolesResponeToArray";
+import { IRole } from "@modules/account/types";
 import {
   editProfile,
   getProfile,
@@ -9,20 +11,26 @@ import {
   getStudingCourses,
   getTeachingCourses,
 } from "./accountActions";
-import { convertRolesResponeToArray } from "./helpers";
 
-export enum Roles {
-  isStudent = "Student",
-  isTeacher = "Teacher",
-  isAdmin = "Admin",
-}
+// import * as api from "@/modules/account/api";
+// import { createAsyncThunk } from "@reduxjs/toolkit";
+
+// export const getRoles = createAsyncThunk("account/getRoles", async () => {
+// const response = await api.getRoles();
+// return response.data;
+// });
+
+// export const getProfile = createAsyncThunk("account/getProfile", async () => {
+//   const response = await api.getProfile();
+//   return response.data;
+// });
 
 export interface IError {
   message: string;
 }
 
 interface IAccountState {
-  roles: Roles[];
+  roles: IRole[];
   profile: IProfileResponse;
   studingCourses: ICourseShortResponse[];
   teachingCourses: ICourseShortResponse[];
@@ -44,7 +52,7 @@ const accountSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // getRoles
+    //getRoles
     builder.addCase(getRoles.pending, (state) => {
       state.status = "loading";
       state.error = null;
@@ -59,7 +67,7 @@ const accountSlice = createSlice({
       state.status = "error";
     });
 
-    // getProfile
+    // // getProfile
     builder.addCase(getProfile.pending, (state) => {
       state.status = "loading";
       state.error = null;

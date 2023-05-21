@@ -74,7 +74,6 @@ const groupsSlice = createSlice({
 
     builder.addCase(createGroup.fulfilled, (state, action) => {
       state.status = "success";
-      console.log(action);
     });
 
     builder.addCase(createGroup.rejected, (state, { payload }) => {

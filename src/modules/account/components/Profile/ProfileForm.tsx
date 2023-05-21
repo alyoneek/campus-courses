@@ -2,21 +2,17 @@ import { Button, DatePicker, Form, Input, message } from "antd";
 import dayjs from "dayjs";
 import { FC, useEffect, useState } from "react";
 
-import { IProfileResponse } from "@/api/account/types";
-import { profileFormValidation } from "@/helpers/validation";
+import { profileFormValidation } from "@/modules/account/helpers/validation";
+import { getProfile } from "@/modules/account/store/accountSelectors";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { editProfile } from "@/store/features/account/accountActions";
+import { editProfile } from "../../store/accountActions";
 
-interface ProfileFormProps {
-  profileInfo: IProfileResponse;
-}
+const ProfileForm: FC = () => {
+  const dispatch = useAppDispatch();
+  const profileInfo = useAppSelector(getProfile);
 
-const ProfileForm: FC<ProfileFormProps> = ({ profileInfo }) => {
   const [isEdit, setEdit] = useState(false);
   const [form] = Form.useForm();
-
-  const dispatch = useAppDispatch();
-  const status = useAppSelector((state) => state.account.status);
 
   useEffect(() => form.resetFields(), [profileInfo]);
 
@@ -98,12 +94,11 @@ const ProfileForm: FC<ProfileFormProps> = ({ profileInfo }) => {
         >
           Изменить
         </Button>
+
         <Button
           htmlType="submit"
           size="large"
-          onClick={onEditClick}
           className={isEdit ? "block" : "hidden"}
-          loading={status === "loading"}
         >
           Сохранить
         </Button>

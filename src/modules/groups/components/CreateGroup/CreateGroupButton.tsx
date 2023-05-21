@@ -1,7 +1,7 @@
 import ModalForm from "@/components/ModalForm";
 import useModal from "@/hooks/useModal";
+import { Roles } from "@/modules/account";
 import RequireAuthComponent from "@/router/RequireAuthComponent";
-import { Roles } from "@/store/features/account/accountSlice";
 import AddButton from "@/ui/buttons/AddButton";
 import CreateGroupForm from "./CreateGroupForm";
 
