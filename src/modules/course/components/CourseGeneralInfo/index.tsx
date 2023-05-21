@@ -6,12 +6,12 @@ import {
   courseStatusColors,
 } from "@/helpers/constants";
 import useRoles from "@/hooks/useRoles";
+import DeleteCourseButton from "@/modules/course/components/DeleteCourse/DeleteCourseButton";
 import EditCourseButton from "@/modules/course/components/EditCourse/EditCourseButton";
 import EditCourseStatusButton from "@/modules/course/components/EditCourseStatus/EditCourseStatusButton";
+import SignupCourseButton from "@/modules/course/components/SignupCourse/SignupCourseButton";
 import { useAppSelector } from "@/store";
 import * as courseSelectors from "@modules/course/store/courseSelectors";
-import DeleteCourseButton from "./components/DeleteCourseButton";
-import SignupCourseButton from "./components/SignupCourseButton";
 
 const gridFullStyle: React.CSSProperties = {
   width: "100%",

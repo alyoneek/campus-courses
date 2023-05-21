@@ -6,6 +6,8 @@ import { getCourseDetails } from "@modules/course/store/courseActions";
 import { getCourseInfo } from "@modules/course/store/courseSelectors";
 import { coursesReducer } from "@modules/course/store/courseSlice";
 
+import { ICourseRequest, ICourseShortResponse } from "./api/types";
+
 const courseActions = {
   getCourseDetails,
 };
@@ -16,3 +18,4 @@ const courseSelectors = {
 
 export { CourseGeneralInfo, CourseExtendedInfo, CoursePeopleInfo };
 export { coursesReducer, courseActions, courseSelectors };
+export type { ICourseRequest, ICourseShortResponse };

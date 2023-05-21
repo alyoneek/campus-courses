@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { IGropResponse } from "@/api/groups/types";
 import { ICourseShortResponse } from "@/modules/course/api/types";
+import { IGropResponse } from "@/modules/groups/api/types";
 import {
   createCourse,
   createGroup,
@@ -72,8 +72,9 @@ const groupsSlice = createSlice({
       state.error = null;
     });
 
-    builder.addCase(createGroup.fulfilled, (state) => {
+    builder.addCase(createGroup.fulfilled, (state, action) => {
       state.status = "success";
+      console.log(action);
     });
 
     builder.addCase(createGroup.rejected, (state, { payload }) => {

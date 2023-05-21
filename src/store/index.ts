@@ -6,10 +6,10 @@ import {
 } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-import { coursesReducer } from "@/modules/course/store/courseSlice";
+import { coursesReducer } from "@/modules/course";
+import { groupsReducer } from "@/modules/groups";
 import { accountReducer } from "@/store/features/account/accountSlice";
 import { authReducer } from "@/store/features/auth/authSlice";
-import { groupsReducer } from "@/store/features/groups/groupsSlice";
 import { usersReducer } from "@/store/features/users/usersSlice";
 
 const combinedReducer = combineReducers({

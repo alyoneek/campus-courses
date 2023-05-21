@@ -12,8 +12,8 @@ import { FC, useEffect } from "react";
 
 import TextEditor from "@/components/TextEditor";
 import { courseFormValidation } from "@/helpers/validation";
+import { createCourse } from "@/modules/groups/store/groupsActions";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { createCourse } from "@/store/features/groups/groupsActions";
 import { getUsers } from "@/store/features/users/usersActions";
 
 interface CreateCourseFormProps {

@@ -1,9 +1,10 @@
-import { IGropRequest, IGropResponse } from "@/api/groups/types";
-import { editGroupFormValidation } from "@/helpers/validation";
-import { useAppDispatch } from "@/store";
-import { updateGroup } from "@/store/features/groups/groupsActions";
 import { Form, FormInstance, Input, message } from "antd";
-import { FC, useEffect } from "react";
+import { FC } from "react";
+
+import { IGropRequest, IGropResponse } from "@/modules/groups/api/types";
+import { updateGroup } from "@/modules/groups/store/groupsActions";
+import { useAppDispatch } from "@/store";
+import { editGroupFormValidation } from "@modules/groups/helpers/validation";
 
 interface EditGroupFormProps {
   initial: IGropResponse;
@@ -17,8 +18,6 @@ const EditGroupForm: FC<EditGroupFormProps> = ({
   afterFinish,
 }) => {
   const dispatch = useAppDispatch();
-
-  useEffect(() => form?.resetFields(), [initial]);
 
   const onFinish = (values: IGropRequest) => {
     dispatch(updateGroup({ id: initial.id, data: values }))
