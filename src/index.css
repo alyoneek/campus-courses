@@ -26,3 +26,17 @@ body,
 .ant-tabs-tab-btn {
   @apply w-full text-center;
 }
+
+.ant-tabs:not(.ant-tabs-card) {
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+}
+
+.ant-tabs-content-holder {
+  padding: 19px;
+}
+
+.ant-alert {
+  padding: 15px 12px;
+  font-size: 15px;
+}

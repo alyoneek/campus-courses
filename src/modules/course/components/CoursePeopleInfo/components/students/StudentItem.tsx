@@ -12,7 +12,7 @@ interface StudentItemProps {
 
 const StudentItem: FC<StudentItemProps> = ({ studentInfo }) => {
   return (
-    <div className="w-full flex items-center justify-between text-base">
+    <div className="w-full flex items-center justify-between">
       <div>
         <h3>{studentInfo.name}</h3>
         <p>

@@ -8,7 +8,7 @@ const AddTeacherButton = () => {
 
   return (
     <>
-      <AddButton className="my-3" onClick={showModal}>
+      <AddButton className="mb-5" onClick={showModal}>
         Добавить преподавателя
       </AddButton>
 

@@ -1,23 +1,19 @@
-import { Alert, List } from "antd";
-
+import List from "@/components/List";
 import { useAppSelector } from "@/store";
 import { getCourseNotifications } from "@modules/course/store/courseSelectors";
+import NotificationItem from "./NotificationItem";
 
 const NotificationsList = () => {
   const notifications = useAppSelector(getCourseNotifications);
 
   return (
     <List
-      itemLayout="horizontal"
-      dataSource={notifications}
-      renderItem={(item) => (
-        <List.Item>
-          {item.isImportant ? (
-            <Alert message={item.text} type="error" className="w-full" />
-          ) : (
-            <div>{item.text}</div>
-          )}
-        </List.Item>
+      data={notifications}
+      renderItem={(notification, i) => (
+        <NotificationItem
+          notificationData={notification}
+          className={i !== notifications.length ? "mb-3" : ""}
+        />
       )}
     />
   );

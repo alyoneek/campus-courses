@@ -1,3 +1,4 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { ReactNode } from "react";
 
 interface ListProps<T> {
@@ -6,7 +7,9 @@ interface ListProps<T> {
 }
 
 const List = <T,>({ data, renderItem }: ListProps<T>) => {
-  return <>{data.map(renderItem)}</>;
+  const [parent] = useAutoAnimate();
+
+  return <div ref={parent}>{data.map(renderItem)}</div>;
 };
 
 export default List;
