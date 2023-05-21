@@ -11,28 +11,19 @@ import {
 import { FC, useEffect } from "react";
 
 import TextEditor from "@/components/TextEditor";
-import { courseFormValidation } from "@/helpers/validation";
-import { createCourse } from "@/modules/groups/store/groupsActions";
+import { courseFormValidation } from "@/modules/course/helpers/validation";
+import { groupsActions } from "@/modules/groups";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { getUsers } from "@/store/features/users/usersActions";
 
 interface CreateCourseFormProps {
   idGroup: string;
-  // idCourse?: string;
-  // edit?: boolean;
-  // courseInfo?: ICourseInfo;
-  // courseDescription?: ICourseDescription;
-  // mainTeacher?: ITeacher,
   form?: FormInstance;
   afterFinish?: () => void;
 }
 
 const CourseForm: FC<CreateCourseFormProps> = ({
   idGroup,
-  // idCourse,
-  // edit = false,
-  // courseInfo,
-  // courseDescription,
   form,
   afterFinish,
 }) => {
@@ -57,7 +48,7 @@ const CourseForm: FC<CreateCourseFormProps> = ({
       startYear: Number(values["startYear"].format("YYYY")),
     };
 
-    dispatch(createCourse({ idGroup, data: newValues }))
+    dispatch(groupsActions.createCourse({ idGroup, data: newValues }))
       .unwrap()
       .then(() => onFinishSuccess())
       .catch((e) => onFinishFailed(e.message));
@@ -79,18 +70,7 @@ const CourseForm: FC<CreateCourseFormProps> = ({
         layout="vertical"
         onFinish={onFinish}
         autoComplete="off"
-        initialValues={
-          // edit
-          //   ? {
-          //       ...courseInfo,
-          //       startYear: dayjs(
-          //         `${courseInfo?.startYear}-01-01`,
-          //         "YYYY-MM-DD"
-          //       ),
-          //       ...courseDescription,
-          //     }:
-          { semester: "Autumn" }
-        }
+        initialValues={{ semester: "Autumn" }}
       >
         <Form.Item
           name="name"
@@ -132,13 +112,19 @@ const CourseForm: FC<CreateCourseFormProps> = ({
           label="Основной преподаватель курса"
           rules={courseFormValidation.mainTeacherId}
         >
-          <Select size="large">
-            {users.map((user) => (
-              <Select.Option key={user.id} value={user.id}>
-                {user.fullName}
-              </Select.Option>
-            ))}
-          </Select>
+          <Select
+            size="large"
+            showSearch
+            filterOption={(input, option) =>
+              (option?.label.toLowerCase() ?? "").startsWith(
+                input.toLowerCase()
+              )
+            }
+            options={users.map((user) => ({
+              value: user.id,
+              label: user.fullName,
+            }))}
+          ></Select>
         </Form.Item>
 
         <Form.Item

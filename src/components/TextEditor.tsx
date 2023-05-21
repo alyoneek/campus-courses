@@ -37,20 +37,18 @@ interface TextEditorProps {
 
 const TextEditor: FC<TextEditorProps> = ({ handleChange, value }) => {
   return (
-    <>
-      <Editor
-        apiKey={API_KEY}
-        onChange={(e) => handleChange(e.target.getContent())}
-        initialValue={value}
-        init={{
-          height: 200,
-          menubar: true,
-          branding: false,
-          plugins: plugins,
-          toolbar: toolbar,
-        }}
-      />
-    </>
+    <Editor
+      apiKey={API_KEY}
+      onChange={(e) => handleChange(e.target.getContent())}
+      initialValue={value}
+      init={{
+        height: 200,
+        menubar: true,
+        branding: false,
+        plugins: plugins,
+        toolbar: toolbar,
+      }}
+    />
   );
 };
 

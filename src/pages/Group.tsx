@@ -1,62 +1,31 @@
-import { Button, Form } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import CoursesList from "@/components/CoursesList";
-import ModalForm from "@/components/ModalForm";
-import CourseForm from "@/components/forms/CourseForm";
 import DataContent from "@/layouts/content/DataContent";
 import { Roles } from "@/modules/account";
+import { CreateCourseButton } from "@/modules/course";
+import { CoursesInGroupList } from "@/modules/groups";
 import { getCourses } from "@/modules/groups/store/groupsActions";
 import RequireAuthComponent from "@/router/RequireAuthComponent";
 import { history } from "@/router/history";
-import { useAppDispatch, useAppSelector } from "@/store";
+import { useAppDispatch } from "@/store";
 
 const Group = () => {
-  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
-  const [createCourseForm] = Form.useForm();
-
   const { idGroup } = useParams();
   const groupName = history.location?.state?.groupName;
 
   const dispatch = useAppDispatch();
-  const courses = useAppSelector((state) => state.groups.currentGroupCourses);
 
   useEffect(() => {
     if (idGroup) dispatch(getCourses(idGroup));
   }, [dispatch, idGroup]);
 
-  const showCreateModal = () => {
-    setCreateModalOpen(true);
-  };
-
-  const handleCreateModalCancel = () => {
-    setCreateModalOpen(false);
-  };
-
   return (
     <DataContent title={`Группа - ${groupName}`}>
       <RequireAuthComponent allowedRoles={[Roles.isAdmin]}>
-        <Button
-          type="primary"
-          htmlType="button"
-          className="mb-2"
-          onClick={showCreateModal}
-        >
-          Создать
-        </Button>
+        <CreateCourseButton idGroup={idGroup as string} />
       </RequireAuthComponent>
-
-      <CoursesList courses={courses} />
-
-      <ModalForm
-        title="Создание курса"
-        open={isCreateModalOpen}
-        onCancel={handleCreateModalCancel}
-        form={createCourseForm}
-      >
-        <CourseForm idGroup={idGroup as string} />
-      </ModalForm>
+      <CoursesInGroupList />
     </DataContent>
   );
 };
