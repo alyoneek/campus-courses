@@ -10,7 +10,7 @@ import { accountReducer } from "@/modules/account/store/accountSlice";
 import { authReducer } from "@/modules/auth/store/authSlice";
 import { coursesReducer } from "@/modules/course";
 import { groupsReducer } from "@/modules/groups";
-import { usersReducer } from "@/store/features/users/usersSlice";
+import { usersReducer } from "@/modules/users/store/usersSlice";
 
 const combinedReducer = combineReducers({
   auth: authReducer,

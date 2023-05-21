@@ -1,7 +1,8 @@
-import Endpoints from "@/api/endpoints";
-import { axiosInstance } from "@/api/instance";
 import { AxiosPromise } from "axios";
+
+import { axiosInstance } from "@/api/instance";
+import endpoints from "./endpoints";
 import * as usersTypes from "./types";
 
 export const getUsers = (): AxiosPromise<usersTypes.IUserResponse[]> =>
-  axiosInstance.get(Endpoints.USERS.ALL_USERS);
+  axiosInstance.get(endpoints.ALL_USERS);

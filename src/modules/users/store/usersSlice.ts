@@ -1,4 +1,4 @@
-import { IUserResponse } from "@/api/users/types";
+import { IUserResponse } from "@/modules/users/api/types";
 import { createSlice } from "@reduxjs/toolkit";
 import { getUsers } from "./usersActions";
 

@@ -5,8 +5,8 @@ import { ITeacherRequest } from "@/modules/course/api/types";
 import { teacherFormValidation } from "@/modules/course/helpers/validation";
 import { addTeacherToCourse } from "@/modules/course/store/courseActions";
 import { getCourseId } from "@/modules/course/store/courseSelectors";
+import { usersActions } from "@/modules/users";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { getUsers } from "@/store/features/users/usersActions";
 
 interface TeacherFormProps {
   form?: FormInstance;
@@ -20,7 +20,7 @@ const AddTeacherForm: FC<TeacherFormProps> = ({ form, afterFinish }) => {
   const users = useAppSelector((state) => state.users.allUsers);
 
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(usersActions.getUsers());
   }, [dispatch]);
 
   const onFinish = (values: ITeacherRequest) => {

@@ -13,8 +13,8 @@ import { FC, useEffect } from "react";
 import TextEditor from "@/components/TextEditor";
 import { courseFormValidation } from "@/modules/course/helpers/validation";
 import { groupsActions } from "@/modules/groups";
+import { usersActions } from "@/modules/users";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { getUsers } from "@/store/features/users/usersActions";
 
 interface CreateCourseFormProps {
   idGroup: string;
@@ -31,7 +31,7 @@ const CourseForm: FC<CreateCourseFormProps> = ({
   const users = useAppSelector((state) => state.users.allUsers);
 
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(usersActions.getUsers());
   }, [dispatch]);
 
   const changeRequirementsField = (value: string) => {

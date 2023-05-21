@@ -19,7 +19,6 @@ const Course = () => {
 
   useEffect(() => {
     if (idCourse) dispatch(courseActions.getCourseDetails(idCourse));
-    //TODO
     dispatch(accountActions.getTeachingCourses());
     dispatch(accountActions.getStudingCourses());
   }, [dispatch, idCourse]);
