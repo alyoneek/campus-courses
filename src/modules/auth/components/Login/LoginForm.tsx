@@ -1,10 +1,10 @@
 import { Button, Form, Input, message } from "antd";
 import { FC } from "react";
 
-import { loginFormValidation } from "@/helpers/validation";
+import { loginFormValidation } from "@/modules/auth/helpers/validation";
+import { login } from "@/modules/auth/store/authActions";
 import { history } from "@/router/history";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { login } from "@/store/features/auth/authActions";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 const LoginForm: FC = () => {

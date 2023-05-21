@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import {
+  getEmail,
+  getToken,
+  resetEmail,
+  resetToken,
+} from "@modules/auth/helpers/localStorage";
 import { login, logout, signup } from "./authActions";
-import { getEmail, getToken, resetEmail, resetToken } from "./helpers";
 
 interface IAuthState {
   token: string | null;

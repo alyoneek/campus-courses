@@ -1,10 +1,10 @@
 import { Button, DatePicker, Form, Input, message } from "antd";
 import { FC } from "react";
 
+import { registerFormValidation } from "@/modules/auth/helpers/validation";
+import { signup } from "@/modules/auth/store/authActions";
 import { history } from "@/router/history";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { signup } from "@/store/features/auth/authActions";
-import { registerFormValidation } from "@helpers/validation";
 
 const RegisterForm: FC = () => {
   const status = useAppSelector((state) => state.account.status);

@@ -1,5 +1,5 @@
-import RegisterForm from "@/components/forms/RegisterForm";
 import AuthContent from "@/layouts/content/AuthContent";
+import { RegisterForm } from "@/modules/auth";
 import { FC } from "react";
 
 const Registration: FC = () => {

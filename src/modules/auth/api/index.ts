@@ -1,18 +1,17 @@
 import { AxiosPromise } from "axios";
 
-import Endpoints from "@/api/endpoints";
 import { axiosInstance } from "@/api/instance";
+import endpoints from "./endpoints";
 import * as authTypes from "./types";
 
 export const signup = (
   data: authTypes.ISignupRequest
 ): AxiosPromise<authTypes.ISignupResponse> =>
-  axiosInstance.post(Endpoints.AUTH.SIGNUP, data);
+  axiosInstance.post(endpoints.SIGNUP, data);
 
 export const login = (
   data: authTypes.ILoginRequest
 ): AxiosPromise<authTypes.ILoginResponse> =>
-  axiosInstance.post(Endpoints.AUTH.LOGIN, data);
+  axiosInstance.post(endpoints.LOGIN, data);
 
-export const logout = (): AxiosPromise =>
-  axiosInstance.post(Endpoints.AUTH.LOGOUT);
+export const logout = (): AxiosPromise => axiosInstance.post(endpoints.LOGOUT);

@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 
 import RequireAuthComponent from "@/router/RequireAuthComponent";
 import { useAppDispatch, useAppSelector } from "@/store";
-import { logout } from "@/store/features/auth/authActions";
 
 import { Roles } from "@/modules/account";
+import { authActions } from "@/modules/auth";
 import styles from "./header.module.scss";
 
 const { Header: AntHeader } = Layout;
@@ -130,7 +130,10 @@ const Header: FC = () => {
           {
             label: (
               <RequireAuthComponent>
-                <div aria-hidden="true" onClick={() => dispatch(logout())}>
+                <div
+                  aria-hidden="true"
+                  onClick={() => dispatch(authActions.logout())}
+                >
                   Выход
                 </div>
               </RequireAuthComponent>

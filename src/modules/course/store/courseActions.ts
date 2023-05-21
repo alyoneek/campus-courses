@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+import { accountActions } from "@/modules/account";
 import * as api from "@/modules/course/api";
 import {
   ICourseShortRequest,
@@ -193,6 +194,7 @@ export const signUpForCourse = createAsyncThunk(
     try {
       await api.signUpForCourse(idCourse);
       dispatch(getCourseDetails(idCourse));
+      dispatch(accountActions.getStudingCourses());
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });

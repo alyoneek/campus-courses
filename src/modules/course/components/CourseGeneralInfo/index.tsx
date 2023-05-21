@@ -33,15 +33,17 @@ const CourseGeneralInfo = () => {
         <div className="flex justify-between mb-3">
           <h2>Основные данные курса</h2>
 
-          {courseInfo.status === "OpenForAssigning" &&
-            isUserCourseSigner(idCourse) && <SignupCourseButton />}
+          <div className="flex gap-10">
+            {courseInfo.status === "OpenForAssigning" &&
+              isUserCourseSigner(idCourse) && <SignupCourseButton />}
 
-          {isUserCourseEditor(idCourse) && (
-            <div>
-              <EditCourseButton />
-              <DeleteCourseButton />
-            </div>
-          )}
+            {isUserCourseEditor(idCourse) && (
+              <div>
+                <EditCourseButton />
+                <DeleteCourseButton />
+              </div>
+            )}
+          </div>
         </div>
 
         <Card>

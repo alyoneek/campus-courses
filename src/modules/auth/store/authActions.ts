@@ -1,15 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import api from "@/api";
-import { ILoginRequest, ISignupRequest } from "@/api/auth/types";
+import { ILoginRequest, ISignupRequest } from "@/modules/auth/api/types";
+import * as api from "@modules/auth/api";
+import { setEmail, setToken } from "../helpers/localStorage";
 import { authActions } from "./authSlice";
-import { setEmail, setToken } from "./helpers";
 
 export const signup = createAsyncThunk(
   "auth/signup",
   async (data: ISignupRequest, { rejectWithValue }) => {
     try {
-      const response = await api.auth.signup(data);
+      const response = await api.signup(data);
       setToken(response.data.token);
       setEmail(data.email);
     } catch (error: any) {
@@ -26,7 +26,7 @@ export const login = createAsyncThunk(
   "auth/login",
   async (data: ILoginRequest, { rejectWithValue }) => {
     try {
-      const response = await api.auth.login(data);
+      const response = await api.login(data);
       setToken(response.data.token);
       setEmail(data.email);
     } catch (error: any) {
@@ -42,7 +42,7 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk(
   "auth/logout",
   async (_, { dispatch }) => {
-    await api.auth.logout();
+    await api.logout();
     dispatch(authActions.clearState());
   }
 );

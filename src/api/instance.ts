@@ -1,11 +1,10 @@
-import Endpoints from "@/api/endpoints";
+import { authActions, authEndpoints } from "@/modules/auth";
 import { store } from "@/store";
-import { authActions } from "@/store/features/auth/authSlice";
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 const BASE_URL = "https://camp-courses.api.kreosoft.space";
 
-const urlsSkipAuth = [Endpoints.AUTH.LOGIN, Endpoints.AUTH.SIGNUP];
+const urlsSkipAuth = [authEndpoints.LOGIN, authEndpoints.SIGNUP];
 
 export const axiosInstance = axios.create({ baseURL: BASE_URL });
 

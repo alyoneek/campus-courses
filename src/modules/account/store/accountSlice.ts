@@ -12,19 +12,6 @@ import {
   getTeachingCourses,
 } from "./accountActions";
 
-// import * as api from "@/modules/account/api";
-// import { createAsyncThunk } from "@reduxjs/toolkit";
-
-// export const getRoles = createAsyncThunk("account/getRoles", async () => {
-// const response = await api.getRoles();
-// return response.data;
-// });
-
-// export const getProfile = createAsyncThunk("account/getProfile", async () => {
-//   const response = await api.getProfile();
-//   return response.data;
-// });
-
 export interface IError {
   message: string;
 }
