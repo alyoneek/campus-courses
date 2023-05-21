@@ -13,7 +13,7 @@ const StudentsList = () => {
       data={students}
       renderItem={(student, i) => (
         <>
-          <StudentItem studentInfo={student} />
+          <StudentItem key={student.id} studentInfo={student} />
           {i !== students.length - 1 && <Divider />}
         </>
       )}

@@ -11,6 +11,7 @@ import { authReducer } from "@/modules/auth/store/authSlice";
 import { coursesReducer } from "@/modules/course";
 import { groupsReducer } from "@/modules/groups";
 import { usersReducer } from "@/modules/users/store/usersSlice";
+import { loadingReducer } from "./loading/loadingSlice";
 
 const combinedReducer = combineReducers({
   auth: authReducer,
@@ -18,6 +19,7 @@ const combinedReducer = combineReducers({
   groups: groupsReducer,
   users: usersReducer,
   courses: coursesReducer,
+  loading: loadingReducer,
 });
 
 const rootReducer: Reducer = (state: RootState, action: AnyAction) => {

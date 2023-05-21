@@ -3,9 +3,16 @@ import { AxiosPromise } from "axios";
 import { axiosInstance } from "@/api/instance";
 import endpoints from "./endpoints";
 import * as coursesTypes from "./types";
+import { ICourseRequest, ICourseShortResponse } from "./types";
 
 export const deleteCourse = (idCourse: string): AxiosPromise =>
   axiosInstance.delete(endpoints.COURSE_BY_ID(idCourse));
+
+export const createCourse = (
+  idGroup: string,
+  data: ICourseRequest
+): AxiosPromise<ICourseShortResponse[]> =>
+  axiosInstance.post(endpoints.COURSE_IN_GROUP(idGroup), data);
 
 export const editCourse = (
   idCourse: string,

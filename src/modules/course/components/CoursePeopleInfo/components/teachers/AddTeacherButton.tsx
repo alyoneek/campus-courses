@@ -1,10 +1,12 @@
 import ModalForm from "@/components/ModalForm";
 import useModal from "@/hooks/useModal";
+import { useAppSelector } from "@/store";
 import AddButton from "@/ui/buttons/AddButton";
 import AddTeacherForm from "./AddTeacherForm";
 
 const AddTeacherButton = () => {
   const { isOpen, form, showModal, hideModal } = useModal();
+  const loading = useAppSelector((state) => state.loading.course.addTeacher);
 
   return (
     <>
@@ -17,6 +19,7 @@ const AddTeacherButton = () => {
         open={isOpen}
         onCancel={hideModal}
         form={form}
+        loading={loading}
       >
         <AddTeacherForm />
       </ModalForm>

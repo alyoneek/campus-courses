@@ -14,6 +14,9 @@ interface CertificationProps {
 }
 
 const Certification: FC<CertificationProps> = ({ studentInfo }) => {
+  const loading = useAppSelector(
+    (state) => state.loading.course.changeStudentMark
+  );
   const [isResultModalOpen, setResultModalOpen] = useState(false);
   const [markType, setMarkType] = useState<CertificationType>("Midterm");
   const [resultForm] = useForm();
@@ -37,6 +40,7 @@ const Certification: FC<CertificationProps> = ({ studentInfo }) => {
         open={isResultModalOpen}
         onCancel={handleResultModalCancel}
         form={resultForm}
+        loading={loading}
       >
         <ResultForm
           markType={markType}

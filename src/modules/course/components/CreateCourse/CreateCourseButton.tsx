@@ -1,6 +1,7 @@
 import ModalForm from "@/components/ModalForm";
 import useModal from "@/hooks/useModal";
-import { Button } from "antd";
+import { useAppSelector } from "@/store";
+import AddButton from "@/ui/buttons/AddButton";
 import { FC } from "react";
 import CreateCourseForm from "./CreateCourseForm";
 
@@ -10,22 +11,19 @@ interface CreateCourseButtonProps {
 
 const CreateCourseButton: FC<CreateCourseButtonProps> = ({ idGroup }) => {
   const { isOpen, form, showModal, hideModal } = useModal();
+  const loading = useAppSelector((state) => state.loading.course.create);
 
   return (
     <>
-      <Button
-        type="primary"
-        htmlType="button"
-        className="mb-2"
-        onClick={showModal}
-      >
+      <AddButton className="mb-2" onClick={showModal}>
         Создать
-      </Button>
+      </AddButton>
       <ModalForm
         title="Создание курса"
         open={isOpen}
         onCancel={hideModal}
         form={form}
+        loading={loading}
       >
         <CreateCourseForm idGroup={idGroup} />
       </ModalForm>

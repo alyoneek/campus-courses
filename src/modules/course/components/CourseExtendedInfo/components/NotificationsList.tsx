@@ -11,6 +11,7 @@ const NotificationsList = () => {
       data={notifications}
       renderItem={(notification, i) => (
         <NotificationItem
+          key={i}
           notificationData={notification}
           className={i !== notifications.length ? "mb-3" : ""}
         />

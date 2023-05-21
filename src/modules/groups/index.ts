@@ -3,12 +3,14 @@ import CreateGroupButton from "@modules/groups/components/CreateGroup/CreateGrou
 import GroupsList from "@modules/groups/components/GroupsList";
 
 import {
-  createCourse,
   getCourses,
   getGroups as getGroupsAction,
 } from "@modules/groups/store/groupsActions";
 import { getGroups as getGroupsSelector } from "@modules/groups/store/groupsSelectors";
-import { groupsReducer } from "@modules/groups/store/groupsSlice";
+import {
+  groupsActions as actions,
+  groupsReducer,
+} from "@modules/groups/store/groupsSlice";
 
 const groupsSelectors = {
   getGroups: getGroupsSelector,
@@ -16,7 +18,7 @@ const groupsSelectors = {
 
 const groupsActions = {
   getGroups: getGroupsAction,
-  createCourse,
+  addCourse: actions.addCourse,
   getCourses,
 };
 

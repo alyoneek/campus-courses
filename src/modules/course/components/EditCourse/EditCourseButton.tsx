@@ -3,11 +3,13 @@ import { FC } from "react";
 import ModalForm from "@/components/ModalForm";
 
 import useModal from "@/hooks/useModal";
+import { useAppSelector } from "@/store";
 import EditButton from "@/ui/buttons/EditButton";
 import EditCourseForm from "./EditCourseForm";
 
 const EditCourseButton: FC = () => {
   const { isOpen, form, showModal, hideModal } = useModal();
+  const loading = useAppSelector((state) => state.loading.course.edit);
 
   return (
     <>
@@ -18,6 +20,7 @@ const EditCourseButton: FC = () => {
         open={isOpen}
         onCancel={hideModal}
         form={form}
+        loading={loading}
       >
         <EditCourseForm />
       </ModalForm>

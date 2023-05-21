@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 const LoginForm: FC = () => {
-  const status = useAppSelector((state) => state.account.status);
+  const loading = useAppSelector((state) => state.loading.auth.login);
   const dispatch = useAppDispatch();
 
   const [form] = Form.useForm();
@@ -49,12 +49,7 @@ const LoginForm: FC = () => {
         />
       </Form.Item>
       <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          size="large"
-          loading={status === "loading"}
-        >
+        <Button type="primary" htmlType="submit" size="large" loading={loading}>
           Войти
         </Button>
       </Form.Item>

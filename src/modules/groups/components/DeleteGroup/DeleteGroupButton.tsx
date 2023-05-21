@@ -2,7 +2,7 @@ import { Popconfirm, message } from "antd";
 
 import usePopconfirm from "@/hooks/usePopconfirm";
 import { deleteGroup } from "@/modules/groups/store/groupsActions";
-import { useAppDispatch } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/store";
 import DeleteButton from "@/ui/buttons/DeleteButton";
 import { FC } from "react";
 
@@ -12,6 +12,7 @@ interface DeleteGroupButtonProps {
 
 const DeleteGroupButton: FC<DeleteGroupButtonProps> = ({ idGroup }) => {
   const dispatch = useAppDispatch();
+  const loading = useAppSelector((state) => state.loading.groups.delete);
 
   const { openPopconfirm, showPopconfirm, onCancelPopconfirm } =
     usePopconfirm();
@@ -34,10 +35,14 @@ const DeleteGroupButton: FC<DeleteGroupButtonProps> = ({ idGroup }) => {
 
   return (
     <Popconfirm
-      title="Вы точно хотите удалить эту группу?"
+      title="Удаление группы"
+      description="Вы точно хотите удалить эту группу?"
       open={openPopconfirm}
       onConfirm={onOkPopconfirm}
       onCancel={onCancelPopconfirm}
+      okText="Да"
+      cancelText="Нет"
+      okButtonProps={{ loading: loading }}
     >
       <DeleteButton onClick={showPopconfirm} />
     </Popconfirm>

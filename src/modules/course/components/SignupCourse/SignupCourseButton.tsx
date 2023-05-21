@@ -8,13 +8,19 @@ import { getCourseId } from "@modules/course/store/courseSelectors";
 const SignupCourseButton = () => {
   const dispatch = useAppDispatch();
   const idCourse = useAppSelector(getCourseId);
+  const loading = useAppSelector((state) => state.loading.course.signup);
 
   const onSignup = () => {
     dispatch(signUpForCourse(idCourse));
   };
 
   return (
-    <Button type="primary" icon={<UsergroupAddOutlined />} onClick={onSignup}>
+    <Button
+      type="primary"
+      icon={<UsergroupAddOutlined />}
+      onClick={onSignup}
+      loading={loading}
+    >
       Записаться
     </Button>
   );

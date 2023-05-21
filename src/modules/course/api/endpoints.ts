@@ -1,5 +1,6 @@
 const endpoints = {
   COURSE_BY_ID: (id: string) => `courses/${id}`,
+  COURSE_IN_GROUP: (idGroup: string) => `courses/${idGroup}`,
   DETAILS: (id: string) => `/courses/${id}/details`,
   STATUS: (idCourse: string) => `/courses/${idCourse}/status`,
   TEACHERS: (idCourse: string) => `/courses/${idCourse}/teachers`,

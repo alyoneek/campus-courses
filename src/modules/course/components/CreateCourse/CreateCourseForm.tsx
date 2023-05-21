@@ -12,7 +12,7 @@ import { FC, useEffect } from "react";
 
 import TextEditor from "@/components/TextEditor";
 import { courseFormValidation } from "@/modules/course/helpers/validation";
-import { groupsActions } from "@/modules/groups";
+import { createCourse } from "@/modules/course/store/courseActions";
 import { usersActions } from "@/modules/users";
 import { useAppDispatch, useAppSelector } from "@/store";
 
@@ -48,7 +48,7 @@ const CourseForm: FC<CreateCourseFormProps> = ({
       startYear: Number(values["startYear"].format("YYYY")),
     };
 
-    dispatch(groupsActions.createCourse({ idGroup, data: newValues }))
+    dispatch(createCourse({ idGroup, data: newValues }))
       .unwrap()
       .then(() => onFinishSuccess())
       .catch((e) => onFinishFailed(e.message));

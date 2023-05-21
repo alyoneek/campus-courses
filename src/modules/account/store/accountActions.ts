@@ -8,7 +8,7 @@ export const getRoles = createAsyncThunk("account/getRoles", async () => {
   return response.data;
 });
 
-export const getProfile = createAsyncThunk("account/getProfile1", async () => {
+export const getProfile = createAsyncThunk("account/getProfile", async () => {
   const response = await api.getProfile();
   return response.data;
 });

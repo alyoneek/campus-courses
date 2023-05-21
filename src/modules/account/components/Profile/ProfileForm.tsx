@@ -10,6 +10,7 @@ import { editProfile } from "../../store/accountActions";
 const ProfileForm: FC = () => {
   const dispatch = useAppDispatch();
   const profileInfo = useAppSelector(getProfile);
+  const loading = useAppSelector((state) => state.loading.account.editProfile);
 
   const [isEdit, setEdit] = useState(false);
   const [form] = Form.useForm();
@@ -99,6 +100,7 @@ const ProfileForm: FC = () => {
           htmlType="submit"
           size="large"
           className={isEdit ? "block" : "hidden"}
+          loading={loading}
         >
           Сохранить
         </Button>

@@ -1,5 +1,4 @@
 import { useResetFormOnCloseModal } from "@/hooks/useResetFormOnCloseModal";
-import { useAppSelector } from "@/store";
 import { Button, FormInstance, Modal } from "antd";
 import { ReactElement, cloneElement } from "react";
 
@@ -9,6 +8,7 @@ interface ModalFormProps {
   onCancel: () => void;
   form: FormInstance;
   children?: ReactElement;
+  loading?: boolean;
 }
 
 const ModalForm = ({
@@ -17,9 +17,9 @@ const ModalForm = ({
   onCancel,
   form,
   children,
+  loading = false,
 }: ModalFormProps) => {
   useResetFormOnCloseModal(form, open);
-  const status = useAppSelector((state) => state.groups.status);
 
   const onOk = () => {
     form.submit();
@@ -43,6 +43,7 @@ const ModalForm = ({
       width={1000}
       open={open}
       onCancel={onCancel}
+      confirmLoading={loading}
       footer={[
         <Button key="back" onClick={onCancel}>
           Отменить
@@ -51,7 +52,7 @@ const ModalForm = ({
           key="submit"
           type="primary"
           htmlType="submit"
-          loading={status === "loading"}
+          loading={loading}
           onClick={onOk}
         >
           Сохранить

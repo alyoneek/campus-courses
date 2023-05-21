@@ -7,7 +7,7 @@ import { history } from "@/router/history";
 import { useAppDispatch, useAppSelector } from "@/store";
 
 const RegisterForm: FC = () => {
-  const status = useAppSelector((state) => state.account.status);
+  const loading = useAppSelector((state) => state.loading.auth.signup);
   const dispatch = useAppDispatch();
 
   const [form] = Form.useForm();
@@ -68,12 +68,7 @@ const RegisterForm: FC = () => {
         <Input.Password size="large" />
       </Form.Item>
       <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          size="large"
-          loading={status === "loading"}
-        >
+        <Button type="primary" htmlType="submit" size="large" loading={loading}>
           Зарегистрироваться
         </Button>
       </Form.Item>

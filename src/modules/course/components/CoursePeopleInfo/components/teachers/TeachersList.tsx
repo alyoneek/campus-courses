@@ -13,7 +13,7 @@ const TeachersList = () => {
       data={teachers}
       renderItem={(teacher, i) => (
         <>
-          <TeacherItem teacherInfo={teacher} />
+          <TeacherItem key={teacher.email} teacherInfo={teacher} />
           {i !== teachers.length - 1 && <Divider />}
         </>
       )}

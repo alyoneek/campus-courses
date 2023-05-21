@@ -11,6 +11,7 @@ import { getCourseId } from "@modules/course/store/courseSelectors";
 const DeleteCourseButton: FC = () => {
   const dispatch = useAppDispatch();
   const idCourse = useAppSelector(getCourseId);
+  const loading = useAppSelector((state) => state.loading.course.delete);
 
   const { openPopconfirm, showPopconfirm, onCancelPopconfirm } =
     usePopconfirm();
@@ -40,6 +41,7 @@ const DeleteCourseButton: FC = () => {
       onCancel={onCancelPopconfirm}
       okText="Да"
       cancelText="Нет"
+      okButtonProps={{ loading: loading }}
     >
       <DeleteButton className="ml-3" onClick={showPopconfirm} />
     </Popconfirm>
