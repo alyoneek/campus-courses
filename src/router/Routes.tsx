@@ -1,4 +1,8 @@
-import { Routes as ReactRoutes, Route } from "react-router-dom";
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 
 import MainLayout from "@/layouts/MainLayout";
 import { Roles } from "@/modules/account";
@@ -15,8 +19,8 @@ import TeachingCourses from "@/pages/TeachingCourses";
 import RequireAuthRoute from "./RequireAuthRoute";
 
 const Routes = () => {
-  return (
-    <ReactRoutes>
+  return createBrowserRouter(
+    createRoutesFromElements(
       <Route path="/" element={<MainLayout />}>
         {/* public routes */}
         <Route index element={<Home />} />
@@ -46,10 +50,10 @@ const Routes = () => {
             </Route>
           </Route>
         </Route>
-      </Route>
 
-      <Route path="*" element={<NotFound />} />
-    </ReactRoutes>
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    )
   );
 };
 

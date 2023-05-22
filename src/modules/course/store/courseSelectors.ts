@@ -10,3 +10,4 @@ export const getCourseStudents = (state: RootState) =>
   state.courses.allStudents;
 export const getCourseTeachers = (state: RootState) =>
   state.courses.allTeachers;
+export const getCourseError = (state: RootState) => state.courses.error;

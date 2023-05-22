@@ -1,4 +1,4 @@
-import { Divider, Empty } from "antd";
+import { Divider } from "antd";
 
 import List from "@/components/List";
 import { getCourseStudents } from "@/modules/course/store/courseSelectors";
@@ -8,11 +8,10 @@ import StudentItem from "./StudentItem";
 const StudentsList = () => {
   const students = useAppSelector(getCourseStudents);
 
-  return students.length === 0 ? (
-    <Empty description="Нет студентов" />
-  ) : (
+  return (
     <List
       data={students}
+      emptyText="Нет студентов"
       renderItem={(student, i) => (
         <>
           <StudentItem key={student.id} studentInfo={student} />

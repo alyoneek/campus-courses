@@ -12,7 +12,7 @@ const ProfileForm: FC = () => {
   const dispatch = useAppDispatch();
   const profileInfo = useAppSelector(getProfile);
   const loading = useAppSelector((state) => state.loading.account.editProfile);
-  const fetcing = useAppSelector((state) => state.loading.isDataFetching);
+  const fetcing = useAppSelector((state) => state.loading.getData.getProfile);
 
   const [isEdit, setEdit] = useState(false);
   const [form] = Form.useForm();

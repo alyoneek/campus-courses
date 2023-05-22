@@ -1,10 +1,10 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 
 import DataContent from "@/layouts/content/DataContent";
 import { CreateGroupButton, GroupsList, groupsActions } from "@/modules/groups";
 import { useAppDispatch } from "@/store";
 
-const Groups: FC = () => {
+const Groups = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

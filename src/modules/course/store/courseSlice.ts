@@ -15,6 +15,7 @@ interface ICoursesState {
   allStudents: IStudent[];
   allTeachers: ITeacher[];
   allNotifications: INotification[];
+  error: string | null;
 }
 
 const initialState: ICoursesState = {
@@ -24,6 +25,7 @@ const initialState: ICoursesState = {
   allStudents: [],
   allTeachers: [],
   allNotifications: [],
+  error: null,
 };
 
 const coursesSlice = createSlice({
@@ -53,6 +55,19 @@ const coursesSlice = createSlice({
         state.allStudents = students;
         state.allTeachers = teachers;
         state.allNotifications = notifications;
+
+        state.error = null;
+      }
+    );
+
+    builder.addCase(CourseActions.getCourseDetails.pending, (state) => {
+      state.error = null;
+    });
+
+    builder.addCase(
+      CourseActions.getCourseDetails.rejected,
+      (state, { payload }) => {
+        state.error = payload?.message;
       }
     );
 

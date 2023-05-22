@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/store";
+
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -12,21 +13,27 @@ import {
   courseActions,
   courseSelectors,
 } from "@/modules/course";
+import NotFound from "./NotFound";
 
 const Course = () => {
-  const { idCourse } = useParams();
   const dispatch = useAppDispatch();
+  const { idCourse } = useParams();
   const courseInfo = useAppSelector(courseSelectors.getCourseInfo);
-  const loading = useAppSelector((state) => state.loading.isDataFetching);
+  const loading = useAppSelector(
+    (state) => state.loading.getData.getCourseDetails
+  );
+  const error = useAppSelector(courseSelectors.getCourseError);
 
   useEffect(() => {
     if (idCourse) dispatch(courseActions.getCourseDetails(idCourse));
     dispatch(accountActions.getTeachingCourses());
     dispatch(accountActions.getStudingCourses());
-  }, [dispatch, idCourse]);
+  }, []);
+
+  if (!!error) return <NotFound />;
 
   return (
-    <DataContent title={courseInfo?.name}>
+    <DataContent title={loading ? "" : courseInfo.name}>
       {loading ? (
         <CourseSkeleton />
       ) : (

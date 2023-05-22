@@ -6,7 +6,10 @@ import {
   getCourses,
   getGroups as getGroupsAction,
 } from "@modules/groups/store/groupsActions";
-import { getGroups as getGroupsSelector } from "@modules/groups/store/groupsSelectors";
+import {
+  getGroupError,
+  getGroups as getGroupsSelector,
+} from "@modules/groups/store/groupsSelectors";
 import {
   groupsActions as actions,
   groupsReducer,
@@ -14,6 +17,7 @@ import {
 
 const groupsSelectors = {
   getGroups: getGroupsSelector,
+  getGroupError,
 };
 
 const groupsActions = {

@@ -11,10 +11,10 @@ const Unauthorized: FC = () => {
     <Result
       status="403"
       title="403"
-      subTitle="Sorry, you are not authorized to access this page."
+      subTitle="У вас недостаточно прав для просмотра данной страницы"
       extra={
         <Button type="primary" onClick={setPreviousPage} size="large">
-          Back
+          Назад
         </Button>
       }
     />

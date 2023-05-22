@@ -1,10 +1,10 @@
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
 import "@/index.css";
-import Routes from "@/router/Routes";
 import { store } from "@/store";
+import Routes from "./router/Routes";
 
 const container = document.getElementById("root");
 
@@ -16,8 +16,6 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <RouterProvider router={Routes()} />
   </Provider>
 );

@@ -1,5 +1,3 @@
-import { Empty } from "antd";
-
 import List from "@/components/List";
 import CardSkeleton from "@/components/Skeletons/CardSkeleton";
 import { getGroups } from "@/modules/groups/store/groupsSelectors";
@@ -8,19 +6,20 @@ import GroupCard from "./components/GroupCard";
 
 const GroupsList = () => {
   const groups = useAppSelector(getGroups);
-  const loading = useAppSelector((state) => state.loading.isDataFetching);
+  const loading = useAppSelector((state) => state.loading.getData.getGroups);
 
   return !loading ? (
-    groups.length === 0 ? (
-      <Empty description="Нет групп" />
-    ) : (
-      <List
-        data={groups}
-        renderItem={(group) => <GroupCard key={group.id} groupInfo={group} />}
-      />
-    )
+    <List
+      data={groups}
+      emptyText="Нет групп"
+      renderItem={(group) => <GroupCard key={group.id} groupInfo={group} />}
+    />
   ) : (
-    Array.from(Array(8).keys()).map((i) => <CardSkeleton key={i} />)
+    <>
+      {Array.from(Array(8).keys()).map((i) => (
+        <CardSkeleton key={i} />
+      ))}
+    </>
   );
 };
 

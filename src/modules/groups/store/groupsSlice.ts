@@ -13,11 +13,13 @@ import {
 interface IGroupsState {
   allGroups: IGropResponse[];
   currentGroupCourses: ICourseShortResponse[];
+  error: string | null;
 }
 
 const initialState: IGroupsState = {
   allGroups: [],
   currentGroupCourses: [],
+  error: null,
 };
 
 const groupsSlice = createSlice({
@@ -56,6 +58,15 @@ const groupsSlice = createSlice({
 
     builder.addCase(getCourses.fulfilled, (state, { payload }) => {
       state.currentGroupCourses = payload;
+      state.error = null;
+    });
+
+    builder.addCase(getCourses.pending, (state) => {
+      state.error = null;
+    });
+
+    builder.addCase(getCourses.rejected, (state, { payload }) => {
+      state.error = payload?.message;
     });
   },
 });

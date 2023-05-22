@@ -4,8 +4,16 @@ import * as courseActions from "@/modules/course/store/courseActions";
 import * as groupsActions from "@/modules/groups/store/groupsActions";
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 
-interface IUsersState {
-  isDataFetching: boolean;
+interface ILoadingState {
+  getData: {
+    getCourseDetails: boolean;
+    getGroups: boolean;
+    getCourses: boolean;
+    getTeachingCourses: boolean;
+    getStudingCourses: boolean;
+    getProfile: boolean;
+    getRoles: boolean;
+  };
   auth: {
     login: boolean;
     signup: boolean;
@@ -31,8 +39,16 @@ interface IUsersState {
   };
 }
 
-const initialState: IUsersState = {
-  isDataFetching: false,
+const initialState: ILoadingState = {
+  getData: {
+    getCourseDetails: false,
+    getGroups: false,
+    getCourses: false,
+    getTeachingCourses: false,
+    getStudingCourses: false,
+    getProfile: false,
+    getRoles: false,
+  },
   auth: {
     login: false,
     signup: false,
@@ -203,8 +219,9 @@ const loadingSlice = createSlice({
         accountActions.getProfile.pending,
         accountActions.getRoles.pending
       ),
-      (state) => {
-        state.isDataFetching = true;
+      (state, action) => {
+        const key = action.type.split("/")[1];
+        state.getData[key] = true;
       }
     ),
       builder.addMatcher(
@@ -217,8 +234,9 @@ const loadingSlice = createSlice({
           accountActions.getProfile.fulfilled,
           accountActions.getRoles.fulfilled
         ),
-        (state) => {
-          state.isDataFetching = false;
+        (state, action) => {
+          const key = action.type.split("/")[1];
+          state.getData[key] = false;
         }
       ),
       builder.addMatcher(
@@ -231,8 +249,9 @@ const loadingSlice = createSlice({
           accountActions.getProfile.rejected,
           accountActions.getRoles.rejected
         ),
-        (state) => {
-          state.isDataFetching = false;
+        (state, action) => {
+          const key = action.type.split("/")[1];
+          state.getData[key] = false;
         }
       );
   },

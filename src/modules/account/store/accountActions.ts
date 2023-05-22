@@ -30,7 +30,7 @@ export const editProfile = createAsyncThunk(
 );
 
 export const getStudingCourses = createAsyncThunk(
-  "account/studingCourses",
+  "account/getStudingCourses",
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.getStudingCourses();
@@ -46,7 +46,7 @@ export const getStudingCourses = createAsyncThunk(
 );
 
 export const getTeachingCourses = createAsyncThunk(
-  "account/teachingCourses",
+  "account/getTeachingCourses",
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.getTeachingCourses();

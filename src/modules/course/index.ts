@@ -4,7 +4,10 @@ import CoursePeopleInfo from "@modules/course/components/CoursePeopleInfo";
 import CreateCourseButton from "@modules/course/components/CreateCourse/CreateCourseButton";
 
 import { getCourseDetails } from "@modules/course/store/courseActions";
-import { getCourseInfo } from "@modules/course/store/courseSelectors";
+import {
+  getCourseError,
+  getCourseInfo,
+} from "@modules/course/store/courseSelectors";
 import { coursesReducer } from "@modules/course/store/courseSlice";
 
 import {
@@ -18,6 +21,7 @@ const courseActions = {
 
 const courseSelectors = {
   getCourseInfo,
+  getCourseError,
 };
 
 export {

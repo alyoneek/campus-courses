@@ -1,5 +1,3 @@
-import { Empty } from "antd";
-
 import List from "@/components/List";
 import { useAppSelector } from "@/store";
 import { getCourseNotifications } from "@modules/course/store/courseSelectors";
@@ -8,11 +6,10 @@ import NotificationItem from "./NotificationItem";
 const NotificationsList = () => {
   const notifications = useAppSelector(getCourseNotifications);
 
-  return notifications.length === 0 ? (
-    <Empty description="Нет уведомлений" />
-  ) : (
+  return (
     <List
       data={notifications}
+      emptyText="Нет уведомлений"
       renderItem={(notification, i) => (
         <NotificationItem
           key={i}

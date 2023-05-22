@@ -6,7 +6,9 @@ import { getTeachingCourses } from "@modules/account/store/accountSelectors";
 
 const TeachingCoursesList = () => {
   const courses = useAppSelector(getTeachingCourses);
-  const loading = useAppSelector((state) => state.loading.isDataFetching);
+  const loading = useAppSelector(
+    (state) => state.loading.getData.getTeachingCourses
+  );
 
   return !loading ? (
     <List
@@ -16,7 +18,11 @@ const TeachingCoursesList = () => {
       )}
     ></List>
   ) : (
-    Array.from(Array(8).keys()).map((i) => <CardSkeleton key={i} />)
+    <>
+      {Array.from(Array(8).keys()).map((i) => (
+        <CardSkeleton key={i} />
+      ))}
+    </>
   );
 };
 
