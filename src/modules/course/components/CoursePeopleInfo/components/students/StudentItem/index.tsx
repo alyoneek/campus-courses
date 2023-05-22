@@ -1,13 +1,15 @@
 import { FC } from "react";
 
-import { StudentStatuses, studentStatusColors } from "@/helpers/constants";
 import useRoles from "@/hooks/useRoles";
 import { IStudent } from "@/modules/course/api/types";
+import AccepteStudentButton from "@/modules/course/components/CoursePeopleInfo/components/students/AccepteStudentButton";
+import Certification from "@/modules/course/components/CoursePeopleInfo/components/students/Certification/Certification";
+import RejectStudentButton from "@/modules/course/components/CoursePeopleInfo/components/students/RejectStudentButton";
+import { StudentStatuses } from "@/modules/course/helpers/constants";
 import { getCourseId } from "@/modules/course/store/courseSelectors";
 import { useAppSelector } from "@/store";
-import AccepteStudentButton from "./AccepteStudentButton";
-import Certification from "./Certification/Certification";
-import RejectStudentButton from "./RejectStudentButton";
+
+import styles from "./studentItem.module.scss";
 
 interface StudentItemProps {
   studentInfo: IStudent;
@@ -23,9 +25,7 @@ const StudentItem: FC<StudentItemProps> = ({ studentInfo }) => {
         <h3>{studentInfo.name}</h3>
         <p>
           Статус -{" "}
-          <span
-            className={`text-${studentStatusColors[studentInfo.status]}-600`}
-          >
+          <span className={styles[studentInfo.status]}>
             {StudentStatuses[studentInfo.status]}
           </span>
         </p>

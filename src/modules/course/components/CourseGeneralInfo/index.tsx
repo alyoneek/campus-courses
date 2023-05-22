@@ -1,17 +1,15 @@
 import { Card } from "antd";
 
-import {
-  CourseStatuses,
-  Semesters,
-  courseStatusColors,
-} from "@/helpers/constants";
 import useRoles from "@/hooks/useRoles";
 import DeleteCourseButton from "@/modules/course/components/DeleteCourse/DeleteCourseButton";
 import EditCourseButton from "@/modules/course/components/EditCourse/EditCourseButton";
 import EditCourseStatusButton from "@/modules/course/components/EditCourseStatus/EditCourseStatusButton";
 import SignupCourseButton from "@/modules/course/components/SignupCourse/SignupCourseButton";
+import { CourseStatuses, Semesters } from "@/modules/course/helpers/constants";
 import { useAppSelector } from "@/store";
 import * as courseSelectors from "@modules/course/store/courseSelectors";
+
+import styles from "./courseGeneralInfo.module.scss";
 
 const gridFullStyle: React.CSSProperties = {
   width: "100%",
@@ -51,11 +49,7 @@ const CourseGeneralInfo = () => {
             <div className="flex justify-between align-middle">
               <div>
                 <h3>Статус курса</h3>
-                <p
-                  className={`text-base text-${
-                    courseStatusColors[courseInfo.status]
-                  }-600`}
-                >
+                <p className={`text-base ${styles[courseInfo.status]}`}>
                   {CourseStatuses[courseInfo.status]}
                 </p>
               </div>

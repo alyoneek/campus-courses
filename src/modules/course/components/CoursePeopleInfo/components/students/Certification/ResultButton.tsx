@@ -1,5 +1,5 @@
-import { StudentMarks, marksColors } from "@/helpers/constants";
 import { MarkType } from "@/modules/course/api/types";
+import { StudentMarks, marksColors } from "@/modules/course/helpers/constants";
 import { Button, Tag } from "antd";
 import { FC } from "react";
 

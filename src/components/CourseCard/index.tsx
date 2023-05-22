@@ -2,12 +2,12 @@ import { Badge, Collapse } from "antd";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
+import { ICourseShortResponse } from "@/modules/course/api/types";
 import {
   CourseStatuses,
   Semesters,
   courseStatusColors,
-} from "@/helpers/constants";
-import { ICourseShortResponse } from "@/modules/course/api/types";
+} from "@/modules/course/helpers/constants";
 
 const { Panel } = Collapse;
 

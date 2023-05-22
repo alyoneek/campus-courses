@@ -7,10 +7,11 @@ import TeacherItem from "./TeacherItem";
 
 const TeachersList = () => {
   const teachers = useAppSelector(getCourseTeachers);
+  const sortedTeachers = [...teachers].sort((x) => (x.isMain ? -1 : 0));
 
   return (
     <List
-      data={teachers}
+      data={sortedTeachers}
       renderItem={(teacher, i) => (
         <>
           <TeacherItem key={teacher.email} teacherInfo={teacher} />
