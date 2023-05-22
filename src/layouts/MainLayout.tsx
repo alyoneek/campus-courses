@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Layout } from "antd";
+import { FloatButton, Layout } from "antd";
 import { FC, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
@@ -26,6 +26,7 @@ const MainLayout: FC = () => {
     <Layout className="min-h-full">
       <Header />
       <Outlet />
+      <FloatButton.BackTop />
     </Layout>
   );
 };

@@ -1,19 +1,22 @@
-import { Button, Tag } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { FC, useState } from "react";
 
 import ModalForm from "@/components/ModalForm";
-import { StudentMarks, marksColors } from "@/helpers/constants";
 import { CertificationType, IStudent } from "@/modules/course/api/types";
 import { getCourseId } from "@/modules/course/store/courseSelectors";
 import { useAppSelector } from "@/store";
+import ResultButton from "./ResultButton";
 import ResultForm from "./ResultForm";
 
 interface CertificationProps {
   studentInfo: IStudent;
+  editable?: boolean;
 }
 
-const Certification: FC<CertificationProps> = ({ studentInfo }) => {
+const Certification: FC<CertificationProps> = ({
+  studentInfo,
+  editable = false,
+}) => {
   const loading = useAppSelector(
     (state) => state.loading.course.changeStudentMark
   );
@@ -55,32 +58,18 @@ const Certification: FC<CertificationProps> = ({ studentInfo }) => {
       </ModalForm>
 
       <div className="flex gap-10">
-        <div>
-          <Button
-            className="text-base"
-            type="link"
-            onClick={() => showResultModal("Midterm")}
-          >
-            Промежуточная аттестация
-          </Button>
-          -
-          <Tag color={marksColors[studentInfo.midtermResult]} className="ml-2">
-            {StudentMarks[studentInfo.midtermResult]}
-          </Tag>
-        </div>
-        <div>
-          <Button
-            className="text-base"
-            type="link"
-            onClick={() => showResultModal("Final")}
-          >
-            Финальная аттестация
-          </Button>
-          -
-          <Tag color={marksColors[studentInfo.finalResult]} className="ml-2">
-            {StudentMarks[studentInfo.finalResult]}
-          </Tag>
-        </div>
+        <ResultButton
+          result={studentInfo.midtermResult}
+          name="Промежуточная аттестация"
+          editable={editable}
+          onClick={() => showResultModal("Midterm")}
+        />
+        <ResultButton
+          result={studentInfo.finalResult}
+          name="Финальная аттестация"
+          editable={editable}
+          onClick={() => showResultModal("Final")}
+        />
       </div>
     </>
   );

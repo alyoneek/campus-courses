@@ -59,7 +59,7 @@ const CourseGeneralInfo = () => {
                   {CourseStatuses[courseInfo.status]}
                 </p>
               </div>
-              <EditCourseStatusButton />
+              {isUserCourseEditor(idCourse) && <EditCourseStatusButton />}
             </div>
           </Card.Grid>
 
