@@ -1,3 +1,5 @@
+import { Empty } from "antd";
+
 import CourseCard from "@/components/CourseCard";
 import List from "@/components/List";
 import CardSkeleton from "@/components/Skeletons/CardSkeleton";
@@ -9,12 +11,16 @@ const CoursesInGroupList = () => {
   const loading = useAppSelector((state) => state.loading.isDataFetching);
 
   return !loading ? (
-    <List
-      data={courses}
-      renderItem={(course) => (
-        <CourseCard key={course.id} courseInfo={course} />
-      )}
-    />
+    courses.length === 0 ? (
+      <Empty description="Нет курсов" />
+    ) : (
+      <List
+        data={courses}
+        renderItem={(course) => (
+          <CourseCard key={course.id} courseInfo={course} />
+        )}
+      />
+    )
   ) : (
     Array.from(Array(8).keys()).map((i) => <CardSkeleton key={i} />)
   );
