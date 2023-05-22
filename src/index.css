@@ -36,6 +36,15 @@ body,
   padding: 19px;
 }
 
+.ant-tabs.ant-tabs-card {
+  .ant-tabs-content-holder {
+    margin-top: -17px;
+    border: 1px solid #f0f0f0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}
+
 .ant-alert {
   padding: 15px 12px;
   font-size: 15px;

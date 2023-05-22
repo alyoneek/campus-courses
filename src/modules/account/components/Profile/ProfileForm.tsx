@@ -6,11 +6,13 @@ import { profileFormValidation } from "@/modules/account/helpers/validation";
 import { getProfile } from "@/modules/account/store/accountSelectors";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { editProfile } from "../../store/accountActions";
+import ProfileSkeleton from "./ProfileSkeleton";
 
 const ProfileForm: FC = () => {
   const dispatch = useAppDispatch();
   const profileInfo = useAppSelector(getProfile);
   const loading = useAppSelector((state) => state.loading.account.editProfile);
+  const fetcing = useAppSelector((state) => state.loading.isDataFetching);
 
   const [isEdit, setEdit] = useState(false);
   const [form] = Form.useForm();
@@ -45,6 +47,8 @@ const ProfileForm: FC = () => {
   };
 
   const formItemLayout = { labelCol: { span: 4 }, wrapperCol: { span: 20 } };
+
+  if (fetcing) return <ProfileSkeleton />;
 
   return (
     <Form
