@@ -1,4 +1,26 @@
 import { NamePath } from "antd/es/form/interface";
+import { Dayjs } from "dayjs";
+import { Rule } from "rc-field-form/lib/interface";
+
+export const validateCourseDate = (_: Rule, value: Dayjs) => {
+  if (!value) {
+    return Promise.resolve();
+  }
+
+  const maxDate = new Date("2029");
+  const choosenDate = new Date(value.format("YYYY"));
+  const minDate = new Date("2000");
+
+  if (choosenDate.getTime() < minDate.getTime()) {
+    return Promise.reject(`Год должен быть не меньше ${minDate.getFullYear()}`);
+  }
+
+  if (choosenDate.getTime() > maxDate.getTime()) {
+    return Promise.reject(`Год должен быть не больше ${maxDate.getFullYear()}`);
+  }
+
+  return Promise.resolve();
+};
 
 export const courseFormValidation = {
   name: [
@@ -11,6 +33,9 @@ export const courseFormValidation = {
     {
       required: true,
       message: "Введите год начала курса",
+    },
+    {
+      validator: validateCourseDate,
     },
   ],
   maximumStudentsCount: [

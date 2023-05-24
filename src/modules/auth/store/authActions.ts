@@ -14,9 +14,11 @@ export const signup = createAsyncThunk(
       setEmail(data.email);
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({
+          message: "Пользователь с таким email существует",
+        });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -31,9 +33,9 @@ export const login = createAsyncThunk(
       setEmail(data.email);
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Неверный логин или пароль" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }

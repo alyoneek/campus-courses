@@ -16,9 +16,9 @@ export const createGroup = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Возникла ошибка при создании" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -37,9 +37,9 @@ export const updateGroup = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Невозможно отредактировать" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -53,9 +53,9 @@ export const deleteGroup = createAsyncThunk(
       return id;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Невозможно удалить" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -71,7 +71,7 @@ export const getCourses = createAsyncThunk(
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }

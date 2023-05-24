@@ -57,7 +57,7 @@ const Certification: FC<CertificationProps> = ({
         />
       </ModalForm>
 
-      <div className="flex md:flex-row flex-col gap-10">
+      <div className="flex xl:flex-row flex-col gap-10 md:items-end items-start">
         <ResultButton
           result={studentInfo.midtermResult}
           name="Промежуточная аттестация"

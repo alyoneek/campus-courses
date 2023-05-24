@@ -11,7 +11,7 @@ export const getUsers = createAsyncThunk(
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }

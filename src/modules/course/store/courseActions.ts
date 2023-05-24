@@ -28,7 +28,7 @@ export const getCourseDetails = createAsyncThunk(
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -47,9 +47,9 @@ export const createCourse = createAsyncThunk(
       dispatch(groupsActions.addCourse(response.data));
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Невозможно создать" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -62,9 +62,9 @@ export const deleteCourse = createAsyncThunk(
       await api.deleteCourse(idCourse);
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Невозможно удалить" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -78,9 +78,9 @@ export const editCourse = createAsyncThunk(
       return payload.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Невозможно отредактировать" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -97,9 +97,11 @@ export const changeCourseStatus = createAsyncThunk(
       return response.data.status;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({
+          message: "Невозможно установить статус меньше текущего",
+        });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -116,9 +118,12 @@ export const addTeacherToCourse = createAsyncThunk(
       return response.data.teachers;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({
+          message:
+            "Этот рользователь уже является преподавателем или студентом",
+        });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -132,9 +137,9 @@ export const addNotificationToCourse = createAsyncThunk(
       return payload.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Невозможно создать уведомление" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -162,9 +167,11 @@ export const changeStudentStatus = createAsyncThunk(
       };
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({
+          message: "Количество учеников превышает максимальное",
+        });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -188,9 +195,9 @@ export const changeStudentMark = createAsyncThunk(
       };
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Невозможно установить отметку" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -205,9 +212,9 @@ export const signUpForCourse = createAsyncThunk(
       dispatch(accountActions.getStudingCourses());
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Невозможно записаться на курс" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }

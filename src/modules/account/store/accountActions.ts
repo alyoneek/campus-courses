@@ -21,9 +21,9 @@ export const editProfile = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
-        return rejectWithValue({ message: error.response.data.message });
+        return rejectWithValue({ message: "Невозможно отредактировать" });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -39,7 +39,7 @@ export const getStudingCourses = createAsyncThunk(
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }
@@ -55,7 +55,7 @@ export const getTeachingCourses = createAsyncThunk(
       if (error.response && error.response.data.message) {
         return rejectWithValue({ message: error.response.data.message });
       } else {
-        return rejectWithValue({ message: error.message });
+        return rejectWithValue({ message: "Ошибка соединения" });
       }
     }
   }

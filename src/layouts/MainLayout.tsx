@@ -10,7 +10,7 @@ import { history } from "@/router/history";
 import { useAppDispatch } from "@/store";
 
 const MainLayout: FC = () => {
-  const { isLoggedIn, roles } = useAuth();
+  const { isLoggedIn } = useAuth();
   const dispatch = useAppDispatch();
 
   history.navigate = useNavigate();
