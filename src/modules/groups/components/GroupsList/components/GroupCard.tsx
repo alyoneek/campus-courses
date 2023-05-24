@@ -20,7 +20,7 @@ const GroupCard: FC<GroupCardProps> = ({ groupInfo }) => {
         key={groupInfo.id}
         className="flex justify-between items-center gap-2"
       >
-        <div className="text-lg">{groupInfo.name}</div>
+        <div className="text-lg text-blue-600">{groupInfo.name}</div>
 
         <div className="flex gap-3">
           <Link

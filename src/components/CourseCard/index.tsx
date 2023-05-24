@@ -21,11 +21,7 @@ const CourseCard: FC<CourseCardProps> = ({ courseInfo }) => {
       text={CourseStatuses[courseInfo.status]}
       color={courseStatusColors[courseInfo.status]}
     >
-      <Collapse
-        size="large"
-        //   bordered={false}
-        className="bg-white mt-2"
-      >
+      <Collapse size="large" className="bg-white mt-2">
         <Panel header={courseInfo.name} key="1" showArrow={false}>
           <p className="mb-1">
             {`Учебный год - ${courseInfo.startYear} - ${
