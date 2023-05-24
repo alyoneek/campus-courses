@@ -59,3 +59,9 @@ ol {
   padding: 15px 12px;
   font-size: 15px;
 }
+
+.ant-ribbon {
+  @media (max-width: 630px) {
+    position: static;
+  }
+}
