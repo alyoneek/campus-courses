@@ -7,6 +7,7 @@ import { IGropResponse } from "@/modules/groups/api/types";
 import DeleteGroupButton from "@/modules/groups/components/DeleteGroup/DeleteGroupButton";
 import EditGroupButton from "@/modules/groups/components/EditGroup/EditGroupButton";
 import RequireAuthComponent from "@/router/RequireAuthComponent";
+import ViewButton from "@/ui/buttons/ViewButton";
 
 interface GroupCardProps {
   groupInfo: IGropResponse;
@@ -15,16 +16,19 @@ interface GroupCardProps {
 const GroupCard: FC<GroupCardProps> = ({ groupInfo }) => {
   return (
     <Card className="mt-2">
-      <div key={groupInfo.id} className="flex justify-between items-center">
-        <Link
-          to={`/groups/${groupInfo.id}`}
-          className="text-base"
-          state={{ groupName: groupInfo.name }}
-        >
-          {groupInfo.name}
-        </Link>
+      <div
+        key={groupInfo.id}
+        className="flex justify-between items-center gap-2"
+      >
+        <div className="text-lg">{groupInfo.name}</div>
 
-        <div className="flex gap-4">
+        <div className="flex gap-3">
+          <Link
+            to={`/groups/${groupInfo.id}`}
+            state={{ groupName: groupInfo.name }}
+          >
+            <ViewButton />
+          </Link>
           <RequireAuthComponent allowedRoles={[Roles.isAdmin]}>
             <EditGroupButton groupInfo={groupInfo} />
           </RequireAuthComponent>

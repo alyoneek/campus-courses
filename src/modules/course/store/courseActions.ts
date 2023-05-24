@@ -120,7 +120,7 @@ export const addTeacherToCourse = createAsyncThunk(
       if (error.response && error.response.data.message) {
         return rejectWithValue({
           message:
-            "Этот рользователь уже является преподавателем или студентом",
+            "Этот пользователь уже является преподавателем или студентом",
         });
       } else {
         return rejectWithValue({ message: "Ошибка соединения" });
