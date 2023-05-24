@@ -20,7 +20,7 @@ const StudentItem: FC<StudentItemProps> = ({ studentInfo }) => {
   const idCourse = useAppSelector(getCourseId);
 
   return (
-    <div className="w-full flex items-center justify-between">
+    <div className="w-full md:flex-row flex gap-5 flex-col md:items-center items-start justify-between">
       <div>
         <h3>{studentInfo.name}</h3>
         <p>
@@ -35,7 +35,7 @@ const StudentItem: FC<StudentItemProps> = ({ studentInfo }) => {
       {isUserCourseEditor(idCourse) && (
         <>
           {studentInfo.status == "InQueue" && (
-            <div className="flex gap-3">
+            <div className="flex sm:flex-row flex-col gap-3">
               <AccepteStudentButton idStudent={studentInfo.id} />
               <RejectStudentButton idStudent={studentInfo.id} />
             </div>

@@ -17,7 +17,7 @@ const ResultButton: FC<ResultButtonProps> = ({
   onClick,
 }) => {
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex sm:flex-row flex-col gap-2 sm:items-center items-start">
       {editable ? (
         <Button className="text-base" type="link" onClick={onClick}>
           {name}

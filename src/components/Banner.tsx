@@ -5,7 +5,7 @@ import BannerImage from "./BannerImage";
 const Banner = () => {
   return (
     <div className="h-[calc(100vh-64px)]">
-      <div className="flex gap-20 max-w-[1500px] mx-auto items-center px-5 justify-center mt-[170px] flex-col xl:flex-row">
+      <div className="flex gap-20 max-w-[1500px] mx-auto items-center px-5 justify-center mt-[70px] xl:mt-[170px] flex-col xl:flex-row">
         <QueueAnim
           className="xl:w-[20%] text-center xl:text-left"
           delay={300}

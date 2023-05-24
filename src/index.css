@@ -40,6 +40,11 @@ ol {
     padding: 19px;
   }
 
+  .ant-tabs-content-holder img {
+    max-width: 100%;
+    object-fit: cover;
+  }
+
   &.ant-tabs-card {
     .ant-tabs-content-holder {
       margin-top: -17px;

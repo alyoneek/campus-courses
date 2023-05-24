@@ -25,18 +25,20 @@ const CourseGeneralInfo = () => {
 
   const { isUserCourseEditor, isUserCourseSigner } = useRoles();
 
+  console.log(isUserCourseSigner(idCourse));
+
   return (
     <>
       <div className="mb-10">
-        <div className="flex justify-between mb-3">
+        <div className="flex justify-between mb-3 gap-5 sm:flex-row flex-col">
           <h2>Основные данные курса</h2>
 
-          <div className="flex gap-10">
+          <div className="flex gap-10 sm:flex-row flex-col">
             {courseInfo.status === "OpenForAssigning" &&
               isUserCourseSigner(idCourse) && <SignupCourseButton />}
 
             {isUserCourseEditor(idCourse) && (
-              <div>
+              <div className="flex gap-2">
                 <EditCourseButton />
                 <DeleteCourseButton />
               </div>
